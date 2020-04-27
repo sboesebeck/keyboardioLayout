@@ -19,7 +19,7 @@
 // Support for storing the keymap in EEPROM
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
-
+#include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
 
@@ -75,7 +75,8 @@
 
 //support for Tap'n'Hold functionality
 #include "Kaleidoscope-Qukeys.h"
-
+//#include "Kaleidoscope-LEDEffectSwitchOnLayer.h"
+//#include "Kaleidoscope-LangPack-German.h"
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
   * The names aren't particularly important. What is important is that each
   * is unique.
@@ -171,7 +172,7 @@ enum { PRIMARY, NUMPAD, SPECIAL, XOY, FUNCTION }; // layers
   *
   */
 
-#define PRIMARY_KEYMAP_QWERTY
+//#define PRIMARY_KEYMAP_QWERTY
 // #define PRIMARY_KEYMAP_COLEMAK
 // #define PRIMARY_KEYMAP_DVORAK
 // #define PRIMARY_KEYMAP_CUSTOM
@@ -193,10 +194,10 @@ KEYMAPS(
    Key_Backspace, Key_Delete, Key_LeftGui, Key_LeftAlt,
    ShiftToLayer(FUNCTION),
 
-   LockLayer(XOY),                 Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
-   Key_Hyper,                         Key_Y, Key_U, Key_I,     Key_O,         Key_P,                          Key_LeftBracket,
-                                      Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  Key_Quote,
-   Key_Backslash,                     Key_N, Key_M, Key_Comma, Key_Period,    MT(RightControl,Slash),         MT(RightShift,RightBracket),
+   LockLayer(XOY),             Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
+   Key_Hyper,                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,                          Key_LeftBracket,
+                               Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  Key_Quote,
+   Key_Backslash,              Key_N, Key_M, Key_Comma, Key_Period,    MT(RightControl,Slash),         MT(RightShift,RightBracket),
    Key_RightAlt, Key_RightGui, Key_Enter, Key_Space,
    ShiftToLayer(FUNCTION)),
 
@@ -241,7 +242,7 @@ KEYMAPS(
    ___, ___, ___, ___,
    ___,
 
-   ___,  ___,    ___,    ___,    ___,   ___,          ___,
+   ___,  ___,    ___,    ___,    ___,   ___,          Key_Slash,
    ___,                   Key_V,   Key_G, Key_C,   Key_L, Key_J,        Key_Minus,
                           Key_D,   Key_T, Key_R,   Key_N, Key_S,        ALT_T(F), 
    ___,                   Key_B,   Key_P, Key_W,   Key_M, CTL_T(Y), ___, 
@@ -300,69 +301,6 @@ static void anyKeyMacro(uint8_t keyState) {
 }
 
 
-static void puke(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("*puke("));
-  }
-}
-
-
-static void swear(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("*swear("));
-  }
-}
-static void smile(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR(">/("));
-  }
-}
-static void frown(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR(">/*"));
-  }
-}
-static void tongue(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR(">/P"));
-  }
-}
-static void tongue2(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("</P"));
-  }
-}
-static void smirk(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("</("));
-  }
-}
-
-static void roll(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("*roll("));
-  }
-}
-static void rofl(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("*rofl("));
-  }
-}
-
-static void shrug(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("*shrug("));
-  }
-}
-
-static void lol(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("*lol("));
-  }
-}
-
-
-
 /** macroAction dispatches keymap events that are tied to a macro
     to that macro. It takes two uint8_t parameters.
 
@@ -376,54 +314,57 @@ static void lol(uint8_t keyState) {
  */
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
-  switch (macroIndex) {
+  if (keyToggledOn(keyState)) {
 
-  case MACRO_VERSION_INFO:
-    versionInfoMacro(keyState);
-    break;
+     switch (macroIndex) {
 
-  case MACRO_ANY:
-    anyKeyMacro(keyState);
-    break;
-  case MACRO_SMIRK:
-    smirk(keyState);
-    break;
-  case MACRO_FROWN:
-    frown(keyState);
-    break;
-  case MACRO_SMILE:
-    smile(keyState);
-    break;
-  case MACRO_PUKE:
-    puke(keyState);
-    break;
-  case MACRO_TONGUE:
-    tongue(keyState);
-    break;
-  case MACRO_TONGUE2:
-    tongue2(keyState);
-    break;
-  case MACRO_SWEAR:
-    swear(keyState);
-    break;
-  case MACRO_DARN:
-    return MACRODOWN(I(25),
-                     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt)
-                    );
-    break;
-  case MACRO_ROLL:
-    roll(keyState);
-    break;
-  case MACRO_ROFL:
-    rofl(keyState);
-    break;
-  case MACRO_SHRUG:
-    shrug(keyState);
-    break;
-  case MACRO_LOL:
-    lol(keyState);
-    break;
+	  case MACRO_VERSION_INFO:
+	    versionInfoMacro(keyState);
+	    break;
 
+	  case MACRO_ANY:
+	    anyKeyMacro(keyState);
+	    break;
+	  case MACRO_SMIRK:
+	    Macros.type(PSTR("</("));
+	    break;
+	  case MACRO_FROWN:
+	    Macros.type(PSTR(">/*"));
+	    break;
+	  case MACRO_SMILE:
+	    Macros.type(PSTR(">/("));
+	    break;
+	  case MACRO_PUKE:
+	    Macros.type(PSTR("*puke("));
+	    break;
+	  case MACRO_TONGUE:
+	    Macros.type(PSTR(">/P"));
+	    break;
+	  case MACRO_TONGUE2:
+	    Macros.type(PSTR("</P"));
+	    break;
+	  case MACRO_SWEAR:
+	    Macros.type(PSTR("*swear("));
+	    break;
+	  case MACRO_DARN:
+	    return MACRODOWN(I(25),
+			     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt)
+			    );
+	    break;
+	  case MACRO_ROLL:
+	    Macros.type(PSTR("*roll("));
+	    break;
+	  case MACRO_ROFL:
+	    Macros.type(PSTR("*rofl("));
+	    break;
+	  case MACRO_SHRUG:
+	    Macros.type(PSTR("*shrug("));
+	    break;
+	  case MACRO_LOL:
+	    Macros.type(PSTR("*lol("));
+	    break;
+
+	  }
   }
   return MACRO_NONE;
 }
@@ -435,13 +376,13 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 // Keyboardio Model 01.
 
 
-static kaleidoscope::plugin::LEDSolidColor solidRed(160, 0, 0);
-static kaleidoscope::plugin::LEDSolidColor solidOrange(140, 70, 0);
-static kaleidoscope::plugin::LEDSolidColor solidYellow(130, 100, 0);
-static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 160, 0);
-static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
-static kaleidoscope::plugin::LEDSolidColor solidIndigo(0, 0, 170);
-static kaleidoscope::plugin::LEDSolidColor solidViolet(130, 0, 120);
+//static kaleidoscope::plugin::LEDSolidColor solidRed(160, 0, 0);
+//static kaleidoscope::plugin::LEDSolidColor solidOrange(140, 70, 0);
+//static kaleidoscope::plugin::LEDSolidColor solidYellow(130, 100, 0);
+//static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 160, 0);
+//static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
+//static kaleidoscope::plugin::LEDSolidColor solidIndigo(0, 0, 170);
+//static kaleidoscope::plugin::LEDSolidColor solidViolet(130, 0, 120);
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
  * and turns them back on when it wakes up.
@@ -548,13 +489,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // LEDControl provides support for other LED modes
   LEDControl,
   
-  // We start with the LED effect that turns off all the LEDs.
-  LEDOff,
-
-  
-  // The stalker effect lights up the keys you've pressed recently
   StalkerEffect,
-
+  WavepoolEffect,
+  
   // The rainbow effect changes the color of all of the keyboard's keys at the same time
   // running through all the colors of the rainbow.
   LEDRainbowEffect,
@@ -577,7 +514,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // keyboard's LEDs as a display
   //AlphaSquareEffect,
 
-
+  LEDOff,
   // The LED Palette Theme plugin provides a shared palette for other plugins,
   // like Colormap below
   LEDPaletteTheme,
@@ -588,10 +525,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The numpad plugin is responsible for lighting up the 'numpad' mode
   // with a custom LED effect
   NumPad,
+  //kaleidoscope::plugin::LEDEffectSwitchOnLayer,
 
   // The macros plugin adds support for macros
   Macros,
-
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
 //  MouseKeys,
 
@@ -638,21 +575,21 @@ void setup() {
   // 'BlazingTrail'. For details on other options, see
   StalkerEffect.variant = STALKER(BlazingTrail);
   StalkerEffect.activate();
-  LEDRainbowWaveEffect.activate();
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
   // one wants to use these layers, just set the default layer to one in EEPROM,
   // by using the `settings.defaultLayer` Focus command, or by using the
   // `keymap.onlyCustom` command to use EEPROM layers only.
   EEPROMKeymap.setup(7);
-
+  
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(7);
+  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
+  //WavepoolEffect.activate();
   Qukeys.activate();
-  Qukeys.setTimeout(150);
-  Qukeys.setReleaseDelay(20);
+  Qukeys.setHoldTimeout(175);
 }
 
 /** loop is the second of the standard Arduino sketch functions.
