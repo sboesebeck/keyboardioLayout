@@ -15,7 +15,8 @@
 
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
-
+#include "Model01-Firmware.h"
+#include "LEDEffectSwitchOnLayer.h"
 // Support for storing the keymap in EEPROM
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
@@ -456,6 +457,8 @@ USE_MAGIC_COMBOS({.action = toggleKeyboardProtocol,
   .keys = { R3C6, R0C0, R0C6 }
 });
 
+
+
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
@@ -595,6 +598,11 @@ void setup() {
   //WavepoolEffect.activate();
   Qukeys.activate();
   Qukeys.setHoldTimeout(155);
+
+  LEDEffectSwitchOnLayer.setPluginForLayer(XOY,LEDRainbowEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,WavepoolEffect);
+  LEDEffectSwitchOnLayer.enable();
 }
 
 /** loop is the second of the standard Arduino sketch functions.
@@ -610,107 +618,3 @@ void loop() {
 
 
 
-
-namespace kaleidoscope {
-namespace plugin {
-
-
-class LEDEffectSwitchOnLayer : public Plugin {
-  public:
-    // Basic plugin status functions.
-    static void enable();
-    static void disable();
-    static bool active();
-
-    // Event handlers. Delete what you don't need.
-    EventHandlerResult onSetup();
-    EventHandlerResult beforeEachCycle();
-    EventHandlerResult onKeyswitchEvent(Key &mapped_key,KeyAddr key_addr,
-                                        uint8_t key_state);
-    EventHandlerResult beforeReportingState();
-    EventHandlerResult afterEachCycle();
-
-    EventHandlerResult onLayerChange();
-
-  private:
-    static bool disabled_;
-};
-
-// LEDEffectSwitchOnLayer
-
-// Member variables.
-bool LEDEffectSwitchOnLayer::disabled_ = false;
-
-// Basic plugin status functions.
-
-// Enable the plugin.
-void LEDEffectSwitchOnLayer::enable() {
-  disabled_ = false;
-}
-
-// Disable the plugin.
-void LEDEffectSwitchOnLayer::disable() {
-  disabled_ = true;
-}
-
-// Returns true if the plugin is enabled.
-bool LEDEffectSwitchOnLayer::active() {
-  return !disabled_;
-}
-
-// Event handlers.
-
-// Runs once, when the plugin is initialized during Kaleidoscope.setup().
-EventHandlerResult LEDEffectSwitchOnLayer::onSetup() {
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-// Run as the first thing at the start of each cycle.
-EventHandlerResult LEDEffectSwitchOnLayer::beforeEachCycle() {
-  if(disabled_) {
-    return EventHandlerResult::OK;
-  }
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-// Run for every non-idle key, in each cycle the key isn't idle in. If a key
-// gets pressed, released, or is held, it is not considered idle, and this
-// event handler will run for it too.
-EventHandlerResult LEDEffectSwitchOnLayer::onKeyswitchEvent(Key &mapped_key,KeyAddr key_addr,
-                                               uint8_t key_state) {
-  if(disabled_) {
-    return EventHandlerResult::OK;
-  }
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-// Runs each cycle right before sending the various reports (keys pressed, mouse
-// events, etc) to the host.
-EventHandlerResult LEDEffectSwitchOnLayer::beforeReportingState() {
-  if(disabled_) {
-    return EventHandlerResult::OK;
-  }
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-// Runs at the very end of each cycle.
-EventHandlerResult LEDEffectSwitchOnLayer::afterEachCycle() {
-  if(disabled_) {
-    return EventHandlerResult::OK;
-  }
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-EventHandlerResult LEDEffectSwitchOnLayer::onLayerChange() {
-  return EventHandlerResult::OK;
-}
-
-}  // namespace plugin
-}  // namespace kaleidoscope
-
-kaleidoscope::plugin::LEDEffectSwitchOnLayer LEDEffectSwitchOnLayer;
