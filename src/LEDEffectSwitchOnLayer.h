@@ -29,8 +29,12 @@ class LEDEffectSwitchOnLayer : public Plugin {
     static void enable();
     static void disable();
     static bool active();
-    
+   
+    void setPluginForLayer(int layer,int offset); 
     void setPluginForLayer(int layer,LEDModeInterface &p);
+    void setPluginOrder(int num, LEDModeInterface &p);
+
+    LEDModeInterface* getPlugin(int num);
     // Event handlers. Delete what you don't need.
     EventHandlerResult onSetup();
     EventHandlerResult beforeEachCycle();
@@ -44,6 +48,7 @@ class LEDEffectSwitchOnLayer : public Plugin {
   private:
     static bool disabled_;
     static LEDModeInterface* activePlugins[32];
+    static LEDModeInterface* effects[32];
 };
 
 

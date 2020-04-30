@@ -25,6 +25,7 @@ namespace plugin {
 // Member variables.
 bool LEDEffectSwitchOnLayer::disabled_ = false;
 LEDModeInterface* LEDEffectSwitchOnLayer::activePlugins[32] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL };
+LEDModeInterface* LEDEffectSwitchOnLayer::effects[32] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL };
 
 
 // Basic plugin status functions.
@@ -46,8 +47,19 @@ bool LEDEffectSwitchOnLayer::active() {
 
 // setting plugins for certain layers
 
+void LEDEffectSwitchOnLayer::setPluginForLayer(int layer,int offset){
+    activePlugins[layer]=effects[offset];
+}
 void LEDEffectSwitchOnLayer::setPluginForLayer(int layer,LEDModeInterface &p){
     activePlugins[layer]=&p;
+}
+
+void LEDEffectSwitchOnLayer::setPluginOrder(int num, LEDModeInterface &p){
+	effects[num]=&p;
+}
+
+LEDModeInterface* LEDEffectSwitchOnLayer::getPlugin(int num){
+	return effects[num];
 }
 // Event handlers.
 

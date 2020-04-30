@@ -23,7 +23,7 @@
 #include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
-
+#include "kaleidoscope/plugin/LEDModeInterface.h"
 // Support for keys that move the mouse
 //#include "Kaleidoscope-MouseKeys.h"
 
@@ -36,7 +36,7 @@
 // Support for "Numpad" mode, which is mostly just the Numpad specific LED mode
 #include "Kaleidoscope-NumPad.h"
 
-#include "Kaleidoscope-LEDEffect-BootAnimation.h"
+//#include "Kaleidoscope-LEDEffect-BootAnimation.h"
 
 // Support for LED modes that set all LEDs to a single color
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
@@ -73,7 +73,6 @@
 
 // Support for USB quirks, like changing the key state report protocol
 #include "Kaleidoscope-USB-Quirks.h"
-
 //support for Tap'n'Hold functionality
 #include "Kaleidoscope-Qukeys.h"
 //#include "Kaleidoscope-LEDEffectSwitchOnLayer.h"
@@ -104,7 +103,8 @@ enum { MACRO_VERSION_INFO,
        MACRO_ROFL,
        MACRO_LOL,
        MACRO_SHRUG,
-       MACRO_TONGUE2
+       MACRO_TONGUE2,
+       LED_EFFECT_NEXT_NUMPADSHIFT
      };
 
 
@@ -188,7 +188,7 @@ enum { PRIMARY, NUMPAD, SPECIAL, XOY, FUNCTION }; // layers
 KEYMAPS(
 
  [PRIMARY] = KEYMAP_STACKED
-  (Key_Escape,                Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+  (Key_Escape,                Key_1, Key_2, Key_3, Key_4, Key_5, M(LED_EFFECT_NEXT_NUMPADSHIFT),
    Key_Tab,                   Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Meh,
    ShiftToLayer(SPECIAL),     Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_LeftShift, CTL_T(Z),   Key_X, Key_C, Key_V, Key_B, LT(NUMPAD,Equals),
@@ -315,10 +315,28 @@ static void anyKeyMacro(uint8_t keyState) {
  */
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
+  static uint32_t start;
+  static int current=0;
+
+  if (macroIndex ==  LED_EFFECT_NEXT_NUMPADSHIFT){
+	if(keyToggledOn(keyState)){
+		start=millis();
+        } else if (keyToggledOff(keyState)) {
+		if (millis()-start < 150){
+			//WavepoolEffect.activate();
+			current=current+1;
+			if (LEDEffectSwitchOnLayer.getPlugin(current)==NULL){
+				current=0;
+			}
+			LEDEffectSwitchOnLayer.getPlugin(current)->activate();
+			LEDEffectSwitchOnLayer.setPluginForLayer(Layer.top(),current);
+		}
+	}
+	return MACRO_NONE;
+  }
   if (keyToggledOn(keyState)) {
-
      switch (macroIndex) {
-
+		 
 	  case MACRO_VERSION_INFO:
 	    versionInfoMacro(keyState);
 	    break;
@@ -377,7 +395,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 // Keyboardio Model 01.
 
 
-//static kaleidoscope::plugin::LEDSolidColor solidRed(160, 0, 0);
+static kaleidoscope::plugin::LEDSolidColor solidRed(160, 0, 0);
 //static kaleidoscope::plugin::LEDSolidColor solidOrange(140, 70, 0);
 //static kaleidoscope::plugin::LEDSolidColor solidYellow(130, 100, 0);
 //static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 160, 0);
@@ -418,7 +436,7 @@ void hostPowerManagementEventHandler(kaleidoscope::plugin::HostPowerManagement::
  *
  * These are the names of your magic combos. They will be used by the
  * `USE_MAGIC_COMBOS` call below.
- */
+ /
 enum {
   // Toggle between Boot (6-key rollover; for BIOSes and early boot) and NKRO
   // mode.
@@ -483,7 +501,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The boot greeting effect pulses the LED button for 10 seconds after the
   // keyboard is first connected
-  BootAnimationEffect,
+  //BootAnimationEffect,
 
   // The hardware test mode, which can be invoked by tapping Prog, LED and the
   // left Fn button at the same time.
@@ -506,7 +524,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The chase effect follows the adventure of a blue pixel which chases a red pixel across
   // your keyboard. Spoiler: the blue pixel never catches the red pixel
   //LEDChaseEffect,
-
   // These static effects turn your keyboard's LEDs a variety of colors
   //solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
 
@@ -538,7 +555,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The HostPowerManagement plugin allows us to turn LEDs off when then host
   // goes to sleep, and resume them when it wakes up.
   HostPowerManagement,
-
+  solidRed,
   // The MagicCombo plugin lets you use key combinations to trigger custom
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
@@ -567,7 +584,8 @@ void setup() {
   // While we hope to improve this in the future, the NumPad plugin
   // needs to be explicitly told which keymap layer is your numpad layer
   NumPad.numPadLayer = NUMPAD;
-
+  NumPad.color = CRGB(0, 0, 160); // a blue color
+  NumPad.lock_hue = 85; // green
   // We configure the AlphaSquare effect to use RED letters
   //AlphaSquare.color = CRGB(255, 0, 0);
 
@@ -581,28 +599,39 @@ void setup() {
 
   // The LED Stalker mode has a few effects. The one we like is called
   // 'BlazingTrail'. For details on other options, see
-  StalkerEffect.variant = STALKER(BlazingTrail);
+  StalkerEffect.variant = STALKER( Haunt);
+  //StalkerEffect.inactive_color= CRGB(0x05, 0x30, 0x05);
   StalkerEffect.activate();
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
   // one wants to use these layers, just set the default layer to one in EEPROM,
   // by using the `settings.defaultLayer` Focus command, or by using the
   // `keymap.onlyCustom` command to use EEPROM layers only.
-  EEPROMKeymap.setup(7);
+  EEPROMKeymap.setup(2);
   
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
-  ColormapEffect.max_layers(7);
+  ColormapEffect.max_layers(2);
   WavepoolEffect.idle_timeout = 5000;  // 5 seconds
   //WavepoolEffect.activate();
   Qukeys.activate();
-  Qukeys.setHoldTimeout(155);
+  Qukeys.setHoldTimeout(135);
+  Qukeys.setOverlapThreshold(85);
 
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,LEDRainbowEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,WavepoolEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
   LEDEffectSwitchOnLayer.enable();
+
+  LEDEffectSwitchOnLayer.setPluginOrder(0,StalkerEffect);
+  LEDEffectSwitchOnLayer.setPluginOrder(1,LEDRainbowEffect);  
+  LEDEffectSwitchOnLayer.setPluginOrder(2,LEDBreatheEffect);  
+  LEDEffectSwitchOnLayer.setPluginOrder(3,LEDRainbowWaveEffect);  
+  LEDEffectSwitchOnLayer.setPluginOrder(4,WavepoolEffect);  
+  LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
+  LEDEffectSwitchOnLayer.setPluginOrder(6,LEDOff);  
+ 
 }
 
 /** loop is the second of the standard Arduino sketch functions.
