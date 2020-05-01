@@ -496,8 +496,8 @@ static void gameMode(uint8_t combo_index){
 // }
 // });
 USE_MAGIC_COMBOS(
-   {.action=gameMode,.keys={ R3C6,R3C9,R0C9}},   //fn+fn+top left key, right half
-   {.action=xoyMode,.keys={R3C6,R3C9,R0C6}},   //FN+FN+"LED"-key
+   {.action=gameMode,.keys={ R3C6,R3C9,R3C15}},   //fn+fn+shift, right half
+   {.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
    {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}}   //Left Fn+Prog+LED
 );
 
@@ -510,8 +510,8 @@ USE_MAGIC_COMBOS(
 static kaleidoscope::plugin::LEDSolidColor solidRed(160, 0, 0);
 //static kaleidoscope::plugin::LEDSolidColor solidOrange(140, 70, 0);
 //static kaleidoscope::plugin::LEDSolidColor solidYellow(130, 100, 0);
-//static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 160, 0);
-//static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
+static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 160, 0);
+static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
 //static kaleidoscope::plugin::LEDSolidColor solidIndigo(0, 0, 170);
 //static kaleidoscope::plugin::LEDSolidColor solidViolet(130, 0, 120);
 
@@ -594,7 +594,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The HostPowerManagement plugin allows us to turn LEDs off when then host
   // goes to sleep, and resume them when it wakes up.
   HostPowerManagement,
+  solidBlue,
   solidRed,
+  solidGreen,
   // The MagicCombo plugin lets you use key combinations to trigger custom
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
@@ -671,7 +673,9 @@ void setup() {
   LEDEffectSwitchOnLayer.setPluginOrder(3,LEDRainbowWaveEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(4,WavepoolEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
-  LEDEffectSwitchOnLayer.setPluginOrder(6,LEDOff);  
+  LEDEffectSwitchOnLayer.setPluginOrder(6,solidGreen);  
+  LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
+  LEDEffectSwitchOnLayer.setPluginOrder(8,LEDOff);  
  
 }
 
