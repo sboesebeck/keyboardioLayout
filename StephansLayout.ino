@@ -275,9 +275,9 @@ KEYMAPS(
    ___, 
 
    Consumer_PlaySlashPause,       Key_F6,                     Key_F7,                   Key_F8,         Key_F9,          Key_F10,                   Key_F11,
-   Consumer_ScanPreviousTrack,    Key_Home,                   Key_PageUp,               Key_UpArrow,    Key_PageDown,    Key_End,                   Key_F12,
+   Consumer_ScanNextTrack,    Key_Home,                   Key_PageUp,               Key_UpArrow,    Key_PageDown,    Key_End,                   Key_F12,
                                   LGUI(Key_LeftArrow),        Key_LeftArrow,            Key_DownArrow,  Key_RightArrow,  LGUI(Key_RightArrow),      ___,
-   Consumer_ScanNextTrack,        ___,             ___,                      ___,            ___,             ___,      ___,
+   Consumer_ScanPreviousTrack,        ___,             ___,                      ___,            ___,             ___,      ___,
    ___, ___, Key_RightGui, ___,
    ___)
 ) // KEYMAPS(
