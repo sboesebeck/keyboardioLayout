@@ -3,7 +3,7 @@
 // See "LICENSE" for license details
 
 #ifndef BUILD_INFORMATION
-#define BUILD_INFORMATION "Stephans Lazout 30.04.2020"
+#define BUILD_INFORMATION "Lazout Yagdul 01.05.2020"
 #endif
 
 
@@ -18,8 +18,8 @@
 #include "Model01-Firmware.h"
 #include "LEDEffectSwitchOnLayer.h"
 // Support for storing the keymap in EEPROM
-#include "Kaleidoscope-EEPROM-Settings.h"
-#include "Kaleidoscope-EEPROM-Keymap.h"
+//#include "Kaleidoscope-EEPROM-Settings.h"
+//#include "Kaleidoscope-EEPROM-Keymap.h"
 #include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
@@ -69,7 +69,7 @@
 #include "Kaleidoscope-HostPowerManagement.h"
 
 // Support for magic combos (key chords that trigger an action)
-//#include "Kaleidoscope-MagicCombo.h"
+#include "Kaleidoscope-MagicCombo.h"
 
 // Support for USB quirks, like changing the key state report protocol
 #include "Kaleidoscope-USB-Quirks.h"
@@ -195,10 +195,10 @@ KEYMAPS(
    Key_Backspace, Key_Delete, Key_LeftControl, Key_LeftAlt,
    ShiftToLayer(FUNCTION),
 
-   LockLayer(GAME),           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
+   Key_RightBracket,           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
    Key_Hyper,                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,                          Key_LeftBracket,
                                Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  Key_Quote,
-   MT(RightGui,Backslash),              Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,         MT(RightShift,RightBracket),
+   MT(RightGui,Backslash),              Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,         Key_RightShift,
    Key_RightAlt, Key_RightControl, Key_Enter, Key_Space,
    ShiftToLayer(FUNCTION)),
 
@@ -476,9 +476,23 @@ enum {
 /**
  *  This enters the hardware test mode
  */
- //static void enterHardwareTestMode(uint8_t combo_index) {
-   //HardwareTestMode.runTests();
- //}
+ static void enterHardwareTestMode(uint8_t combo_index) {
+   HardwareTestMode.runTests();
+ }
+static void xoyMode(uint8_t combo_index){
+   if (Layer.isActive(XOY)){
+      Layer.move(PRIMARY);
+   } else { 
+      Layer.move(XOY);
+   }
+}
+static void gameMode(uint8_t combo_index){
+ if  (Layer.isActive(GAME)){
+    Layer.move(PRIMARY);
+ } else { 
+    Layer.move(GAME);
+ }  
+}
 
 
 /** Magic combo list, a list of key combo and action pairs the firmware should
@@ -489,33 +503,20 @@ enum {
 //                   .keys = { R3C6, R2C6, R3C7 }
 // }
 // });
-//USE_MAGIC_COMBOS({.action=gameMode,.keys={ R3C6,R3C9,R0C9}},   //fn+fn+top left key, right half
-   //{.action=xoyMode,.keys={R2C6,R3C9,R0C6},   //FN+FN+"LED"-key
-   //{.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}   //Left Fn+Prog+LED
-//});
+USE_MAGIC_COMBOS(
+   {.action=gameMode,.keys={ R3C6,R3C9,R0C9}},   //fn+fn+top left key, right half
+   {.action=xoyMode,.keys={R3C6,R3C9,R0C6}},   //FN+FN+"LED"-key
+   {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}}   //Left Fn+Prog+LED
+);
 
-//static void xoyMode(uint8_t combo_index){
-   //if (Layer.top()==XOY){
-      //Layer.move(PRIMARY);
-   //} else { 
-      //Layer.move(XOY);
-   //}
-//}
-//static void gameMode(uint8_t combo_index){
- //if  (Layer.top() == GAME){
-    //Layer.move(PRIMARY);
- //} else { 
-    //Layer.move(GAME);
- //}  
-//}
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
 KALEIDOSCOPE_INIT_PLUGINS(
   // The EEPROMSettings & EEPROMKeymap plugins make it possible to have an
   // editable keymap in EEPROM.
-  EEPROMSettings,
-  EEPROMKeymap,
+  //EEPROMSettings,
+  //EEPROMKeymap,
   Qukeys,
   // Focus allows bi-directional communication with the host, and is the
   // interface through which the keymap in EEPROM can be edited.
@@ -524,11 +525,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // FocusSettingsCommand adds a few Focus commands, intended to aid in
   // changing some settings of the keyboard, such as the default layer (via the
   // `settings.defaultLayer` command)
-  FocusSettingsCommand,
+  //FocusSettingsCommand,
 
   // FocusEEPROMCommand adds a set of Focus commands, which are very helpful in
   // both debugging, and in backing up one's EEPROM contents.
-  FocusEEPROMCommand,
+  //FocusEEPROMCommand,
 
   // The boot greeting effect pulses the LED button for 10 seconds after the
   // keyboard is first connected
@@ -590,7 +591,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The MagicCombo plugin lets you use key combinations to trigger custom
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
-  //MagicCombo,
+  MagicCombo,
   LEDEffectSwitchOnLayer,
   // The USBQuirks plugin lets you do some things with USB that we aren't
   // comfortable - or able - to do automatically, but can be useful
@@ -638,7 +639,7 @@ void setup() {
   // one wants to use these layers, just set the default layer to one in EEPROM,
   // by using the `settings.defaultLayer` Focus command, or by using the
   // `keymap.onlyCustom` command to use EEPROM layers only.
-  EEPROMKeymap.setup(2);
+  //EEPROMKeymap.setup(2);
   
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
