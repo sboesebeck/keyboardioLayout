@@ -407,18 +407,6 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 
 
 
-// These 'solid' color effect definitions define a rainbow of
-// LED color modes calibrated to draw 500mA or less on the
-// Keyboardio Model 01.
-
-
-static kaleidoscope::plugin::LEDSolidColor solidRed(160, 0, 0);
-//static kaleidoscope::plugin::LEDSolidColor solidOrange(140, 70, 0);
-//static kaleidoscope::plugin::LEDSolidColor solidYellow(130, 100, 0);
-//static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 160, 0);
-//static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
-//static kaleidoscope::plugin::LEDSolidColor solidIndigo(0, 0, 170);
-//static kaleidoscope::plugin::LEDSolidColor solidViolet(130, 0, 120);
 
 /** toggleLedsOnSuspendResume toggles the LEDs off when the host goes to sleep,
  * and turns them back on when it wakes up.
@@ -482,15 +470,19 @@ enum {
 static void xoyMode(uint8_t combo_index){
    if (Layer.isActive(XOY)){
       Layer.move(PRIMARY);
+       StalkerEffect.variant = STALKER( BlazingTrail);
    } else { 
       Layer.move(XOY);
+      StalkerEffect.variant = STALKER( Haunt);
    }
 }
 static void gameMode(uint8_t combo_index){
  if  (Layer.isActive(GAME)){
     Layer.move(PRIMARY);
+    StalkerEffect.variant=STALKER(BlazingTrail);
  } else { 
     Layer.move(GAME);
+    StalkerEffect.variant = STALKER(Rainbow);
  }  
 }
 
@@ -508,6 +500,21 @@ USE_MAGIC_COMBOS(
    {.action=xoyMode,.keys={R3C6,R3C9,R0C6}},   //FN+FN+"LED"-key
    {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}}   //Left Fn+Prog+LED
 );
+
+
+// These 'solid' color effect definitions define a rainbow of
+// LED color modes calibrated to draw 500mA or less on the
+// Keyboardio Model 01.
+
+
+static kaleidoscope::plugin::LEDSolidColor solidRed(160, 0, 0);
+//static kaleidoscope::plugin::LEDSolidColor solidOrange(140, 70, 0);
+//static kaleidoscope::plugin::LEDSolidColor solidYellow(130, 100, 0);
+//static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 160, 0);
+//static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
+//static kaleidoscope::plugin::LEDSolidColor solidIndigo(0, 0, 170);
+//static kaleidoscope::plugin::LEDSolidColor solidViolet(130, 0, 120);
+
 
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
@@ -631,9 +638,10 @@ void setup() {
 
   // The LED Stalker mode has a few effects. The one we like is called
   // 'BlazingTrail'. For details on other options, see
-  StalkerEffect.variant = STALKER( Rainbow);
+  StalkerEffect.variant = STALKER( BlazingTrail);
   //StalkerEffect.inactive_color= CRGB(0x05, 0x30, 0x05);
   StalkerEffect.activate();
+
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
   // one wants to use these layers, just set the default layer to one in EEPROM,
@@ -651,10 +659,10 @@ void setup() {
   Qukeys.setHoldTimeout(155);
   Qukeys.setOverlapThreshold(85);
 
-  LEDEffectSwitchOnLayer.setPluginForLayer(XOY,LEDRainbowEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
-  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
+  //LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
+  //LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
+  //LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
+  //LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
   LEDEffectSwitchOnLayer.enable();
 
   LEDEffectSwitchOnLayer.setPluginOrder(0,StalkerEffect);
