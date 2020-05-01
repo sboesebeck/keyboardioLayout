@@ -36,12 +36,6 @@ class LEDEffectSwitchOnLayer : public Plugin {
 
     LEDModeInterface* getPlugin(int num);
     // Event handlers. Delete what you don't need.
-    EventHandlerResult onSetup();
-    EventHandlerResult beforeEachCycle();
-    EventHandlerResult onKeyswitchEvent(Key &mapped_key,KeyAddr key_addr, 
-                                        uint8_t key_state);
-    EventHandlerResult beforeReportingState();
-    EventHandlerResult afterEachCycle();
 
     EventHandlerResult onLayerChange();
 

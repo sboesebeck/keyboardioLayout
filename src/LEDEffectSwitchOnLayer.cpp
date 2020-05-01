@@ -62,53 +62,6 @@ LEDModeInterface* LEDEffectSwitchOnLayer::getPlugin(int num){
 	return effects[num];
 }
 // Event handlers.
-
-// Runs once, when the plugin is initialized during Kaleidoscope.setup().
-EventHandlerResult LEDEffectSwitchOnLayer::onSetup() {
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-// Run as the first thing at the start of each cycle.
-EventHandlerResult LEDEffectSwitchOnLayer::beforeEachCycle() {
-  if(disabled_) {
-    return EventHandlerResult::OK;
-  }
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-// Run for every non-idle key, in each cycle the key isn't idle in. If a key
-// gets pressed, released, or is held, it is not considered idle, and this
-// event handler will run for it too.
-EventHandlerResult LEDEffectSwitchOnLayer::onKeyswitchEvent(Key &mapped_key,KeyAddr key_addr, 
-                                               uint8_t key_state) {
-  if(disabled_) {
-    return EventHandlerResult::OK;
-  }
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-// Runs each cycle right before sending the various reports (keys pressed, mouse
-// events, etc) to the host.
-EventHandlerResult LEDEffectSwitchOnLayer::beforeReportingState() {
-  if(disabled_) {
-    return EventHandlerResult::OK;
-  }
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
-// Runs at the very end of each cycle.
-EventHandlerResult LEDEffectSwitchOnLayer::afterEachCycle() {
-  if(disabled_) {
-    return EventHandlerResult::OK;
-  }
-  // Code goes here.
-  return EventHandlerResult::OK;
-}
-
 EventHandlerResult LEDEffectSwitchOnLayer::onLayerChange() {
   if (activePlugins[Layer.top()]!=NULL){
 	activePlugins[Layer.top()]->activate();

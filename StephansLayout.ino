@@ -659,8 +659,8 @@ void setup() {
   Qukeys.setHoldTimeout(155);
   Qukeys.setOverlapThreshold(85);
 
+  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
   //LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
-  //LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
   //LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
   //LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
   LEDEffectSwitchOnLayer.enable();
