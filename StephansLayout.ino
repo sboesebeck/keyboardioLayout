@@ -72,7 +72,7 @@
 #include "Kaleidoscope-MagicCombo.h"
 
 // Support for USB quirks, like changing the key state report protocol
-#include "Kaleidoscope-USB-Quirks.h"
+//#include "Kaleidoscope-USB-Quirks.h"
 //support for Tap'n'Hold functionality
 #include "Kaleidoscope-Qukeys.h"
 //#include "Kaleidoscope-LEDEffectSwitchOnLayer.h"
@@ -601,12 +601,12 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
   MagicCombo,
-  LEDEffectSwitchOnLayer,
+  LEDEffectSwitchOnLayer
   // The USBQuirks plugin lets you do some things with USB that we aren't
   // comfortable - or able - to do automatically, but can be useful
   // nevertheless. Such as toggling the key report protocol between Boot (used
   // by BIOSes) and Report (NKRO).
-  USBQuirks
+  //USBQuirks
 );
 
 
