@@ -75,6 +75,8 @@
 //#include "Kaleidoscope-USB-Quirks.h"
 //support for Tap'n'Hold functionality
 #include "Kaleidoscope-Qukeys.h"
+#include <Kaleidoscope-HostOS.h>
+#include "Kaleidoscope-Unicode.h"
 //#include "Kaleidoscope-LEDEffectSwitchOnLayer.h"
 //#include "Kaleidoscope-LangPack-German.h"
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
@@ -104,6 +106,9 @@ enum { MACRO_VERSION_INFO,
        MACRO_LOL,
        MACRO_SHRUG,
        MACRO_TONGUE2,
+       MACRO_LLAP,
+       MACRO_COFFEE,
+       MACRO_FACEPALM,
        LED_EFFECT_NEXT_NUMPADSHIFT
      };
 
@@ -267,11 +272,11 @@ KEYMAPS(
    ___),
 
   [FUNCTION] =  KEYMAP_STACKED
-  (Consumer_Mute,             Key_F1,           Key_F2,         Key_F3,            Key_F4,               Key_F5,            ___,
-   Consumer_VolumeIncrement,  ___,              M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
-   Consumer_VolumeDecrement,      ___,              M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
-   ___,      ___,              M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
-   ___,      ___,              ___,         ___,
+  (Consumer_Mute,             Key_F1,            Key_F2,         Key_F3,            Key_F4,               Key_F5,            ___,
+   Consumer_VolumeIncrement,  M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
+   Consumer_VolumeDecrement,  M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
+   ___,                       M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
+   ___,  ___,   ___,  ___,
    ___, 
 
    ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
@@ -363,6 +368,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 	    //break;
 	  case MACRO_SMIRK:
 	    Macros.type(PSTR("</("));
+            //Unicode.type(0x2328);
 	    break;
 	  case MACRO_FROWN:
 	    Macros.type(PSTR(">/*"));
@@ -399,7 +405,15 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 	  case MACRO_LOL:
 	    Macros.type(PSTR("*lol("));
 	    break;
-
+	  case MACRO_LLAP:
+            Macros.type(PSTR("*llap("));
+	    break;
+	  case MACRO_FACEPALM:
+            Macros.type(PSTR("*facepalm("));
+            break;
+          case MACRO_COFFEE:
+            Macros.type(PSTR("*coffee("));
+            break;
 	  }
   }
   return MACRO_NONE;
@@ -601,6 +615,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
   MagicCombo,
+  Unicode,
   LEDEffectSwitchOnLayer
   // The USBQuirks plugin lets you do some things with USB that we aren't
   // comfortable - or able - to do automatically, but can be useful
@@ -621,7 +636,7 @@ void setup() {
 
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
-
+  HostOS.os(kaleidoscope::plugin::hostos::OSX);
   // While we hope to improve this in the future, the NumPad plugin
   // needs to be explicitly told which keymap layer is your numpad layer
   NumPad.numPadLayer = NUMPAD;
