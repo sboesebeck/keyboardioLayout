@@ -162,7 +162,7 @@ enum { MACRO_VERSION_INFO,
   *
   */
 
-enum { PRIMARY, NUMPAD, SPECIAL, GAME,XOY, FUNCTION }; // layers
+enum { PRIMARY, XOY,GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
 
 
 /**
@@ -207,6 +207,37 @@ KEYMAPS(
    Key_RightAlt, Key_RightControl, Key_Enter, Key_Space,
    ShiftToLayer(FUNCTION)),
 
+ [XOY] =  KEYMAP_STACKED
+  (___, ___, ___, ___, ___, ___, ___,
+   ___, Key_X,        Key_Comma, Key_O,     Key_Period,      Key_Z,         ___,
+   ShiftToLayer(SPECIAL), Key_H,        Key_A,     Key_E,     Key_I,           Key_U,
+   ___, CTL_T(K), Key_Q,     Key_Quote, Key_LeftBracket, Key_Semicolon, ___,
+   ___, ___, ___, ___,
+   ___,
+
+   ___,  ___,    ___,    ___,    ___,   ___,          Key_Slash,
+   ___,                   Key_V,   Key_G, Key_C,   Key_L, Key_J,        Key_Minus,
+                          Key_D,   Key_T, Key_R,   Key_N, Key_S,        ALT_T(F), 
+   ___,                   Key_B,   Key_P, Key_W,   Key_M, CTL_T(Y), ___, 
+   ___, ___, ___, ___,
+   ___),
+
+ [GAME] =  KEYMAP_STACKED
+  (___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, Key_F1,
+   ___, ___, ___, ___, ___, ___,
+   Key_LeftControl, ___, ___, ___, ___, ___, Key_F2,
+   Key_Space, Key_Backspace, Key_F3, Key_F4,
+   Key_LeftShift,
+
+   ___,  ___, ___, ___,           ___,              ___, ___,
+   ___,                     ___,        ___,      ___,      ___, ___, ___,
+                         ___,        ___,    ___,    ___,         ___,              ___, 
+   ___,                   ___, ___, ___,   ___,                 ___,                      ___, 
+   ___, ___, ___, ___,
+   ___),
+
+
 
   [NUMPAD] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, M(MACRO_VERSION_INFO),
@@ -217,9 +248,9 @@ KEYMAPS(
    ___,
 
    ___,  ___, Key_7, Key_8,      Key_9,              Key_KeypadSubtract, ___,
-   ___,                    ___, Key_4, Key_5,      Key_6,              Key_KeypadAdd,      ___,
-                           ___, Key_1, Key_2,      Key_3,              Key_Equals,         ___,
-   ___,                    ___, Key_0, Key_Period, Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter,
+   ___,  ___, Key_4, Key_5,      Key_6,              Key_KeypadAdd,      ___,
+         ___, Key_1, Key_2,      Key_3,              Key_Equals,         ___,
+   ___,  ___, Key_0, Key_Comma,  Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter,
    ___, ___, ___, ___,
    ___),
 
@@ -240,37 +271,7 @@ KEYMAPS(
    ___),
 
 
- [GAME] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, Key_F1,
-   ___, ___, ___, ___, ___, ___,
-   Key_LeftControl, ___, ___, ___, ___, ___, Key_F2,
-   Key_Space, Key_Backspace, Key_F3, Key_F4,
-   Key_LeftShift,
-
-   ___,  ___, ___, ___,           ___,              ___, ___,
-   ___,                     ___,        ___,      ___,      ___, ___, ___,
-                         ___,        ___,    ___,    ___,         ___,              ___, 
-   ___,                   ___, ___, ___,   ___,                 ___,                      ___, 
-   ___, ___, ___, ___,
-   ___),
-
    
-[XOY] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, ___,
-   ___, Key_X,        Key_Comma, Key_O,     Key_Period,      Key_Z,         ___,
-   ___, Key_H,        Key_A,     Key_E,     Key_I,           Key_U,
-   ___, CTL_T(K), Key_Q,     Key_Quote, Key_LeftBracket, Key_Semicolon, ___,
-   ___, ___, ___, ___,
-   ___,
-
-   ___,  ___,    ___,    ___,    ___,   ___,          Key_Slash,
-   ___,                   Key_V,   Key_G, Key_C,   Key_L, Key_J,        Key_Minus,
-                          Key_D,   Key_T, Key_R,   Key_N, Key_S,        ALT_T(F), 
-   ___,                   Key_B,   Key_P, Key_W,   Key_M, CTL_T(Y), ___, 
-   ___, ___, ___, ___,
-   ___),
-
   [FUNCTION] =  KEYMAP_STACKED
   (Consumer_Mute,             Key_F1,            Key_F2,         Key_F3,            Key_F4,               Key_F5,            ___,
    Consumer_VolumeIncrement,  M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
@@ -542,7 +543,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // Focus allows bi-directional communication with the host, and is the
   // interface through which the keymap in EEPROM can be edited.
   Focus,
-
+  FocusLEDCommand,
   // FocusSettingsCommand adds a few Focus commands, intended to aid in
   // changing some settings of the keyboard, such as the default layer (via the
   // `settings.defaultLayer` command)
@@ -665,7 +666,7 @@ void setup() {
   // by using the `settings.defaultLayer` Focus command, or by using the
   // `keymap.onlyCustom` command to use EEPROM layers only.
   //EEPROMKeymap.setup(2);
-  
+
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
