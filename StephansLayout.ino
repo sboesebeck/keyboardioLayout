@@ -18,8 +18,8 @@
 #include "Model01-Firmware.h"
 #include "LEDEffectSwitchOnLayer.h"
 // Support for storing the keymap in EEPROM
-//#include "Kaleidoscope-EEPROM-Settings.h"
-//#include "Kaleidoscope-EEPROM-Keymap.h"
+#include "Kaleidoscope-EEPROM-Settings.h"
+#include "Kaleidoscope-EEPROM-Keymap.h"
 #include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
@@ -196,14 +196,14 @@ KEYMAPS(
   (Key_Escape,                Key_1, Key_2, Key_3, Key_4, Key_5, M(LED_EFFECT_NEXT_NUMPADSHIFT),
    Key_Tab,                   Key_Q, Key_W, Key_E, Key_R, Key_T, MT(LeftGui,Equals),
    ShiftToLayer(SPECIAL),     Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_LeftShift, Key_Z,   Key_X, Key_C, Key_V, Key_B, Key_Meh,
+   MT(LeftShift,Backtick),    MT(LeftControl,Z),   Key_X, Key_C, Key_V, Key_B, Key_Meh,
    Key_Backspace, Key_Delete, Key_LeftControl, Key_LeftAlt,
    ShiftToLayer(FUNCTION),
 
    Key_RightBracket,           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
    MT(RightGui,Backslash),                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,                          Key_LeftBracket,
                                Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  Key_Quote,
-   Key_Hyper,              Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,         Key_RightShift,
+   Key_Hyper,              Key_N, Key_M, Key_Comma, Key_Period,    MT(RightControl,Slash),         MT(RightShift,RightBracket),
    Key_RightAlt, Key_RightControl, Key_Enter, Key_Space,
    ShiftToLayer(FUNCTION)),
 
@@ -431,10 +431,8 @@ void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event 
   case kaleidoscope::plugin::HostPowerManagement::Suspend:
     LEDControl.set_all_leds_to({0, 0, 0});
     LEDControl.syncLeds();
-    LEDControl.paused = true;
     break;
   case kaleidoscope::plugin::HostPowerManagement::Resume:
-    LEDControl.paused = false;
     LEDControl.refreshAll();
     break;
   case kaleidoscope::plugin::HostPowerManagement::Sleep:
@@ -537,8 +535,8 @@ static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
 KALEIDOSCOPE_INIT_PLUGINS(
   // The EEPROMSettings & EEPROMKeymap plugins make it possible to have an
   // editable keymap in EEPROM.
-  //EEPROMSettings,
-  //EEPROMKeymap,
+  EEPROMSettings,
+  EEPROMKeymap,
   Qukeys,
   // Focus allows bi-directional communication with the host, and is the
   // interface through which the keymap in EEPROM can be edited.
@@ -671,11 +669,11 @@ void setup() {
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(2);
-  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
+  WavepoolEffect.idle_timeout = 15000;  // 5 seconds
   //WavepoolEffect.activate();
   Qukeys.activate();
-  Qukeys.setHoldTimeout(155);
-  Qukeys.setOverlapThreshold(85);
+  Qukeys.setHoldTimeout(150);
+  Qukeys.setOverlapThreshold(88);
 
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
   //LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
