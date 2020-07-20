@@ -197,14 +197,14 @@ KEYMAPS(
    Key_Tab,                   Key_Q, Key_W, Key_E, Key_R, Key_T, MT(LeftGui,Equals),
    ShiftToLayer(SPECIAL),     Key_A, Key_S, Key_D, Key_F, Key_G,
    MT(LeftShift,Backtick),    MT(LeftControl,Z),   Key_X, Key_C, Key_V, Key_B, Key_Meh,
-   Key_Backspace, Key_Delete, Key_LeftControl, Key_LeftAlt,
+   Key_Backspace, Key_Delete, Key_LeftAlt, Key_LeftControl,
    ShiftToLayer(FUNCTION),
 
-   Key_RightBracket,           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
-   MT(RightGui,Backslash),                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,                          Key_LeftBracket,
+   Consumer_PlaySlashPause,           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
+   MT(RightGui,Backslash),                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,             Key_LeftBracket,
                                Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  Key_Quote,
    Key_Hyper,              Key_N, Key_M, Key_Comma, Key_Period,    MT(RightControl,Slash),         MT(RightShift,RightBracket),
-   Key_RightAlt, Key_RightControl, Key_Enter, Key_Space,
+   Key_RightControl, Key_RightAlt, Key_Enter, Key_Space,
    ShiftToLayer(FUNCTION)),
 
  [XOY] =  KEYMAP_STACKED
@@ -280,10 +280,10 @@ KEYMAPS(
    ___,  ___,   ___,  ___,
    ___, 
 
-   ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
-   ___,     Key_Home,            Key_PageUp,     Key_UpArrow,    Key_PageDown,               Key_End,                   Key_F12,
-            LGUI(Key_LeftArrow), Key_LeftArrow,  Key_DownArrow,  Key_RightArrow,             LGUI(Key_RightArrow),      ___,
-   ___,     ___,                 ___,            ___,            Consumer_ScanPreviousTrack, Consumer_PlaySlashPause,   Consumer_ScanNextTrack,
+   Consumer_PlaySlashPause,        Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
+   Consumer_ScanNextTrack,     	   Key_Home,            Key_PageUp,     Key_UpArrow,    Key_PageDown,               Key_End,                   Key_F12,
+            			   LGUI(Key_LeftArrow), Key_LeftArrow,  Key_DownArrow,  Key_RightArrow,             LGUI(Key_RightArrow),      ___,
+   Consumer_ScanPreviousTrack,     ___,                 ___,            ___,            ___,                        ___,   		       ___,
    ___, ___, ___, ___,
    ___)
 ) // KEYMAPS(
@@ -673,7 +673,7 @@ void setup() {
 //WavepoolEffect.activate();
   Qukeys.activate();
   Qukeys.setHoldTimeout(180);
-  Qukeys.setOverlapThreshold(77);
+  Qukeys.setOverlapThreshold(45);
 
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
