@@ -670,15 +670,16 @@ void setup() {
   // many editable layers we have (see above).
   ColormapEffect.max_layers(2);
   WavepoolEffect.idle_timeout = 15000;  // 5 seconds
-  //WavepoolEffect.activate();
+//WavepoolEffect.activate();
   Qukeys.activate();
-  Qukeys.setHoldTimeout(150);
-  Qukeys.setOverlapThreshold(88);
+  Qukeys.setHoldTimeout(180);
+  Qukeys.setOverlapThreshold(77);
 
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
-  //LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
-  //LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
-  //LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
+  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,LEDRainbowWaveEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
   LEDEffectSwitchOnLayer.enable();
 
   LEDEffectSwitchOnLayer.setPluginOrder(0,StalkerEffect);
