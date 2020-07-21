@@ -195,16 +195,16 @@ KEYMAPS(
  [PRIMARY] = KEYMAP_STACKED
   (Key_Escape,                Key_1, Key_2, Key_3, Key_4, Key_5, M(LED_EFFECT_NEXT_NUMPADSHIFT),
    Key_Tab,                   Key_Q, Key_W, Key_E, Key_R, Key_T, MT(LeftGui,Equals),
-   ShiftToLayer(SPECIAL),     Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_LeftAlt,     Key_A, Key_S, Key_D, Key_F, Key_G,
    MT(LeftShift,Backtick),    MT(LeftControl,Z),   Key_X, Key_C, Key_V, Key_B, Key_Meh,
-   Key_Backspace, Key_Delete, Key_LeftAlt, Key_LeftControl,
+   Key_Backspace, Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
    ShiftToLayer(FUNCTION),
 
    Consumer_PlaySlashPause,           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
    MT(RightGui,Backslash),                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,             Key_LeftBracket,
-                               Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  Key_Quote,
+                               Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  MT(RightAlt,Quote),
    Key_Hyper,              Key_N, Key_M, Key_Comma, Key_Period,    MT(RightControl,Slash),         MT(RightShift,RightBracket),
-   Key_RightControl, Key_RightAlt, Key_Enter, Key_Space,
+   ShiftToLayer(SPECIAL), Key_RightAlt, Key_Enter, Key_Space,
    ShiftToLayer(FUNCTION)),
 
  [XOY] =  KEYMAP_STACKED
