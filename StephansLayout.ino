@@ -256,17 +256,17 @@ KEYMAPS(
 
 
  [SPECIAL] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___,
+  (___, ___,           ___,           ___,           ___,           ___,                   ___,
+   ___, ___,           ___,           ___,           ___,           ___,                   ___,
+   ___, LSHIFT(Key_1), LSHIFT(Key_2), LSHIFT(Key_4), LSHIFT(Key_6), LSHIFT(Key_Backslash),
+   ___, ___,           ___,           ___,           ___,           ___,                   ___,
+   ___, ___,           ___,           ___,
    ___,
 
    M(MACRO_VERSION_INFO),  ___, ___, ___,           ___,              ___, ___,
    ___,                     LALT(Key_7),        LALT(Key_5),      LALT(Key_6),      LALT(LSHIFT(Key_6)), LALT(LSHIFT(Key_Equals)), ___,
                           LSHIFT(Key_7),        LSHIFT(Key_8),    LSHIFT(Key_9),    LALT(Key_8),         LALT(Key_9),              ___, 
-   ___,                   LALT(LSHIFT(Key_7)), Key_Backtick, LSHIFT(Key_Backtick),   ___,                 ___,                      ___, 
+   ___,                   LALT(LSHIFT(Key_7)),  Key_Backtick,     LSHIFT(Key_Comma),LSHIFT(Key_Period),  LSHIFT(Key_Backtick),     ___, 
    ___, ___, ___, ___,
    ___),
 
