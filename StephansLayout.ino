@@ -193,18 +193,18 @@ enum { PRIMARY, XOY,GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
 KEYMAPS(
 
  [PRIMARY] = KEYMAP_STACKED
-  (Key_Escape,                Key_1, Key_2, Key_3, Key_4, Key_5, M(LED_EFFECT_NEXT_NUMPADSHIFT),
-   Key_Tab,                   Key_Q, Key_W, Key_E, Key_R, Key_T, MT(LeftGui,Equals),
-   Key_LeftAlt,     Key_A, Key_S, Key_D, Key_F, Key_G,
-   MT(LeftShift,Backtick),    MT(LeftControl,Z),   Key_X, Key_C, Key_V, Key_B, Key_Meh,
-   Key_Backspace, Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
+  (Key_Escape,      Key_1, Key_2, Key_3, Key_4, Key_5,  Key_Backtick,  //M(LED_EFFECT_NEXT_NUMPADSHIFT),
+   Key_Tab,         Key_Q, Key_W, Key_E, Key_R, Key_T, MT(LeftGui,Equals),
+   Key_LeftControl, Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_LeftShift,   Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Meh,
+   Key_Backspace,Key_Delete , Key_LeftAlt, ShiftToLayer(SPECIAL),
    ShiftToLayer(FUNCTION),
 
-   Consumer_PlaySlashPause,           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
+   Key_RightBracket,           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
    MT(RightGui,Backslash),                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,             Key_LeftBracket,
-                               Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  MT(RightAlt,Quote),
-   Key_Hyper,              Key_N, Key_M, Key_Comma, Key_Period,    MT(RightControl,Slash),         MT(RightShift,RightBracket),
-   ShiftToLayer(SPECIAL), Key_RightAlt, Key_Enter, Key_Space,
+                               Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  MT(RightControl,Quote),
+   Key_Hyper,              Key_N, Key_M, Key_Comma, Key_Period,        Key_Slash,         	       Key_RightShift,
+   ShiftToLayer(SPECIAL), Key_RightAlt,Key_Enter,  Key_Space,
    ShiftToLayer(FUNCTION)),
 
  [XOY] =  KEYMAP_STACKED
@@ -256,17 +256,17 @@ KEYMAPS(
 
 
  [SPECIAL] =  KEYMAP_STACKED
-  (___, ___,           ___,           ___,           ___,           ___,                   ___,
-   ___, ___,           ___,           ___,           ___,           ___,                   ___,
-   ___, LSHIFT(Key_1), LSHIFT(Key_2), LSHIFT(Key_4), LSHIFT(Key_6), LSHIFT(Key_Backslash),
-   ___, ___,           ___,           ___,           ___,           ___,                   ___,
+  (___, ___,           ___,           ___,           ___,                 ___,                   ___,
+   ___, ___,           ___,           LALT(Key_E),   ___,                 ___,                   ___,
+   ___, LSHIFT(Key_1), LSHIFT(Key_2), Key_Backtick, LSHIFT(Key_Backtick), LSHIFT(Key_Backslash),
+   ___, ___,           ___,           ___,           ___,                 ___,                   ___,
    ___, ___,           ___,           ___,
    ___,
 
-   M(MACRO_VERSION_INFO),  ___, ___, ___,           ___,              ___, ___,
-   ___,                     LALT(Key_7),        LALT(Key_5),      LALT(Key_6),      LALT(LSHIFT(Key_6)), LALT(LSHIFT(Key_Equals)), ___,
-                          LSHIFT(Key_7),        LSHIFT(Key_8),    LSHIFT(Key_9),    LALT(Key_8),         LALT(Key_9),              ___, 
-   ___,                   LALT(LSHIFT(Key_7)),  Key_Backtick,     LSHIFT(Key_Comma),LSHIFT(Key_Period),  LSHIFT(Key_Backtick),     ___, 
+   M(MACRO_VERSION_INFO), ___,                ___,                 ___,              ___,                LALT(LSHIFT(Key_Equals)),    LSHIFT(Key_Minus),
+   ___,                   LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(Key_8),        LALT(Key_9),                  LSHIFT(Key_0),
+                          LSHIFT(Key_7),      LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_L),        LALT(LSHIFT(Key_6)),      LSHIFT(Key_RightBracket), 
+   ___,                   LALT(Key_N),        LALT(LSHIFT(Key_7)), LSHIFT(Key_Comma),LSHIFT(Key_Period), Key_Slash,     Key_RightBracket, 
    ___, ___, ___, ___,
    ___),
 
@@ -368,52 +368,52 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 	    //anyKeyMacro(keyState);
 	    //break;
 	  case MACRO_SMIRK:
-	    Macros.type(PSTR("</("));
+	    Macros.type(PSTR("</( "));
             //Unicode.type(0x2328);
 	    break;
 	  case MACRO_FROWN:
-	    Macros.type(PSTR(">/*"));
+	    Macros.type(PSTR(">/* "));
 	    break;
 	  case MACRO_SMILE:
-	    Macros.type(PSTR(">/("));
+	    Macros.type(PSTR(">/( "));
 	    break;
 	  case MACRO_PUKE:
-	    Macros.type(PSTR("*puke("));
+	    Macros.type(PSTR("*puke( "));
 	    break;
 	  case MACRO_TONGUE:
-	    Macros.type(PSTR(">/P"));
+	    Macros.type(PSTR(">/P "));
 	    break;
 	  case MACRO_TONGUE2:
-	    Macros.type(PSTR("</P"));
+	    Macros.type(PSTR("</P "));
 	    break;
 	  case MACRO_SWEAR:
-	    Macros.type(PSTR("*swear("));
+	    Macros.type(PSTR("*swear( "));
 	    break;
 	  case MACRO_DARN:
 	    return MACRODOWN(I(25),
-			     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt)
+			     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt),T(Space)
 			    );
 	    break;
 	  case MACRO_ROLL:
-	    Macros.type(PSTR("*roll("));
+	    Macros.type(PSTR("*roll( "));
 	    break;
 	  case MACRO_ROFL:
-	    Macros.type(PSTR("*rofl("));
+	    Macros.type(PSTR("*rofl( "));
 	    break;
 	  case MACRO_SHRUG:
-	    Macros.type(PSTR("*shrug("));
+	    Macros.type(PSTR("*shrug( "));
 	    break;
 	  case MACRO_LOL:
-	    Macros.type(PSTR("*lol("));
+	    Macros.type(PSTR("*lol( "));
 	    break;
 	  case MACRO_LLAP:
-            Macros.type(PSTR("*llap("));
+            Macros.type(PSTR("*llap( "));
 	    break;
 	  case MACRO_FACEPALM:
-            Macros.type(PSTR("*facepalm("));
+            Macros.type(PSTR("*facepalm( "));
             break;
           case MACRO_COFFEE:
-            Macros.type(PSTR("*coffee("));
+            Macros.type(PSTR("*coffee( "));
             break;
 	  }
   }
