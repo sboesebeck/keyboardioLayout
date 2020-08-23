@@ -499,6 +499,19 @@ static void gameMode(uint8_t combo_index){
  }  
 }
 
+static void nextLEDEffect(uint8_t combo_index){
+	static int current=0;
+	current=current+1;
+	if (LEDEffectSwitchOnLayer.getPlugin(current)==NULL){
+		current=0;
+	}
+	LEDEffectSwitchOnLayer.getPlugin(current)->activate();
+	LEDEffectSwitchOnLayer.setPluginForLayer(Layer.top(),current);
+	
+}
+
+
+
 
 /** Magic combo list, a list of key combo and action pairs the firmware should
  * recognise.
@@ -511,7 +524,8 @@ static void gameMode(uint8_t combo_index){
 USE_MAGIC_COMBOS(
    {.action=gameMode,.keys={ R3C6,R3C9,R3C15}},   //fn+fn+shift, right half
    {.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
-   {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}}   //Left Fn+Prog+LED
+   {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}},   //Left Fn+Prog+LED
+   {.action=nextLEDEffect,.keys={R2C8,R2C9,R0C6}}   //Hyper+Alt+LED
 );
 
 
