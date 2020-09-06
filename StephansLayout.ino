@@ -92,7 +92,7 @@ ii  * These are the names of your macros. They'll be used in two places.
   * a macro key is pressed.
   */
 
-enum { MACRO_VERSION_INFO,
+enum { //MACRO_VERSION_INFO,
        //MACRO_ANY,
        MACRO_SMIRK,
        MACRO_FROWN,
@@ -113,6 +113,7 @@ enum { MACRO_VERSION_INFO,
      };
 
 
+////     static byte r=0x05;
 
 /** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
   * keymaps: The standard QWERTY keymap, the "Function layer" keymap and the "Numpad"
@@ -240,18 +241,18 @@ KEYMAPS(
 
 
   [NUMPAD] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, M(MACRO_VERSION_INFO),
+  (___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___,
    ___,
 
-   ___,  ___, Key_7, Key_8,      Key_9,              Key_KeypadSubtract, ___,
-   ___,  ___, Key_4, Key_5,      Key_6,              Key_KeypadAdd,      ___,
-         ___, Key_1, Key_2,      Key_3,              Key_Equals,         ___,
-   ___,  ___, Key_0, Key_Comma,  Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter,
-   ___, ___, ___, ___,
+   ___,  ___, Key_KeypadDivide, Key_KeypadMultiply,     Key_Slash,  Key_KeypadSubtract, ___,
+   ___,  ___, Key_7,            Key_8,                  Key_9,      Key_KeypadAdd,      ___,
+         ___, Key_4,            Key_5,                  Key_6,      Key_Period,   ___,
+   ___,  ___, Key_1,            Key_2,                  Key_3,      Key_Comma, ___,   
+   ___,  ___, ___,  Key_0,
    ___),
 
 
@@ -263,10 +264,10 @@ KEYMAPS(
    ___, ___,           ___,           ___,
    ___,
 
-   M(MACRO_VERSION_INFO), ___,                ___,                 ___,              ___,                LALT(LSHIFT(Key_Equals)),    LSHIFT(Key_Minus),
-   ___,                   LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(Key_8),        LALT(Key_9),                  LSHIFT(Key_0),
-                          LSHIFT(Key_7),      LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_L),        LALT(LSHIFT(Key_6)),      LSHIFT(Key_RightBracket), 
-   ___,                   LALT(Key_N),        LALT(LSHIFT(Key_7)), LSHIFT(Key_Comma),LSHIFT(Key_Period), Key_Slash,     Key_RightBracket, 
+   ___,         LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
+   ___,         LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
+                LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
+   ___,         Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,     Key_RightBracket, 
    ___, ___, ___, ___,
    ___),
 
@@ -296,12 +297,12 @@ KEYMAPS(
  *  prints out the firmware build information as virtual keystrokes
  */
 
-static void versionInfoMacro(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("Kezboardio Model 01 / Kaleidoscope ")); //Kezboardio Model 01 ß Kaleidoscope Stephans Layout 23.04.2020
-    Macros.type(PSTR(BUILD_INFORMATION));
-  }
-}
+//static void versionInfoMacro(uint8_t keyState) {
+//  if (keyToggledOn(keyState)) {
+//    Macros.type(PSTR("Kezboardio Model 01 / Kaleidoscope ")); //Kezboardio Model 01 ß Kaleidoscope Stephans Layout 23.04.2020
+//    Macros.type(PSTR(BUILD_INFORMATION));
+//  }
+//}
 
 /** anyKeyMacro is used to provide the functionality of the 'Any' key.
  *
@@ -360,10 +361,9 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   if (keyToggledOn(keyState)) {
      switch (macroIndex) {
 		 
-	  case MACRO_VERSION_INFO:
-	    versionInfoMacro(keyState);
-	    break;
-
+	  //case MACRO_VERSION_INFO:
+	  //  versionInfoMacro(keyState);
+	  //  break;
 	  //case MACRO_ANY:
 	    //anyKeyMacro(keyState);
 	    //break;
@@ -510,6 +510,15 @@ static void nextLEDEffect(uint8_t combo_index){
 	
 }
 
+//static void addR(uint8_t combo_index){
+//     if (r>=0xff-0x15){
+//       r=0x0;
+//     } else {
+//       r=r+0x15;
+//     }
+//     StalkerEffect.inactive_color= CRGB(r, 0x10, 0x45);
+//}
+
 
 
 
@@ -525,7 +534,8 @@ USE_MAGIC_COMBOS(
    {.action=gameMode,.keys={ R3C6,R3C9,R3C15}},   //fn+fn+shift, right half
    {.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
    {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}},   //Left Fn+Prog+LED
-   {.action=nextLEDEffect,.keys={R2C8,R2C9,R0C6}}   //Hyper+Alt+LED
+   {.action=nextLEDEffect,.keys={R2C8,R2C9,R0C6}},   //Hyper+Alt+LED
+ //  {.action=addR,.keys={R3C6,R3C9,R1C1}}   //FN+FN+1
 );
 
 
@@ -669,7 +679,7 @@ void setup() {
   // The LED Stalker mode has a few effects. The one we like is called
   // 'BlazingTrail'. For details on other options, see
   StalkerEffect.variant = STALKER( BlazingTrail);
-  //StalkerEffect.inactive_color= CRGB(0x05, 0x30, 0x05);
+  StalkerEffect.inactive_color= CRGB(0x24, 0x24, 0x85);
   StalkerEffect.activate();
 
   // To make the keymap editable without flashing new firmware, we store
@@ -682,7 +692,7 @@ void setup() {
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
-  ColormapEffect.max_layers(2);
+  ColormapEffect.max_layers(1);
   WavepoolEffect.idle_timeout = 15000;  // 5 seconds
 //WavepoolEffect.activate();
   Qukeys.activate();
