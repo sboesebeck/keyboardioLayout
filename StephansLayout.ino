@@ -16,7 +16,7 @@
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
 #include "Model01-Firmware.h"
-#include "LEDEffectSwitchOnLayer.h"
+#include "src/LEDEffectSwitchOnLayer.h"
 // Support for storing the keymap in EEPROM
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
@@ -113,6 +113,7 @@ enum { //MACRO_VERSION_INFO,
      };
 
 
+static int current=0;
 ////     static byte r=0x05;
 
 /** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
@@ -352,7 +353,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 				current=0;
 			}
 			LEDEffectSwitchOnLayer.getPlugin(current)->activate();
-			LEDEffectSwitchOnLayer.setPluginForLayer(Layer.top(),current);
+			LEDEffectSwitchOnLayer.setPluginForLayer(Layer.mostRecent(),current);
 		}
 	}
 	return MACRO_NONE;
@@ -500,14 +501,45 @@ static void gameMode(uint8_t combo_index){
 }
 
 static void nextLEDEffect(uint8_t combo_index){
-	static int current=0;
 	current=current+1;
 	if (LEDEffectSwitchOnLayer.getPlugin(current)==NULL){
 		current=0;
 	}
 	LEDEffectSwitchOnLayer.getPlugin(current)->activate();
-	LEDEffectSwitchOnLayer.setPluginForLayer(Layer.top(),current);
+	LEDEffectSwitchOnLayer.setPluginForLayer(Layer.mostRecent(),current);
 	
+}
+
+static void toggleLed(uint8_t combo_index){
+    static int on=0;
+    on+=1;
+    if (on>4) on=0;
+    switch(on) {
+      case 0:
+	StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
+	break;
+      case 1:
+        StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
+	break;
+      case 2:
+	StalkerEffect.inactive_color=CRGB(0x60, 0x64, 0x85);
+	break;
+      case 3:
+	StalkerEffect.inactive_color=CRGB(0x85,0x30,0x30);
+	break;
+      case 4:
+	StalkerEffect.inactive_color=CRGB(0,0,0);
+	break;
+      default:
+	StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
+	break;
+
+	//LEDOff.activate();
+    	//LEDControl.set_all_leds_to({0, 0, 0});
+   	//LEDControl.syncLeds();
+	//LEDEffectSwitchOnLayer.getPlugin(current)->activate();
+	//LEDControl.refreshAll();
+    }
 }
 
 //static void addR(uint8_t combo_index){
@@ -535,6 +567,7 @@ USE_MAGIC_COMBOS(
    {.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
    {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}},   //Left Fn+Prog+LED
    {.action=nextLEDEffect,.keys={R2C8,R2C9,R0C6}},   //Hyper+Alt+LED
+   {.action=toggleLed,.keys={R3C0,R3C15,R3C9}},   //shift+shift+right FN
  //  {.action=addR,.keys={R3C6,R3C9,R1C1}}   //FN+FN+1
 );
 

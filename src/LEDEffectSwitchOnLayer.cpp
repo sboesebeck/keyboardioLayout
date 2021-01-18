@@ -63,8 +63,8 @@ LEDModeInterface* LEDEffectSwitchOnLayer::getPlugin(int num){
 }
 // Event handlers.
 EventHandlerResult LEDEffectSwitchOnLayer::onLayerChange() {
-  if (activePlugins[Layer.top()]!=NULL){
-	activePlugins[Layer.top()]->activate();
+  if (activePlugins[Layer.mostRecent()]!=NULL){
+	activePlugins[Layer.mostRecent()]->activate();
   }
   return EventHandlerResult::OK;
 }
