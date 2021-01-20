@@ -164,7 +164,7 @@ static int current=0;
   *
   */
 
-enum { PRIMARY, XOY,GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
+enum { PRIMARY, GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
 
 
 /**
@@ -209,7 +209,7 @@ KEYMAPS(
    ShiftToLayer(SPECIAL), Key_RightAlt,Key_Enter,  Key_Space,
    ShiftToLayer(FUNCTION)),
 
- [XOY] =  KEYMAP_STACKED
+/* [XOY] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
    ___, Key_X,        Key_Comma, Key_O,     Key_Period,      Key_Z,         ___,
    ShiftToLayer(SPECIAL), Key_H,        Key_A,     Key_E,     Key_I,           Key_U,
@@ -223,7 +223,7 @@ KEYMAPS(
    ___,                   Key_B,   Key_P, Key_W,   Key_M, CTL_T(Y), ___, 
    ___, ___, ___, ___,
    ___),
-
+*/
  [GAME] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, Key_F1,
@@ -481,7 +481,7 @@ enum {
  static void enterHardwareTestMode(uint8_t combo_index) {
    HardwareTestMode.runTests();
  }
-static void xoyMode(uint8_t combo_index){
+/*static void xoyMode(uint8_t combo_index){
    if (Layer.isActive(XOY)){
       Layer.move(PRIMARY);
        StalkerEffect.variant = STALKER( BlazingTrail);
@@ -489,7 +489,7 @@ static void xoyMode(uint8_t combo_index){
       Layer.move(XOY);
       StalkerEffect.variant = STALKER( Haunt);
    }
-}
+}*/
 static void gameMode(uint8_t combo_index){
  if  (Layer.isActive(GAME)){
     Layer.move(PRIMARY);
@@ -516,10 +516,10 @@ static void toggleLed(uint8_t combo_index){
     if (on>4) on=0;
     switch(on) {
       case 0:
-	StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
+        StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
 	break;
       case 1:
-        StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
+	StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
 	break;
       case 2:
 	StalkerEffect.inactive_color=CRGB(0x60, 0x64, 0x85);
@@ -564,7 +564,7 @@ static void toggleLed(uint8_t combo_index){
 // });
 USE_MAGIC_COMBOS(
    {.action=gameMode,.keys={ R3C6,R3C9,R3C15}},   //fn+fn+shift, right half
-   {.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
+   //{.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
    {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}},   //Left Fn+Prog+LED
    {.action=nextLEDEffect,.keys={R2C8,R2C9,R0C6}},   //Hyper+Alt+LED
    {.action=toggleLed,.keys={R3C0,R3C15,R3C9}},   //shift+shift+right FN
@@ -712,7 +712,7 @@ void setup() {
   // The LED Stalker mode has a few effects. The one we like is called
   // 'BlazingTrail'. For details on other options, see
   StalkerEffect.variant = STALKER( BlazingTrail);
-  StalkerEffect.inactive_color= CRGB(0x24, 0x24, 0x85);
+  StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
   StalkerEffect.activate();
 
   // To make the keymap editable without flashing new firmware, we store
@@ -733,7 +733,7 @@ void setup() {
   Qukeys.setOverlapThreshold(45);
 
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
+  //LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
   LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,LEDRainbowWaveEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
