@@ -23,6 +23,8 @@
 #include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
+#include "Kaleidoscope-LayerFocus.h"
+//#include "Kaleidoscope-RemoteControl.h"
 #include "kaleidoscope/plugin/LEDModeInterface.h"
 // Support for keys that move the mouse
 //#include "Kaleidoscope-MouseKeys.h"
@@ -35,8 +37,9 @@
 
 // Support for "Numpad" mode, which is mostly just the Numpad specific LED mode
 #include "Kaleidoscope-NumPad.h"
-
+#include <Kaleidoscope-IdleLEDs.h>
 //#include "Kaleidoscope-LEDEffect-BootAnimation.h"
+#include <Kaleidoscope-LEDEffects.h>
 
 // Support for LED modes that set all LEDs to a single color
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
@@ -76,7 +79,7 @@
 //support for Tap'n'Hold functionality
 #include "Kaleidoscope-Qukeys.h"
 #include <Kaleidoscope-HostOS.h>
-#include "Kaleidoscope-Unicode.h"
+//#include "Kaleidoscope-Unicode.h"
 //#include "Kaleidoscope-LEDEffectSwitchOnLayer.h"
 //#include "Kaleidoscope-LangPack-German.h"
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
@@ -584,7 +587,9 @@ static kaleidoscope::plugin::LEDSolidColor solidGreen(0, 160, 0);
 static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
 //static kaleidoscope::plugin::LEDSolidColor solidIndigo(0, 0, 170);
 //static kaleidoscope::plugin::LEDSolidColor solidViolet(130, 0, 120);
-
+//static kaleidoscope::plugin::TriColor greenBlueRedEffect (CRGB(0x00, 0xff, 0x00),
+ //                                                   CRGB(0x00, 0x00, 0xff),
+ //                                                   CRGB(0xff, 0x00, 0x00));
 
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
@@ -599,6 +604,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // interface through which the keymap in EEPROM can be edited.
   Focus,
   FocusLEDCommand,
+  LayerFocus,
+  //RemoteControl,
   // FocusSettingsCommand adds a few Focus commands, intended to aid in
   // changing some settings of the keyboard, such as the default layer (via the
   // `settings.defaultLayer` command)
@@ -618,7 +625,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // LEDControl provides support for other LED modes
   LEDControl,
-  
+  JukeboxEffect,
+  MiamiEffect,
+  JukeboxAlternateEffect,
   StalkerEffect,
   WavepoolEffect,
   
@@ -671,7 +680,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
   MagicCombo,
-  Unicode,
+  PersistentIdleLEDs,
   LEDEffectSwitchOnLayer
   // The USBQuirks plugin lets you do some things with USB that we aren't
   // comfortable - or able - to do automatically, but can be useful
@@ -732,6 +741,8 @@ void setup() {
   Qukeys.setHoldTimeout(180);
   Qukeys.setOverlapThreshold(45);
 
+  PersistentIdleLEDs.setIdleTimeoutSeconds(30);
+  //greenBlueRedEffect.activate();
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
   //LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
@@ -747,10 +758,14 @@ void setup() {
   LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
   LEDEffectSwitchOnLayer.setPluginOrder(6,solidGreen);  
   LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
-  LEDEffectSwitchOnLayer.setPluginOrder(8,LEDOff);  
+  LEDEffectSwitchOnLayer.setPluginOrder(8,MiamiEffect);  
+  LEDEffectSwitchOnLayer.setPluginOrder(9,JukeboxEffect);  
+
+  LEDEffectSwitchOnLayer.setPluginOrder(10,LEDOff);  
  
 }
 
+//REMOTE_CONTROL_INIT(REMOTE_CONTROL)
 /** loop is the second of the standard Arduino sketch functions.
   * As you might expect, it runs in a loop, never exiting.
   *
