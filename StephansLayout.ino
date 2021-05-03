@@ -167,7 +167,8 @@ static int current=0;
   *
   */
 
-enum { PRIMARY, GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
+enum { PRIMARY, XOY,GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
+//enum { PRIMARY, GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
 
 
 /**
@@ -212,7 +213,7 @@ KEYMAPS(
    ShiftToLayer(SPECIAL), Key_RightAlt,Key_Enter,  Key_Space,
    ShiftToLayer(FUNCTION)),
 
-/* [XOY] =  KEYMAP_STACKED
+ [XOY] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
    ___, Key_X,        Key_Comma, Key_O,     Key_Period,      Key_Z,         ___,
    ShiftToLayer(SPECIAL), Key_H,        Key_A,     Key_E,     Key_I,           Key_U,
@@ -226,7 +227,7 @@ KEYMAPS(
    ___,                   Key_B,   Key_P, Key_W,   Key_M, CTL_T(Y), ___, 
    ___, ___, ___, ___,
    ___),
-*/
+
  [GAME] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, Key_F1,
@@ -484,7 +485,7 @@ enum {
  static void enterHardwareTestMode(uint8_t combo_index) {
    HardwareTestMode.runTests();
  }
-/*static void xoyMode(uint8_t combo_index){
+static void xoyMode(uint8_t combo_index){
    if (Layer.isActive(XOY)){
       Layer.move(PRIMARY);
        StalkerEffect.variant = STALKER( BlazingTrail);
@@ -492,7 +493,7 @@ enum {
       Layer.move(XOY);
       StalkerEffect.variant = STALKER( Haunt);
    }
-}*/
+}
 static void gameMode(uint8_t combo_index){
  if  (Layer.isActive(GAME)){
     Layer.move(PRIMARY);
@@ -567,7 +568,7 @@ static void toggleLed(uint8_t combo_index){
 // });
 USE_MAGIC_COMBOS(
    {.action=gameMode,.keys={ R3C6,R3C9,R3C15}},   //fn+fn+shift, right half
-   //{.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
+   {.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
    {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}},   //Left Fn+Prog+LED
    {.action=nextLEDEffect,.keys={R2C8,R2C9,R0C6}},   //Hyper+Alt+LED
    {.action=toggleLed,.keys={R3C0,R3C15,R3C9}},   //shift+shift+right FN
@@ -744,7 +745,7 @@ void setup() {
   PersistentIdleLEDs.setIdleTimeoutSeconds(30);
   //greenBlueRedEffect.activate();
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
-  //LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
   LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,LEDRainbowWaveEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
