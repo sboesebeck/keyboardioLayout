@@ -214,17 +214,17 @@ KEYMAPS(
    ShiftToLayer(FUNCTION)),
 
  [XOY] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, ___,
-   ___, Key_X,        Key_Comma, Key_O,     Key_Period,      Key_Z,         ___,
-   ShiftToLayer(SPECIAL), Key_H,        Key_A,     Key_E,     Key_I,           Key_U,
-   ___, CTL_T(K), Key_Q,     Key_Quote, Key_LeftBracket, Key_Semicolon, ___,
+  (___,             ___, ___, ___, ___, ___, ___,
+   ___,             Key_X,        Key_Comma, Key_O,     Key_Period,      Key_Z,         ___,
+   Key_LeftControl, Key_H,        Key_A,     Key_E,     Key_I,           Key_U,
+   ___,             Key_K,        Key_Q,     Key_Quote, Key_LeftBracket, Key_Semicolon, ___,
    ___, ___, ___, ___,
    ___,
 
    ___,  ___,    ___,    ___,    ___,   ___,          Key_Slash,
-   ___,                   Key_V,   Key_G, Key_C,   Key_L, Key_J,        Key_Minus,
-                          Key_D,   Key_T, Key_R,   Key_N, Key_S,        ALT_T(F), 
-   ___,                   Key_B,   Key_P, Key_W,   Key_M, CTL_T(Y), ___, 
+   ___,                   Key_V,   Key_G, Key_C,   Key_L, Key_J, Key_Minus,
+                          Key_D,   Key_T, Key_R,   Key_N, Key_S, CTL_T(F), 
+   ___,                   Key_B,   Key_P, Key_W,   Key_M, Key_Y, ___, 
    ___, ___, ___, ___,
    ___),
 
