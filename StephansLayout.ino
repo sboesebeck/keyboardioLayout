@@ -215,7 +215,7 @@ KEYMAPS(
 
  [XOY] =  KEYMAP_STACKED
   (___,             ___, ___, ___, ___, ___, ___,
-   ___,             Key_X,        Key_Comma, Key_O,     Key_Period,      Key_Z,         ___,
+   ___,             Key_X,        Key_Period, Key_O,    Key_Comma,       Key_Z,         ___,
    Key_LeftControl, Key_H,        Key_A,     Key_E,     Key_I,           Key_U,
    ___,             Key_K,        Key_Q,     Key_Quote, Key_LeftBracket, Key_Semicolon, ___,
    ___, ___, ___, ___,
@@ -742,7 +742,7 @@ void setup() {
   Qukeys.setHoldTimeout(180);
   Qukeys.setOverlapThreshold(45);
 
-  PersistentIdleLEDs.setIdleTimeoutSeconds(30);
+  PersistentIdleLEDs.setIdleTimeoutSeconds(130);
   //greenBlueRedEffect.activate();
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
