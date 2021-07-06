@@ -283,13 +283,14 @@ KEYMAPS(
    Consumer_VolumeIncrement,  M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
    Consumer_VolumeDecrement,  M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
    ___,                       M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
-   ___,  ___,   ___,  ___,
+   ___, ___, ___, ___,
+
    ___, 
 
-   Consumer_PlaySlashPause,        Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
-   Consumer_ScanNextTrack,     	   Key_Home,            Key_PageUp,     Key_UpArrow,    Key_PageDown,               Key_End,                   Key_F12,
-            			   LGUI(Key_LeftArrow), Key_LeftArrow,  Key_DownArrow,  Key_RightArrow,             LGUI(Key_RightArrow),      ___,
-   Consumer_ScanPreviousTrack,     ___,                 ___,            ___,            ___,                        ___,   		       ___,
+   ___,        Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
+   ___,        Key_Home,            Key_PageUp,     Key_UpArrow,    Key_PageDown,               Key_End,                   Key_F12,
+               LGUI(Key_LeftArrow), Key_LeftArrow,  Key_DownArrow,  Key_RightArrow,             LGUI(Key_RightArrow),      ___,
+   ___,     ___,                 ___,            ___,            Consumer_ScanPreviousTrack, Consumer_ScanNextTrack, Consumer_PlaySlashPause,
    ___, ___, ___, ___,
    ___)
 ) // KEYMAPS(
