@@ -266,14 +266,14 @@ KEYMAPS(
    ___, ___,           ___,           LALT(Key_E),   ___,                 ___,                   ___,
    ___, LSHIFT(Key_1), LSHIFT(Key_2), Key_Backtick, LSHIFT(Key_Backtick), LSHIFT(Key_Backslash),
    ___, ___,           ___,           ___,           ___,                 ___,                   ___,
-   ___, ___,           ___,           ___,
+   Consumer_Mute, Consumer_VolumeIncrement, Consumer_VolumeDecrement, ___,
    ___,
 
    ___,         LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
    ___,         LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
                 LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
    ___,         Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,     Key_RightBracket, 
-   ___, ___, ___, ___,
+   ___,         Consumer_ScanPreviousTrack, Consumer_ScanNextTrack, Consumer_PlaySlashPause,
    ___),
 
 
@@ -287,10 +287,10 @@ KEYMAPS(
 
    ___, 
 
-   ___,        Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
-   ___,        Key_Home,            Key_PageUp,     Key_UpArrow,    Key_PageDown,               Key_End,                   Key_F12,
-               LGUI(Key_LeftArrow), Key_LeftArrow,  Key_DownArrow,  Key_RightArrow,             LGUI(Key_RightArrow),      ___,
-   ___,     ___,                 ___,            ___,            Consumer_ScanPreviousTrack, Consumer_ScanNextTrack, Consumer_PlaySlashPause,
+   ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
+   ___,     Key_Home,            Key_PageUp,     Key_UpArrow,    Key_PageDown,               Key_End,                   Key_F12,
+            LGUI(Key_LeftArrow), Key_LeftArrow,  Key_DownArrow,  Key_RightArrow,             LGUI(Key_RightArrow),      ___,
+   ___,     ___,                 ___,            ___,            ___,                        ___,                       ___,
    ___, ___, ___, ___,
    ___)
 ) // KEYMAPS(
