@@ -262,27 +262,27 @@ KEYMAPS(
 
 
  [SPECIAL] =  KEYMAP_STACKED
-  (___, ___,           ___,           ___,           ___,                 ___,                   ___,
-   ___, ___,           ___,           LALT(Key_E),   ___,                 ___,                   ___,
+  (___, ___,           ___,           ___,           ___,                 ___,                   Consumer_Mute,
+   ___, ___,           ___,           LALT(Key_E),   ___,                 ___,                   Consumer_VolumeIncrement,
    ___, LSHIFT(Key_1), LSHIFT(Key_2), Key_Backtick, LSHIFT(Key_Backtick), LSHIFT(Key_Backslash),
-   ___, ___,           ___,           ___,           ___,                 ___,                   ___,
-   Consumer_Mute, Consumer_VolumeIncrement, Consumer_VolumeDecrement, ___,
+   ___, ___,           ___,           ___,           ___,                 ___,                   Consumer_VolumeDecrement,
+   ___, ___,           ___,           ___,
    ___,
 
-   ___,         LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
-   ___,         LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
-                LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
-   ___,         Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,     Key_RightBracket, 
-   ___,         Consumer_ScanPreviousTrack, Consumer_ScanNextTrack, Consumer_PlaySlashPause,
+   Consumer_PlaySlashPause,         LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
+   Consumer_ScanNextTrack,          LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
+                                    LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
+   Consumer_ScanPreviousTrack,      Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,     Key_RightBracket, 
+   ___,         		    ___, 		___, 		     ___,
    ___),
 
 
    
   [FUNCTION] =  KEYMAP_STACKED
-  (Consumer_Mute,             Key_F1,            Key_F2,         Key_F3,            Key_F4,               Key_F5,            ___,
-   Consumer_VolumeIncrement,  M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
-   Consumer_VolumeDecrement,  M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
-   ___,                       M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
+  (Consumer_Mute,    Key_F1,            Key_F2,         Key_F3,            Key_F4,               Key_F5,            ___,
+   ___,              M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
+   ___,              M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
+   ___,              M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
    ___, ___, ___, ___,
 
    ___, 
@@ -724,7 +724,8 @@ void setup() {
   // 'BlazingTrail'. For details on other options, see
   StalkerEffect.variant = STALKER( BlazingTrail);
   StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
-  StalkerEffect.activate();
+  //StalkerEffect.activate();
+  LEDRainbowEffect.activate();
 
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
@@ -745,7 +746,7 @@ void setup() {
 
   PersistentIdleLEDs.setIdleTimeoutSeconds(130);
   //greenBlueRedEffect.activate();
-  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,StalkerEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,LEDRainbowEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
   LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,LEDRainbowWaveEffect);
