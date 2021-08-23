@@ -627,9 +627,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // LEDControl provides support for other LED modes
   LEDControl,
-  JukeboxEffect,
-  MiamiEffect,
-  JukeboxAlternateEffect,
+  //JukeboxEffect,
+  //MiamiEffect,
+  //JukeboxAlternateEffect,
   StalkerEffect,
   WavepoolEffect,
   
@@ -763,10 +763,10 @@ void setup() {
   LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
   LEDEffectSwitchOnLayer.setPluginOrder(6,solidGreen);  
   LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
-  LEDEffectSwitchOnLayer.setPluginOrder(8,MiamiEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(9,JukeboxEffect);  
+  //LEDEffectSwitchOnLayer.setPluginOrder(8,MiamiEffect);  
+  //LEDEffectSwitchOnLayer.setPluginOrder(9,JukeboxEffect);  
 
-  LEDEffectSwitchOnLayer.setPluginOrder(10,LEDOff);  
+  LEDEffectSwitchOnLayer.setPluginOrder(8,LEDOff);  
  
 }
 
