@@ -741,8 +741,10 @@ void setup() {
   WavepoolEffect.idle_timeout = 15000;  // 5 seconds
 //WavepoolEffect.activate();
   Qukeys.activate();
-  Qukeys.setHoldTimeout(180);
-  Qukeys.setOverlapThreshold(45);
+  Qukeys.setHoldTimeout(250);
+  Qukeys.setOverlapThreshold(80);
+  Qukeys.setMinimumHoldTime(50);
+  Qukeys.setMinimumPriorInterval(75);
 
   PersistentIdleLEDs.setIdleTimeoutSeconds(130);
   //greenBlueRedEffect.activate();
