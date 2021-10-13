@@ -374,52 +374,52 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 	    //anyKeyMacro(keyState);
 	    //break;
 	  case MACRO_SMIRK:
-	    Macros.type(PSTR("</( "));
+	    Macros.type(PSTR("</("));
             //Unicode.type(0x2328);
 	    break;
 	  case MACRO_FROWN:
-	    Macros.type(PSTR(">/* "));
+	    Macros.type(PSTR(">/*"));
 	    break;
 	  case MACRO_SMILE:
-	    Macros.type(PSTR(">/( "));
+	    Macros.type(PSTR(">/("));
 	    break;
 	  case MACRO_PUKE:
-	    Macros.type(PSTR("*puke( "));
+	    Macros.type(PSTR("*puke("));
 	    break;
 	  case MACRO_TONGUE:
-	    Macros.type(PSTR(">/P "));
+	    Macros.type(PSTR(">/P"));
 	    break;
 	  case MACRO_TONGUE2:
-	    Macros.type(PSTR("</P "));
+	    Macros.type(PSTR("</P"));
 	    break;
 	  case MACRO_SWEAR:
-	    Macros.type(PSTR("*swear( "));
+	    Macros.type(PSTR("*swear("));
 	    break;
 	  case MACRO_DARN:
 	    return MACRODOWN(I(25),
-			     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt),T(Space)
+			     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt)
 			    );
 	    break;
 	  case MACRO_ROLL:
-	    Macros.type(PSTR("*roll( "));
+	    Macros.type(PSTR("*roll("));
 	    break;
 	  case MACRO_ROFL:
-	    Macros.type(PSTR("*rofl( "));
+	    Macros.type(PSTR("*rofl("));
 	    break;
 	  case MACRO_SHRUG:
-	    Macros.type(PSTR("*shrug( "));
+	    Macros.type(PSTR("*shrug("));
 	    break;
 	  case MACRO_LOL:
-	    Macros.type(PSTR("*lol( "));
+	    Macros.type(PSTR("*lol("));
 	    break;
 	  case MACRO_LLAP:
-            Macros.type(PSTR("*llap( "));
+            Macros.type(PSTR("*llap("));
 	    break;
 	  case MACRO_FACEPALM:
-            Macros.type(PSTR("*facepalm( "));
+            Macros.type(PSTR("*facepalm("));
             break;
           case MACRO_COFFEE:
-            Macros.type(PSTR("*coffee( "));
+            Macros.type(PSTR("*coffee("));
             break;
 	  }
   }
