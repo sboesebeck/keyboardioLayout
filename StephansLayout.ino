@@ -395,11 +395,11 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 	  case MACRO_SWEAR:
 	    Macros.type(PSTR("*swear("));
 	    break;
-	  case MACRO_DARN:
-	    return MACRODOWN(I(25),
-			     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt)
-			    );
-	    break;
+	  //case MACRO_DARN:
+	    //return MACRODOWN(I(25),
+		//	     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt)
+		//	    );
+	    //break;
 	  case MACRO_ROLL:
 	    Macros.type(PSTR("*roll("));
 	    break;
