@@ -206,11 +206,11 @@ KEYMAPS(
    Key_Backspace,Key_Delete , Key_LeftAlt, ShiftToLayer(SPECIAL),
    ShiftToLayer(FUNCTION),
 
-   Key_RightBracket,           Key_6, Key_7, Key_8,     Key_9,         Key_0,                          Key_Minus,
-   MT(RightGui,Backslash),                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,             Key_LeftBracket,
-                               Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,                  MT(RightControl,Quote),
-   Key_Hyper,              Key_N, Key_M, Key_Comma, Key_Period,        Key_Slash,         	       Key_RightShift,
-   ShiftToLayer(SPECIAL), Key_RightAlt,Key_Enter,  Key_Space,
+   Key_RightBracket,       Key_6, Key_7, Key_8,     Key_9,         Key_0,           Key_Minus,
+   MT(RightGui,Backslash), Key_Y, Key_U, Key_I,     Key_O,         Key_P,           Key_LeftBracket,
+                           Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon,   MT(RightControl,Quote),
+   Key_Hyper,              Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,       Key_RightShift,
+   ShiftToLayer(SPECIAL),  Key_RightAlt,Key_Enter,  Key_Space,
    ShiftToLayer(FUNCTION)),
 
  [XOY] =  KEYMAP_STACKED
@@ -279,10 +279,10 @@ ___),
 
 
 [FUNCTION] =  KEYMAP_STACKED
-(Key_Power,    Key_F1,            Key_F2,         Key_F3,            Key_F4,               Key_F5,            ___,
-   ___,              M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
-   ___,              M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
-   ___,              M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
+(Key_Power,    Key_F1,            Key_F2,         Key_F3,            Key_F4,              Key_F5,            ___,
+   ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
+   ___,        M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
+   ___,        M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
    ___, ___, ___, ___,
 
    ___, 
