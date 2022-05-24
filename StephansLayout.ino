@@ -20,14 +20,15 @@
 // Support for storing the keymap in EEPROM
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
-//#include <Kaleidoscope-LED-Wavepool.h>
+#include "Kaleidoscope-Turbo.h"
+#include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-LayerFocus.h"
 //#include "Kaleidoscope-RemoteControl.h"
 #include "kaleidoscope/plugin/LEDModeInterface.h"
 // Support for keys that move the mouse
-//#include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-MouseKeys.h"
 
 // Support for macros
 #include "Kaleidoscope-Macros.h"
@@ -253,26 +254,26 @@ KEYMAPS(
    ___, ___, ___, ___,
    ___,
 
-___,  ___, Key_KeypadDivide, Key_KeypadMultiply,     Key_Slash,  Key_KeypadSubtract, ___,
-___,  ___, Key_7,            Key_8,                  Key_9,      Key_KeypadAdd,      ___,
- ___, Key_4,            Key_5,                  Key_6,      Key_Period,   ___,
-___,  ___, Key_1,            Key_2,                  Key_3,      Key_Comma, ___,   
-___,  ___, ___,  Key_0,
-___),
+   ___,  ___,      Key_KeypadDivide, Key_KeypadMultiply,     Key_Slash,  Key_KeypadSubtract, ___,
+   ___,  ___,      Key_7,            Key_8,                  Key_9,      Key_KeypadAdd,      ___,
+         ___,      Key_4,            Key_5,                  Key_6,      Key_Period,         ___,
+   ___,  ___,      Key_1,            Key_2,                  Key_3,      Key_Comma,          ___,   
+   ___,  ___, ___, Key_0,
+   ___),
 
 
 [SPECIAL] =  KEYMAP_STACKED
-(___, ___,           ___,           ___,           ___,                 ___,                   Consumer_Mute,
-___, ___,           ___,           LALT(Key_E),   ___,                 ___,                   Consumer_VolumeIncrement,
-___, LSHIFT(Key_1), LSHIFT(Key_2), Key_Backtick, LSHIFT(Key_Backtick), LSHIFT(Key_Backslash),
-___, ___,           ___,           ___,           ___,                 ___,                   Consumer_VolumeDecrement,
-___, ___,           ___,           ___,
+(___,      ___,                ___,             ___,           ___,                 Key_mouseWarpEnd,      Consumer_Mute,
+___,       Key_mouseWarpNW,    Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       Key_mouseWarpNE,       Consumer_VolumeIncrement,
+___,       ___,                Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
+Key_Turbo, ___,                Key_mouseWarpSW, Key_mouseBtnM, Key_mouseWarpSE,     ___,                   Consumer_VolumeDecrement,
+___,       ___,                ___,             ___,
 ___,
 
-Consumer_PlaySlashPause,         LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
-Consumer_ScanNextTrack,          LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
+Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
+Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
 			    LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
-Consumer_ScanPreviousTrack,      Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,     Key_RightBracket, 
+Consumer_ScanPreviousTrack, Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,            Key_RightBracket, 
 ___,         		    ___, 		___, 		     ___,
 ___),
 
@@ -280,9 +281,9 @@ ___),
 
 [FUNCTION] =  KEYMAP_STACKED
 (Key_Power,    Key_F1,            Key_F2,         Key_F3,            Key_F4,              Key_F5,            ___,
-   ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
+   ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     ___,
    ___,        M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
-   ___,        M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
+   ___,        M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     ___,
    ___, ___, ___, ___,
 
    ___, 
@@ -442,6 +443,8 @@ void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event 
     LEDControl.refreshAll();
     break;
   case kaleidoscope::plugin::HostPowerManagement::Sleep:
+    LEDControl.set_all_leds_to({0, 0, 0});
+    LEDControl.syncLeds();
     break;
   }
 }
@@ -627,11 +630,14 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // LEDControl provides support for other LED modes
   LEDControl,
+  //For the Key_Turbo to work
+  Turbo,
+
   //JukeboxEffect,
   //MiamiEffect,
   //JukeboxAlternateEffect,
   StalkerEffect,
-  //WavepoolEffect,
+  WavepoolEffect,
   
   // The rainbow effect changes the color of all of the keyboard's keys at the same time
   // running through all the colors of the rainbow.
@@ -725,41 +731,47 @@ void setup() {
   StalkerEffect.variant = STALKER( BlazingTrail);
   StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
   //StalkerEffect.activate();
-  LEDRainbowEffect.activate();
+  LEDRainbowWaveEffect.activate();
 
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
   // one wants to use these layers, just set the default layer to one in EEPROM,
   // by using the `settings.defaultLayer` Focus command, or by using the
   // `keymap.onlyCustom` command to use EEPROM layers only.
-  //EEPROMKeymap.setup(2);
+  EEPROMKeymap.setup(2);
+
+  Turbo.interval(10);
+  Turbo.sticky(true);
+  Turbo.flash(true);
+  Turbo.flashInterval(80);
+  Turbo.activeColor(CRGB(0x64, 0x96, 0xed));
 
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(1);
-  //WavepoolEffect.idle_timeout = 15000;  // 5 seconds
-//WavepoolEffect.activate();
+  WavepoolEffect.idle_timeout = 15000;  // 15 seconds
+  //WavepoolEffect.activate();
   Qukeys.activate();
-  Qukeys.setHoldTimeout(250);
+  Qukeys.setHoldTimeout(220);
   Qukeys.setOverlapThreshold(80);
   Qukeys.setMinimumHoldTime(50);
   Qukeys.setMinimumPriorInterval(75);
 
   PersistentIdleLEDs.setIdleTimeoutSeconds(130);
   //greenBlueRedEffect.activate();
-  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,LEDRainbowEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,LEDRainbowWaveEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
-  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,LEDRainbowWaveEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,solidGreen);
+  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,solidBlue);
+  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
   LEDEffectSwitchOnLayer.enable();
 
   LEDEffectSwitchOnLayer.setPluginOrder(0,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginOrder(1,LEDRainbowEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(2,LEDBreatheEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(3,LEDRainbowWaveEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(4,solidBlue);  
+  LEDEffectSwitchOnLayer.setPluginOrder(4,WavepoolEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
   LEDEffectSwitchOnLayer.setPluginOrder(6,solidGreen);  
   LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
