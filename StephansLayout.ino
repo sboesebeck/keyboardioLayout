@@ -15,12 +15,12 @@
 
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
-#include "Model01-Firmware.h"
+//#include "Model01-Firmware.h"
 #include "src/LEDEffectSwitchOnLayer.h"
 // Support for storing the keymap in EEPROM
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
-#include <Kaleidoscope-LED-Wavepool.h>
+//#include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-LayerFocus.h"
@@ -631,7 +631,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   //MiamiEffect,
   //JukeboxAlternateEffect,
   StalkerEffect,
-  WavepoolEffect,
+  //WavepoolEffect,
   
   // The rainbow effect changes the color of all of the keyboard's keys at the same time
   // running through all the colors of the rainbow.
@@ -738,7 +738,7 @@ void setup() {
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(1);
-  WavepoolEffect.idle_timeout = 15000;  // 5 seconds
+  //WavepoolEffect.idle_timeout = 15000;  // 5 seconds
 //WavepoolEffect.activate();
   Qukeys.activate();
   Qukeys.setHoldTimeout(250);
@@ -752,14 +752,14 @@ void setup() {
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
   LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,LEDRainbowWaveEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,solidGreen);
   LEDEffectSwitchOnLayer.enable();
 
   LEDEffectSwitchOnLayer.setPluginOrder(0,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginOrder(1,LEDRainbowEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(2,LEDBreatheEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(3,LEDRainbowWaveEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(4,WavepoolEffect);  
+  LEDEffectSwitchOnLayer.setPluginOrder(4,solidBlue);  
   LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
   LEDEffectSwitchOnLayer.setPluginOrder(6,solidGreen);  
   LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
