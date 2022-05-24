@@ -15,12 +15,12 @@
 
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
-#include "Model01-Firmware.h"
+//#include "Model100-Firmware.h"
 #include "src/LEDEffectSwitchOnLayer.h"
 // Support for storing the keymap in EEPROM
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
-#include <Kaleidoscope-LED-Wavepool.h>
+//#include "Kaleidoscope-LED-Wavepool.h"
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-LayerFocus.h"
@@ -343,14 +343,14 @@ ___),
 
  */
 
-const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
+const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
   static uint32_t start;
   static int current=0;
 
   if (macroIndex ==  LED_EFFECT_NEXT_NUMPADSHIFT){
-	if(keyToggledOn(keyState)){
+	if(keyToggledOn(event.state)){
 		start=millis();
-        } else if (keyToggledOff(keyState)) {
+        } else if (keyToggledOff(event.state)) {
 		if (millis()-start < 150){
 			//WavepoolEffect.activate();
 			current=current+1;
@@ -364,7 +364,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 	return MACRO_NONE;
   }
   
-  if (keyToggledOn(keyState)) {
+  if (keyToggledOn(event.state)) {
      switch (macroIndex) {
 		 
 	  //case MACRO_VERSION_INFO:
@@ -631,7 +631,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   //MiamiEffect,
   //JukeboxAlternateEffect,
   StalkerEffect,
-  WavepoolEffect,
+  //WavepoolEffect,
   
   // The rainbow effect changes the color of all of the keyboard's keys at the same time
   // running through all the colors of the rainbow.
@@ -738,7 +738,7 @@ void setup() {
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(1);
-  WavepoolEffect.idle_timeout = 15000;  // 5 seconds
+  //WavepoolEffect.idle_timeout = 15000;  // 5 seconds
 //WavepoolEffect.activate();
   Qukeys.activate();
   Qukeys.setHoldTimeout(250);
@@ -751,22 +751,22 @@ void setup() {
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,LEDRainbowEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
-  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,LEDRainbowWaveEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,solidGreen);
+  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,LEDRainbowWaveEffect);
   LEDEffectSwitchOnLayer.enable();
 
   LEDEffectSwitchOnLayer.setPluginOrder(0,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginOrder(1,LEDRainbowEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(2,LEDBreatheEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(3,LEDRainbowWaveEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(4,WavepoolEffect);  
+  LEDEffectSwitchOnLayer.setPluginOrder(4,solidGreen);  
   LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
-  LEDEffectSwitchOnLayer.setPluginOrder(6,solidGreen);  
-  LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
+  LEDEffectSwitchOnLayer.setPluginOrder(6,solidBlue);  
+  //LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
   //LEDEffectSwitchOnLayer.setPluginOrder(8,MiamiEffect);  
   //LEDEffectSwitchOnLayer.setPluginOrder(9,JukeboxEffect);  
 
-  LEDEffectSwitchOnLayer.setPluginOrder(8,LEDOff);  
+  LEDEffectSwitchOnLayer.setPluginOrder(7,LEDOff);  
  
 }
 
