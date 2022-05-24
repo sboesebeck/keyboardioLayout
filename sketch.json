@@ -1,6 +1,6 @@
 {
   "cpu": {
-    "fqbn": "keyboardio:avr:model01,",
+    "fqbn": "keyboardio:avr:model01",
     "port": ""
   }
 }
