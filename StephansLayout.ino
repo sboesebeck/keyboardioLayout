@@ -15,12 +15,13 @@
 
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
-//#include "Model100-Firmware.h"
+//#include "Model01-Firmware.h"
 #include "src/LEDEffectSwitchOnLayer.h"
 // Support for storing the keymap in EEPROM
-#include "Kaleidoscope-EEPROM-Settings.h"
-#include "Kaleidoscope-EEPROM-Keymap.h"
-//#include "Kaleidoscope-LED-Wavepool.h"
+//#include "Kaleidoscope-EEPROM-Settings.h"
+//#include "Kaleidoscope-EEPROM-Keymap.h"
+#include "Kaleidoscope-Turbo.h"
+#include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-LayerFocus.h"
@@ -66,7 +67,7 @@
 #include "Kaleidoscope-Colormap.h"
 
 // Support for Keyboardio's internal keyboard testing mode
-#include "Kaleidoscope-HardwareTestMode.h"
+//#include "Kaleidoscope-HardwareTestMode.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
@@ -253,26 +254,26 @@ KEYMAPS(
    ___, ___, ___, ___,
    ___,
 
-___,  ___, Key_KeypadDivide, Key_KeypadMultiply,     Key_Slash,  Key_KeypadSubtract, ___,
-___,  ___, Key_7,            Key_8,                  Key_9,      Key_KeypadAdd,      ___,
- ___, Key_4,            Key_5,                  Key_6,      Key_Period,   ___,
-___,  ___, Key_1,            Key_2,                  Key_3,      Key_Comma, ___,   
-___,  ___, ___,  Key_0,
-___),
+   ___,  ___,      Key_KeypadDivide, Key_KeypadMultiply,     Key_Slash,  Key_KeypadSubtract, ___,
+   ___,  ___,      Key_7,            Key_8,                  Key_9,      Key_KeypadAdd,      ___,
+         ___,      Key_4,            Key_5,                  Key_6,      Key_Period,         ___,
+   ___,  ___,      Key_1,            Key_2,                  Key_3,      Key_Comma,          ___,   
+   ___,  ___, ___, Key_0,
+   ___),
 
 
 [SPECIAL] =  KEYMAP_STACKED
-(___, ___,           ___,           ___,           ___,                 ___,                   Consumer_Mute,
-___, ___,           ___,           LALT(Key_E),   ___,                 ___,                   Consumer_VolumeIncrement,
-___, LSHIFT(Key_1), LSHIFT(Key_2), Key_Backtick, LSHIFT(Key_Backtick), LSHIFT(Key_Backslash),
-___, ___,           ___,           ___,           ___,                 ___,                   Consumer_VolumeDecrement,
-___, ___,           ___,           ___,
+(___,      ___,                ___,      ___,   ___,     ___,       Consumer_Mute,
+___,       ___,                ___,      ___,   ___,     ___,       Consumer_VolumeIncrement,
+___,       ___,                ___,      ___,   ___,     ___,
+Key_Turbo, ___,                ___,      ___,   ___,     ___,       Consumer_VolumeDecrement,
+___,       ___,                ___,             ___,
 ___,
 
-Consumer_PlaySlashPause,         LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
-Consumer_ScanNextTrack,          LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
+Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
+Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
 			    LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
-Consumer_ScanPreviousTrack,      Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,     Key_RightBracket, 
+Consumer_ScanPreviousTrack, Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,            Key_RightBracket, 
 ___,         		    ___, 		___, 		     ___,
 ___),
 
@@ -280,9 +281,9 @@ ___),
 
 [FUNCTION] =  KEYMAP_STACKED
 (Key_Power,    Key_F1,            Key_F2,         Key_F3,            Key_F4,              Key_F5,            ___,
-   ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),      ___,
+   ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     ___,
    ___,        M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
-   ___,        M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),               ___,
+   ___,        M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     ___,
    ___, ___, ___, ___,
 
    ___, 
@@ -343,14 +344,14 @@ ___),
 
  */
 
-const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
+const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   static uint32_t start;
   static int current=0;
 
   if (macroIndex ==  LED_EFFECT_NEXT_NUMPADSHIFT){
-	if(keyToggledOn(event.state)){
+	if(keyToggledOn(keyState)){
 		start=millis();
-        } else if (keyToggledOff(event.state)) {
+        } else if (keyToggledOff(keyState)) {
 		if (millis()-start < 150){
 			//WavepoolEffect.activate();
 			current=current+1;
@@ -364,7 +365,7 @@ const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
 	return MACRO_NONE;
   }
   
-  if (keyToggledOn(event.state)) {
+  if (keyToggledOn(keyState)) {
      switch (macroIndex) {
 		 
 	  //case MACRO_VERSION_INFO:
@@ -442,6 +443,8 @@ void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event 
     LEDControl.refreshAll();
     break;
   case kaleidoscope::plugin::HostPowerManagement::Sleep:
+    LEDControl.set_all_leds_to({0, 0, 0});
+    LEDControl.syncLeds();
     break;
   }
 }
@@ -483,9 +486,9 @@ enum {
 /**
  *  This enters the hardware test mode
  */
- static void enterHardwareTestMode(uint8_t combo_index) {
-   HardwareTestMode.runTests();
- }
+// static void enterHardwareTestMode(uint8_t combo_index) {
+ //  HardwareTestMode.runTests();
+// }
 static void xoyMode(uint8_t combo_index){
    if (Layer.isActive(XOY)){
       Layer.move(PRIMARY);
@@ -570,7 +573,7 @@ static void toggleLed(uint8_t combo_index){
 USE_MAGIC_COMBOS(
    {.action=gameMode,.keys={ R3C6,R3C9,R3C15}},   //fn+fn+shift, right half
    {.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
-   {.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}},   //Left Fn+Prog+LED
+   //{.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}},   //Left Fn+Prog+LED
    {.action=nextLEDEffect,.keys={R2C8,R2C9,R0C6}},   //Hyper+Alt+LED
    {.action=toggleLed,.keys={R3C0,R3C15,R3C9}},   //shift+shift+right FN
  //  {.action=addR,.keys={R3C6,R3C9,R1C1}}   //FN+FN+1
@@ -599,8 +602,8 @@ static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
 KALEIDOSCOPE_INIT_PLUGINS(
   // The EEPROMSettings & EEPROMKeymap plugins make it possible to have an
   // editable keymap in EEPROM.
-  EEPROMSettings,
-  EEPROMKeymap,
+  //EEPROMSettings,
+  //EEPROMKeymap,
   Qukeys,
   // Focus allows bi-directional communication with the host, and is the
   // interface through which the keymap in EEPROM can be edited.
@@ -623,15 +626,18 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The hardware test mode, which can be invoked by tapping Prog, LED and the
   // left Fn button at the same time.
-  HardwareTestMode,
+  //HardwareTestMode,
 
   // LEDControl provides support for other LED modes
   LEDControl,
+  //For the Key_Turbo to work
+  Turbo,
+
   //JukeboxEffect,
   //MiamiEffect,
   //JukeboxAlternateEffect,
   StalkerEffect,
-  //WavepoolEffect,
+  WavepoolEffect,
   
   // The rainbow effect changes the color of all of the keyboard's keys at the same time
   // running through all the colors of the rainbow.
@@ -670,7 +676,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The macros plugin adds support for macros
   Macros,
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
-//  MouseKeys,
+  //MouseKeys,
 
   // The HostPowerManagement plugin allows us to turn LEDs off when then host
   // goes to sleep, and resume them when it wakes up.
@@ -718,14 +724,14 @@ void setup() {
   LEDRainbowWaveEffect.brightness(150);
 
   // Set the action key the test mode should listen for to Left Fn
-  HardwareTestMode.setActionKey(R3C6);
+  //HardwareTestMode.setActionKey(R3C6);
 
   // The LED Stalker mode has a few effects. The one we like is called
   // 'BlazingTrail'. For details on other options, see
   StalkerEffect.variant = STALKER( BlazingTrail);
   StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
   //StalkerEffect.activate();
-  LEDRainbowEffect.activate();
+  LEDRainbowWaveEffect.activate();
 
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
@@ -734,39 +740,45 @@ void setup() {
   // `keymap.onlyCustom` command to use EEPROM layers only.
   //EEPROMKeymap.setup(2);
 
+  Turbo.interval(10);
+  Turbo.sticky(true);
+  Turbo.flash(true);
+  Turbo.flashInterval(80);
+  Turbo.activeColor(CRGB(0x64, 0x96, 0xed));
+
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(1);
-  //WavepoolEffect.idle_timeout = 15000;  // 5 seconds
-//WavepoolEffect.activate();
+  WavepoolEffect.idle_timeout = 15000;  // 15 seconds
+  //WavepoolEffect.activate();
   Qukeys.activate();
-  Qukeys.setHoldTimeout(250);
+  Qukeys.setHoldTimeout(220);
   Qukeys.setOverlapThreshold(80);
   Qukeys.setMinimumHoldTime(50);
   Qukeys.setMinimumPriorInterval(75);
 
   PersistentIdleLEDs.setIdleTimeoutSeconds(130);
   //greenBlueRedEffect.activate();
-  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,LEDRainbowEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,LEDRainbowWaveEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
-  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,solidGreen);
-  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,LEDRainbowWaveEffect);
+  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,solidBlue);
+  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
   LEDEffectSwitchOnLayer.enable();
 
   LEDEffectSwitchOnLayer.setPluginOrder(0,StalkerEffect);
   LEDEffectSwitchOnLayer.setPluginOrder(1,LEDRainbowEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(2,LEDBreatheEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(3,LEDRainbowWaveEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(4,solidGreen);  
+  LEDEffectSwitchOnLayer.setPluginOrder(4,WavepoolEffect);  
   LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
-  LEDEffectSwitchOnLayer.setPluginOrder(6,solidBlue);  
-  //LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
+  LEDEffectSwitchOnLayer.setPluginOrder(6,solidGreen);  
+  LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
   //LEDEffectSwitchOnLayer.setPluginOrder(8,MiamiEffect);  
   //LEDEffectSwitchOnLayer.setPluginOrder(9,JukeboxEffect);  
 
-  LEDEffectSwitchOnLayer.setPluginOrder(7,LEDOff);  
+  LEDEffectSwitchOnLayer.setPluginOrder(8,LEDOff);  
  
 }
 
