@@ -263,11 +263,11 @@ KEYMAPS(
 
 
 [SPECIAL] =  KEYMAP_STACKED
-(___,      ___,                ___,             ___,           ___,                 Key_mouseWarpEnd,      Consumer_Mute,
-___,       Key_mouseWarpNW,    Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       Key_mouseWarpNE,       Consumer_VolumeIncrement,
-___,       ___,                Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
-Key_Turbo, ___,                Key_mouseWarpSW, Key_mouseBtnM, Key_mouseWarpSE,     ___,                   Consumer_VolumeDecrement,
-___,       ___,                ___,             ___,
+(___,               ___,                ___,             ___,           ___,                 Key_mouseWarpEnd,      Consumer_Mute,
+___,                Key_mouseWarpNW,    Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       Key_mouseWarpNE,       Consumer_VolumeIncrement,
+___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
+Key_Turbo,          Key_mouseScrollUp,  Key_mouseWarpSW, Key_mouseBtnM, Key_mouseWarpSE,     ___,                   Consumer_VolumeDecrement,
+Key_mouseScrollL,   Key_mouseScrollR,   ___,             ___,
 ___,
 
 Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
@@ -344,14 +344,14 @@ ___),
 
  */
 
-const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
+const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
   static uint32_t start;
   static int current=0;
 
   if (macroIndex ==  LED_EFFECT_NEXT_NUMPADSHIFT){
-	if(keyToggledOn(keyState)){
+	if(keyToggledOn(event.state)){
 		start=millis();
-        } else if (keyToggledOff(keyState)) {
+        } else if (keyToggledOff(event.state)) {
 		if (millis()-start < 150){
 			//WavepoolEffect.activate();
 			current=current+1;
@@ -365,7 +365,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 	return MACRO_NONE;
   }
   
-  if (keyToggledOn(keyState)) {
+  if (keyToggledOn(event.state)) {
      switch (macroIndex) {
 		 
 	  //case MACRO_VERSION_INFO:
