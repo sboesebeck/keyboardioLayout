@@ -344,14 +344,14 @@ ___),
 
  */
 
-const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
+const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
   static uint32_t start;
   static int current=0;
 
   if (macroIndex ==  LED_EFFECT_NEXT_NUMPADSHIFT){
-	if(keyToggledOn(keyState)){
+	if(keyToggledOn(event.state)){
 		start=millis();
-        } else if (keyToggledOff(keyState)) {
+        } else if (keyToggledOff(event.state)) {
 		if (millis()-start < 150){
 			//WavepoolEffect.activate();
 			current=current+1;
@@ -365,14 +365,14 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 	return MACRO_NONE;
   }
   
-  if (keyToggledOn(keyState)) {
+  if (keyToggledOn(event.state)) {
      switch (macroIndex) {
 		 
 	  //case MACRO_VERSION_INFO:
-	  //  versionInfoMacro(keyState);
+	  //  versionInfoMacro(event.state);
 	  //  break;
 	  //case MACRO_ANY:
-	    //anyKeyMacro(keyState);
+	    //anyKeyMacro(event.state);
 	    //break;
 	  case MACRO_SMIRK:
 	    Macros.type(PSTR("</("));
