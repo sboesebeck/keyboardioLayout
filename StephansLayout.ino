@@ -525,22 +525,22 @@ static void toggleLed(uint8_t combo_index){
     switch(on) {
       case 0:
         StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
-	break;
+        break;
       case 1:
-	StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
-	break;
+        StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
+        break;
       case 2:
-	StalkerEffect.inactive_color=CRGB(0x60, 0x64, 0x85);
-	break;
+        StalkerEffect.inactive_color=CRGB(0x60, 0x64, 0x85);
+        break;
       case 3:
-	StalkerEffect.inactive_color=CRGB(0x85,0x30,0x30);
-	break;
+        StalkerEffect.inactive_color=CRGB(0x85,0x30,0x30);
+        break;
       case 4:
-	StalkerEffect.inactive_color=CRGB(0,0,0);
-	break;
+        StalkerEffect.inactive_color=CRGB(0,0,0);
+        break;
       default:
-	StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
-	break;
+        StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
+        break;
 
 	//LEDOff.activate();
     	//LEDControl.set_all_leds_to({0, 0, 0});
@@ -749,7 +749,7 @@ void setup() {
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
-  ColormapEffect.max_layers(1);
+  ColormapEffect.max_layers(5);
   WavepoolEffect.idle_timeout = 15000;  // 15 seconds
   //WavepoolEffect.activate();
   Qukeys.activate();
