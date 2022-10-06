@@ -43,6 +43,7 @@ class LEDEffectSwitchOnLayer : public Plugin {
     static bool disabled_;
     static LEDModeInterface* activePlugins[32];
     static LEDModeInterface* effects[32];
+    static LEDModeInterface* activePlugin;
 };
 
 
