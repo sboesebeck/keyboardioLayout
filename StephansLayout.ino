@@ -19,7 +19,7 @@
 #include "src/LEDEffectSwitchOnLayer.h"
 // Support for storing the keymap in EEPROM
 #include "Kaleidoscope-EEPROM-Settings.h"
-#include "Kaleidoscope-EEPROM-Keymap.h"
+// #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-Turbo.h"
 #include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
@@ -603,7 +603,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The EEPROMSettings & EEPROMKeymap plugins make it possible to have an
   // editable keymap in EEPROM.
   EEPROMSettings,
-  EEPROMKeymap,
+  // EEPROMKeymap,
   Qukeys,
   // Focus allows bi-directional communication with the host, and is the
   // interface through which the keymap in EEPROM can be edited.
@@ -738,7 +738,7 @@ void setup() {
   // one wants to use these layers, just set the default layer to one in EEPROM,
   // by using the `settings.defaultLayer` Focus command, or by using the
   // `keymap.onlyCustom` command to use EEPROM layers only.
-  EEPROMKeymap.setup(2);
+  // EEPROMKeymap.setup(2);
 
   Turbo.interval(10);
   Turbo.sticky(true);
