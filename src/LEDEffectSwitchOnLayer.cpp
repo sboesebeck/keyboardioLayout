@@ -24,9 +24,9 @@ namespace kaleidoscope {
 
     // Member variables.
     bool LEDEffectSwitchOnLayer::disabled_ = false;
-    LEDModeInterface* LEDEffectSwitchOnLayer::activePlugins[32] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL };
-    LEDModeInterface* LEDEffectSwitchOnLayer::effects[32] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL };
-    LEDModeInterface* LEDEffectSwitchOnLayer::activePlugin=NULL;
+    LEDModeInterface* LEDEffectSwitchOnLayer::activePlugins[32] = {nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr };
+    LEDModeInterface* LEDEffectSwitchOnLayer::effects[32] = {nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr };
+    LEDModeInterface* LEDEffectSwitchOnLayer::activePlugin=nullptr;
 
     // Basic plugin status functions.
 
@@ -63,7 +63,7 @@ namespace kaleidoscope {
     }
     // Event handlers.
     EventHandlerResult LEDEffectSwitchOnLayer::onLayerChange() {
-      if (activePlugins[Layer.mostRecent()]!=NULL &&  activePlugins[Layer.mostRecent()]!=activePlugin){
+      if (activePlugins[Layer.mostRecent()]!=nullptr &&  activePlugins[Layer.mostRecent()]!=activePlugin){
         activePlugins[Layer.mostRecent()]->activate();
         activePlugin=activePlugins[Layer.mostRecent()];
       }
