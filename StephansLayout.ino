@@ -289,8 +289,8 @@ ___),
    ___, 
 
    ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
-   ___,     Key_Home,            Key_PageUp,     Key_UpArrow,    Key_PageDown,               Key_End,                   Key_F12,
-            LGUI(Key_LeftArrow), Key_LeftArrow,  Key_DownArrow,  Key_RightArrow,             LGUI(Key_RightArrow),      ___,
+   ___,     Key_Home,            Key_PageUp,     Key_PageDown,   Key_End,                    LGUI(Key_LeftArrow),       Key_F12,
+            Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             LGUI(Key_RightArrow),      ___,
    ___,     ___,                 ___,            ___,            ___,                        ___,                       ___,
    ___, ___, ___, ___,
    ___)
@@ -762,8 +762,9 @@ void setup() {
   //greenBlueRedEffect.activate();
   LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,LEDRainbowWaveEffect);
   LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
-  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,NULL);
+  LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,nullptr);
+  // LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
+  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,nullptr);
   LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
   LEDEffectSwitchOnLayer.enable();
 
