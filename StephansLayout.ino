@@ -289,9 +289,9 @@ ___),
    ___, 
 
    ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
-   ___,     Key_Home,            Key_PageUp,     Key_PageDown,   Key_End,                    LGUI(Key_LeftArrow),       Key_F12,
-            Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             LGUI(Key_RightArrow),      ___,
-   ___,     ___,                 ___,            ___,            ___,                        ___,                       ___,
+   ___,     Key_Home,            Key_PageDown,   Key_PageUp,     Key_End,                    ___,                       Key_F12,
+            Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             ___,                       ___,
+   ___,     LGUI(Key_LeftArrow), ___,            ___,            LGUI(Key_RightArrow),       ___,                       ___,
    ___, ___, ___, ___,
    ___)
 ) // KEYMAPS(
