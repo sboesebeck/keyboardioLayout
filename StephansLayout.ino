@@ -263,37 +263,36 @@ KEYMAPS(
 
 
 [SPECIAL] =  KEYMAP_STACKED
-(___,               ___,                ___,             ___,           ___,                 Key_mouseWarpEnd,      Consumer_Mute,
-___,                Key_mouseWarpNW,    Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       Key_mouseWarpNE,       Consumer_VolumeIncrement,
-___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
-Key_Turbo,          Key_mouseScrollUp,  Key_mouseWarpSW, Key_mouseBtnM, Key_mouseWarpSE,     ___,                   Consumer_VolumeDecrement,
-Key_mouseScrollL,   Key_mouseScrollR,   ___,             ___,
-___,
+(___,        ___,               ___,            ___,               ___,                 ___,               ___,
+ ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     ___,
+ ___,        M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
+ Key_Turbo,  M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     ___,
+ ___, ___, ___, ___,
+ ___,
 
-Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
-Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
-			    LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
-Consumer_ScanPreviousTrack, Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,            Key_RightBracket, 
-___,         		    ___, 		___, 		     ___,
-___),
+ Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
+ Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
+                             LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
+ Consumer_ScanPreviousTrack, Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,            Key_RightBracket, 
+ ___,         		    ___, 		___, 		     ___,
+ ___),
 
 
 
 [FUNCTION] =  KEYMAP_STACKED
-(Key_Power,    Key_F1,            Key_F2,         Key_F3,            Key_F4,              Key_F5,            ___,
-   ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     ___,
-   ___,        M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
-   ___,        M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     ___,
-   ___, ___, ___, ___,
+(Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                Consumer_Mute,
+ ___,                ___,                Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   Consumer_VolumeIncrement,
+ ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
+ ___,                Key_mouseScrollUp,  ___,             Key_mouseBtnM, ___,                 ___,                   Consumer_VolumeDecrement,
+ Key_mouseScrollL,   Key_mouseScrollR,   ___,             ___,
 
-   ___, 
-
-   ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
-   ___,     Key_Home,            Key_PageDown,   Key_PageUp,     Key_End,                    ___,                       Key_F12,
-            Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             ___,                       ___,
-   ___,     LGUI(Key_LeftArrow), ___,            ___,            LGUI(Key_RightArrow),       ___,                       ___,
-   ___, ___, ___, ___,
-   ___)
+ ___, 
+ ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
+ ___,     Key_Home,            Key_PageDown,   Key_PageUp,     Key_End,                    ___,                       Key_F12,
+          Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             ___,                       ___,
+ ___,     LGUI(Key_LeftArrow), ___,            ___,            LGUI(Key_RightArrow),       ___,                       ___,
+ ___, ___, ___, ___,
+ ___)
 ) // KEYMAPS(
 
 /* Re-enable astyle's indent enforcement */
