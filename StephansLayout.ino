@@ -265,10 +265,10 @@ KEYMAPS(
 
 
 [SPECIAL] =  KEYMAP_STACKED
-(___,        ___,               ___,            ___,               ___,                 ___,               ___,
- ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     ___,
+(___,        ___,               ___,            ___,               ___,                 ___,               Consumer_Mute,
+ ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     Consumer_VolumeIncrement,
  ___,        M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
- Key_Turbo,  M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     ___,
+ Key_Turbo,  M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     Consumer_VolumeDecrement,
  ___, ___, ___, ___,
  ___,
 
@@ -282,10 +282,10 @@ KEYMAPS(
 
 
 [FUNCTION] =  KEYMAP_STACKED
-(Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                Consumer_Mute,
- ___,                ___,                Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   Consumer_VolumeIncrement,
+(Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                ___,
+ ___,                ___,                Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
  ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
- ___,                Key_mouseScrollUp,  ___,             Key_mouseBtnM, ___,                 ___,                   Consumer_VolumeDecrement,
+ ___,                Key_mouseScrollUp,  ___,             Key_mouseBtnM, ___,                 ___,                   ___,
  Key_mouseScrollL,   Key_mouseScrollR,   ___,             ___,
 
  ___, 
