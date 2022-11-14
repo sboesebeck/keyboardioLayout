@@ -786,7 +786,7 @@ void setup() {
     Qukeys.setMinimumHoldTime(50);
     Qukeys.setMinimumPriorInterval(75);
     //PersistentIdleLEDs.setIdleTimeoutSeconds(130);
-    ScreenSaverLEDs.setIdleTimeoutSeconds(30);
+    ScreenSaverLEDs.setIdleTimeoutSeconds(180);
     ScreenSaverLEDs.setScreenSaverLEDEffect(LEDDigitalRainEffect);
     //greenBlueRedEffect.activate();
     LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY, LEDRainbowWaveEffect);
