@@ -32,7 +32,7 @@ namespace kaleidoscope {
             disabled_ = false;
         }
 
-        // Disable the plugin.
+        // Disable the: plugin.
         void LEDColorEffectByKey::disable() {
             disabled_ = true;
         }
