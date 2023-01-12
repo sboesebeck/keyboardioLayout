@@ -8,7 +8,7 @@ namespace kaleidoscope {
         uint32_t ScreenSaverLEDs::idle_time_limit = 600000;  // 10 minutes
         uint32_t ScreenSaverLEDs::start_time_     = 0;
         bool ScreenSaverLEDs::idle_;
-        kaleidoscope::plugin::LEDMode * ScreenSaverLEDs::saver_mode_ = nullptr;
+        kaleidoscope::plugin::LEDModeInterface * ScreenSaverLEDs::saver_mode_ = nullptr;
         uint8_t ScreenSaverLEDs::normal_mode_index_;
 
         uint32_t ScreenSaverLEDs::idleTimeoutSeconds() {
@@ -19,11 +19,11 @@ namespace kaleidoscope {
             idle_time_limit = new_limit * 1000;
         }
 
-        kaleidoscope::plugin::LEDMode * ScreenSaverLEDs::screenSaverLEDEffect() {
+        kaleidoscope::plugin::LEDModeInterface * ScreenSaverLEDs::screenSaverLEDEffect() {
             return saver_mode_;
         }
 
-        void ScreenSaverLEDs::setScreenSaverLEDEffect(kaleidoscope::plugin::LEDMode & mode) {
+        void ScreenSaverLEDs::setScreenSaverLEDEffect(kaleidoscope::plugin::LEDModeInterface & mode) {
             saver_mode_ = & mode;
         }
         kaleidoscope::EventHandlerResult ScreenSaverLEDs::beforeEachCycle() {

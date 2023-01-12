@@ -17,8 +17,8 @@ namespace kaleidoscope {
 
             static uint32_t idleTimeoutSeconds();
             static void setIdleTimeoutSeconds(uint32_t new_limit);
-            static kaleidoscope::plugin::LEDMode * screenSaverLEDEffect();
-            static void setScreenSaverLEDEffect(kaleidoscope::plugin::LEDMode & mode);
+            static kaleidoscope::plugin::LEDModeInterface * screenSaverLEDEffect();
+            static void setScreenSaverLEDEffect(kaleidoscope::plugin::LEDModeInterface & mode);
 
             // Event handlers. Delete what you don't need.
             // EventHandlerResult onSetup();
@@ -34,7 +34,7 @@ namespace kaleidoscope {
             static bool disabled_;
             static bool idle_;
             static uint32_t start_time_;
-            static kaleidoscope::plugin::LEDMode * saver_mode_;
+            static kaleidoscope::plugin::LEDModeInterface * saver_mode_;
             static uint8_t normal_mode_index_;
         };
 

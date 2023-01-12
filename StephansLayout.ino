@@ -756,12 +756,10 @@ void setup() {
     StalkerEffect.variant = STALKER(BlazingTrail);
     StalkerEffect.inactive_color = CRGB(0x30, 0x90, 0x30);
     LEDRainbowWaveEffect.activate();
-    LEDDigitalRainEffect.DROP_MS = 140;
-    LEDDigitalRainEffect.DECAY_MS = 1500;
-    LEDDigitalRainEffect.NEW_DROP_PROBABILITY = 20;
-    LEDDigitalRainEffect.PURE_GREEN_INTENSITY = 0xe0;
-    LEDDigitalRainEffect.MAXIMUM_BRIGHTNESS_BOOST=0xd0;
-    LEDDigitalRainEffect.COLOR_CHANNEL=1;
+    LEDDigitalRainEffect.setDropMs(140);
+    LEDDigitalRainEffect.setDecayMs(1500);
+    LEDDigitalRainEffect.setNewDropProbability(20);
+    LEDDigitalRainEffect.setColorChannel(LEDDigitalRainEffect.ColorChannel::GREEN);
 
     // To make the keymap editable without flashing new firmware, we store
     // additional layers in EEPROM. For now, we reserve space for five layers. If
