@@ -1,10 +1,13 @@
-# Stephans Layout
+#Stephans Layout
 This is a layout / firmware for the Keyboardio Model01. Thanks to the opensource nature of the keyboard and it's software, I was able to just take the default Firmware and adapt it to my needs and ideas. This will change over time, as I will experiment with other features, that might be useful for my work and my typing skills.
+
+**Attention**: Branch _master_ covers `Keyboardio Model01` - if you need the
+Model100 Layout, switch to branch `model100`!
 
 ## Features of the Firmware
 The firmware does have a couple of layers defined, for certain use cases:
 - PRIMARY: is now set as standard QWERTZ Layout for a German OSX usage... I hope to change that to a ADNW-XOY layout at some point
-- FUNCTION: this is the key layout enabled by pressing one of the palm keys, here I implemented an "inversed T" Cursor Cluster on the left side. This works astonishingly well for me. I removed all mouse keys in this layout, and the plugin is not included here. I added a couple of Macros instead, for creating emojis as ASCII-Strings. But those will be replaced by the OS to the corresponding emoji. 
+- FUNCTION: this is the key layout enabled by pressing one of the palm keys, here I implemented an "inversed T" Cursor Cluster on the left side. This works astonishingly well for me. I removed all mouse keys in this layout, and the plugin is not included here. I added a couple of Macros instead, for creating emojis as ASCII-Strings. But those will be replaced by the OS to the corresponding emoji.
 - XOY: an alternative layout for typing. Should be more efficient and ergonomic, but I still struggle to get fast with it
 - GAME: well, for Egoshooter or something, this is a useful layer 😉
 - SPECIAL: The Special Layer creates all kinds of Braces on the home row for the left hand. Very easy to type!
@@ -15,7 +18,7 @@ I tried to reduce the number of plugins for this firmware, so I removed everythi
 
 I use a couple of LED Effects on this layout, but that might change in Future to something else.
 
-Qukeys is used for a couple of double assigned keys, so the Left and right CMD-Key (GUI for windows users) is also # and ´ 
+Qukeys is used for a couple of double assigned keys, so the Left and right CMD-Key (GUI for windows users) is also # and ´
 
 ## programmed extensions
 There are 2 things implemented in code:
@@ -41,8 +44,8 @@ _The default firmware for the Keyboardio Model 01_
 
 <h3>This is a quick start guide for folks who are familiar with Arduino and prefer to use the command line. For everyone else:
 
- * [Check out the wiki](https://github.com/keyboardio/Kaleidoscope/wiki/Keyboardio-Model-01-Introduction) for a more in depth introduction to how the Model 01 keyboard and the Kaleidoscope firmware work. 
- 
+ * [Check out the wiki](https://github.com/keyboardio/Kaleidoscope/wiki/Keyboardio-Model-01-Introduction) for a more in depth introduction to how the Model 01 keyboard and the Kaleidoscope firmware work.
+
   * If you have questions, [The community forums are happy to help!](https://community.keyboard.io/)</h3>
 
 # Download and install
@@ -67,17 +70,17 @@ If you install Arduino into some place that's /not/ `/usr/local/arduino`, you'll
 ### MacOS
 ```sh
 mkdir -p $HOME/Documents/Arduino
-cd $HOME/Documents/Arduino 
+cd $HOME/Documents/Arduino
 ```
 
 ### Linux
 
 ```sh
 mkdir -p $HOME/Arduino
-cd $HOME/Arduino 
+cd $HOME/Arduino
 ```
 
-## Download hardware platform, including library source code 
+## Download hardware platform, including library source code
 
 ```sh
 mkdir -p hardware
