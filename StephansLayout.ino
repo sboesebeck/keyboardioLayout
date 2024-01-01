@@ -25,7 +25,7 @@
 #include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
-#include "Kaleidoscope-LayerFocus.h"
+// #include "Kaleidoscope-LayerFocus.h"
 //#include "Kaleidoscope-RemoteControl.h"
 #include "kaleidoscope/plugin/LEDModeInterface.h"
 // Support for keys that move the mouse
@@ -489,15 +489,6 @@ enum {
 // static void enterHardwareTestMode(uint8_t combo_index) {
  //  HardwareTestMode.runTests();
 // }
-static void xoyMode(uint8_t combo_index){
-   if (Layer.isActive(XOY)){
-      Layer.move(PRIMARY);
-       StalkerEffect.variant = STALKER( BlazingTrail);
-   } else { 
-      Layer.move(XOY);
-      StalkerEffect.variant = STALKER( Haunt);
-   }
-}
 static void xoyMode(uint8_t combo_index) {
     if (Layer.isActive(XOY)) {
         Layer.move(PRIMARY);
@@ -749,7 +740,7 @@ void setup() {
     LEDRainbowEffect.brightness(150);
     LEDRainbowWaveEffect.brightness(150);
     // Set the action key the test mode should listen for to Left Fn
-    HardwareTestMode.setActionKey(R3C6);
+    //HardwareTestMode.setActionKey(R3C6);
     // The LED Stalker mode has a few effects. The one we like is called
     // 'BlazingTrail'. For details on other options, see
     //StalkerEffect.activate();

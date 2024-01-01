@@ -1,1 +1,1 @@
-default_fqbn: keyboardio:gd32:keyboardio_model_100
+default_fqbn: keyboardio:avr:model01
