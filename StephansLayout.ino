@@ -6,7 +6,7 @@
     #define BUILD_INFORMATION "Lazout Yagdul 01.05.2020"
 #endif
 
-
+//------> MODEL100!!!!
 /**
  * These #include directives pull in the Kaleidoscope firmware core,
  * as well as the Kaleidoscope plugins we use in the Model 01's firmware
