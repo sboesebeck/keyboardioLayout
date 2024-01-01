@@ -196,7 +196,6 @@ enum { PRIMARY, XOY,GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
  *   so we can make the keymaps actually resemble the physical key layout better
  */
 // *INDENT-OFF*
-
 KEYMAPS(
 
  [PRIMARY] = KEYMAP_STACKED
@@ -224,8 +223,8 @@ KEYMAPS(
 
    ___,  ___,    ___,    ___,    ___,   ___,          Key_Slash,
    ___,                   Key_V,   Key_G, Key_C,   Key_L, Key_J, Key_Minus,
-                          Key_D,   Key_T, Key_R,   Key_N, Key_S, CTL_T(F), 
-   ___,                   Key_B,   Key_P, Key_W,   Key_M, Key_Y, ___, 
+                          Key_D,   Key_T, Key_R,   Key_N, Key_S, CTL_T(F),
+   ___,                   Key_B,   Key_P, Key_W,   Key_M, Key_Y, ___,
    ___, ___, ___, ___,
    ___),
 
@@ -239,8 +238,8 @@ KEYMAPS(
 
    ___,  ___, ___, ___,           ___,              ___, ___,
    ___,                     ___,        ___,      ___,      ___, ___, ___,
-                         ___,        ___,    ___,    ___,         ___,              ___, 
-   ___,                   ___, ___, ___,   ___,                 ___,                      ___, 
+                         ___,        ___,    ___,    ___,         ___,              ___,
+   ___,                   ___, ___, ___,   ___,                 ___,                      ___,
    ___, ___, ___, ___,
    ___),
 
@@ -257,43 +256,42 @@ KEYMAPS(
    ___,  ___,      Key_KeypadDivide, Key_KeypadMultiply,     Key_Slash,  Key_KeypadSubtract, ___,
    ___,  ___,      Key_7,            Key_8,                  Key_9,      Key_KeypadAdd,      ___,
          ___,      Key_4,            Key_5,                  Key_6,      Key_Period,         ___,
-   ___,  ___,      Key_1,            Key_2,                  Key_3,      Key_Comma,          ___,   
+   ___,  ___,      Key_1,            Key_2,                  Key_3,      Key_Comma,          ___,
    ___,  ___, ___, Key_0,
    ___),
 
 
 [SPECIAL] =  KEYMAP_STACKED
-(___,      ___,                ___,      ___,   ___,     ___,       Consumer_Mute,
-___,       ___,                ___,      ___,   ___,     ___,       Consumer_VolumeIncrement,
-___,       ___,                ___,      ___,   ___,     ___,
-Key_Turbo, ___,                ___,      ___,   ___,     ___,       Consumer_VolumeDecrement,
-___,       ___,                ___,             ___,
-___,
+(___,           ___,               ___,            ___,               ___,                 ___,               Consumer_Mute,
+ LALT(Key_Tab), M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     Consumer_VolumeIncrement,
+ ___,           M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
+ Key_Turbo,     M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     Consumer_VolumeDecrement,
+ ___, ___, ___, ___,
+ ___,
 
-Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
-Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
-			    LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket), 
-Consumer_ScanPreviousTrack, Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,            Key_RightBracket, 
-___,         		    ___, 		___, 		     ___,
-___),
+ Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,              ___,                      ___,                  LSHIFT(Key_Minus),
+ Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),      LALT(LSHIFT(Key_Equals)), LALT(LSHIFT(Key_6)),  LSHIFT(Key_0),
+                             LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),    LALT(Key_8),              LALT(Key_9),          LSHIFT(Key_RightBracket),
+ Consumer_ScanPreviousTrack, Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma),LSHIFT(Key_Period),       Key_Slash,            Key_RightBracket,
+ ___,         		    ___, 		___, 		     ___,
+ ___),
 
 
 
 [FUNCTION] =  KEYMAP_STACKED
-(Key_Power,    Key_F1,            Key_F2,         Key_F3,            Key_F4,              Key_F5,            ___,
-   ___,        M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     ___,
-   ___,        M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
-   ___,        M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     ___,
-   ___, ___, ___, ___,
+(Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                ___,
+ ___,                ___,                Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
+ ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
+ ___,                Key_mouseScrollUp,  ___,             Key_mouseBtnM, ___,                 ___,                   ___,
+ Key_mouseScrollL,   Key_mouseScrollR,   ___,             ___,
 
-   ___, 
-
-   ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
-   ___,     Key_Home,            Key_PageUp,     Key_UpArrow,    Key_PageDown,               Key_End,                   Key_F12,
-            LGUI(Key_LeftArrow), Key_LeftArrow,  Key_DownArrow,  Key_RightArrow,             LGUI(Key_RightArrow),      ___,
-   ___,     ___,                 ___,            ___,            ___,                        ___,                       ___,
-   ___, ___, ___, ___,
-   ___)
+ ___,
+ ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
+ ___,     Key_Home,            Key_PageDown,   Key_PageUp,     Key_End,                    ___,                       Key_F12,
+          Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             ___,                       ___,
+ ___,     LGUI(Key_LeftArrow), ___,            ___,            LGUI(Key_RightArrow),       ___,                       ___,
+ ___, ___, ___, ___,
+ ___)
 ) // KEYMAPS(
 
 /* Re-enable astyle's indent enforcement */
