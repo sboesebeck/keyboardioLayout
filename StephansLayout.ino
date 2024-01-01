@@ -412,14 +412,14 @@ const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
 	    Macros.type(PSTR("*lol("));
 	    break;
 	  case MACRO_LLAP:
-            Macros.type(PSTR("*llap("));
+        Macros.type(PSTR("*llap("));
 	    break;
 	  case MACRO_FACEPALM:
             Macros.type(PSTR("*facepalm("));
             break;
-          case MACRO_COFFEE:
-            Macros.type(PSTR("*coffee("));
-            break;
+      case MACRO_COFFEE:
+        Macros.type(PSTR("*coffee("));
+        break;
 	  }
   }
   return MACRO_NONE;
