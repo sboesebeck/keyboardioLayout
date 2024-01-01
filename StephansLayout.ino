@@ -5,7 +5,7 @@
 #ifndef BUILD_INFORMATION
 #define BUILD_INFORMATION "Lazout Yagdul 01.05.2020"
 #endif
-
+///// Firmware Model 01
 
 /**
  * These #include directives pull in the Kaleidoscope firmware core,
