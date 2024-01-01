@@ -3,7 +3,7 @@
 // See "LICENSE" for license details
 
 #ifndef BUILD_INFORMATION
-#define BUILD_INFORMATION "Lazout Yagdul 01.05.2020"
+    #define BUILD_INFORMATION "Lazout Yagdul 01.05.2020"
 #endif
 ///// Firmware Model 01
 
@@ -17,6 +17,7 @@
 #include "Kaleidoscope.h"
 //#include "Model01-Firmware.h"
 #include "src/LEDEffectSwitchOnLayer.h"
+#include "src/ScreenSaverLEDs.h"
 // Support for storing the keymap in EEPROM
 //#include "Kaleidoscope-EEPROM-Settings.h"
 //#include "Kaleidoscope-EEPROM-Keymap.h"
@@ -28,7 +29,7 @@
 //#include "Kaleidoscope-RemoteControl.h"
 #include "kaleidoscope/plugin/LEDModeInterface.h"
 // Support for keys that move the mouse
-//#include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-MouseKeys.h"
 
 // Support for macros
 #include "Kaleidoscope-Macros.h"
@@ -47,6 +48,7 @@
 
 // Support for an LED mode that makes all the LEDs 'breathe'
 #include "Kaleidoscope-LEDEffect-Breathe.h"
+#include "Kaleidoscope-LEDEffect-DigitalRain.h"
 
 // Support for an LED mode that makes a red pixel chase a blue pixel across the keyboard
 //#include "Kaleidoscope-LEDEffect-Chase.h"
@@ -97,27 +99,27 @@ ii  * These are the names of your macros. They'll be used in two places.
   */
 
 enum { //MACRO_VERSION_INFO,
-       //MACRO_ANY,
-       MACRO_SMIRK,
-       MACRO_FROWN,
-       MACRO_SMILE,
-       MACRO_PUKE,
-       MACRO_TONGUE,
-       MACRO_SWEAR,
-       MACRO_DARN,
-       MACRO_ROLL,
-       MACRO_ROFL,
-       MACRO_LOL,
-       MACRO_SHRUG,
-       MACRO_TONGUE2,
-       MACRO_LLAP,
-       MACRO_COFFEE,
-       MACRO_FACEPALM,
-       LED_EFFECT_NEXT_NUMPADSHIFT
-     };
+    //MACRO_ANY,
+    MACRO_SMIRK,
+    MACRO_FROWN,
+    MACRO_SMILE,
+    MACRO_PUKE,
+    MACRO_TONGUE,
+    MACRO_SWEAR,
+    MACRO_DARN,
+    MACRO_ROLL,
+    MACRO_ROFL,
+    MACRO_LOL,
+    MACRO_SHRUG,
+    MACRO_TONGUE2,
+    MACRO_LLAP,
+    MACRO_COFFEE,
+    MACRO_FACEPALM,
+    LED_EFFECT_NEXT_NUMPADSHIFT
+};
 
 
-static int current=0;
+static int current = 0;
 ////     static byte r=0x05;
 
 /** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
@@ -168,7 +170,7 @@ static int current=0;
   *
   */
 
-enum { PRIMARY, XOY,GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
+enum { PRIMARY, XOY, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
 //enum { PRIMARY, GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
 
 
@@ -318,15 +320,15 @@ KEYMAPS(
  */
 
 //static void anyKeyMacro(uint8_t keyState) {
- // static Key lastKey;
-  //bool toggledOn = false;
-  //if (keyToggledOn(keyState)) {
-    //lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
-    //toggledOn = true;
-  //}
+// static Key lastKey;
+//bool toggledOn = false;
+//if (keyToggledOn(keyState)) {
+//lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
+//toggledOn = true;
+//}
 //
-  //if (keyIsPressed(keyState))
-    //kaleidoscope::hid::pressKey(lastKey, toggledOn);
+//if (keyIsPressed(keyState))
+//kaleidoscope::hid::pressKey(lastKey, toggledOn);
 //}
 
 
@@ -452,7 +454,7 @@ void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event 
  * events.
  */
 void hostPowerManagementEventHandler(kaleidoscope::plugin::HostPowerManagement::Event event) {
-  toggleLedsOnSuspendResume(event);
+    toggleLedsOnSuspendResume(event);
 }
 
 /** This 'enum' is a list of all the magic combos used by the Model 01's
@@ -496,55 +498,71 @@ static void xoyMode(uint8_t combo_index){
       StalkerEffect.variant = STALKER( Haunt);
    }
 }
-static void gameMode(uint8_t combo_index){
- if  (Layer.isActive(GAME)){
-    Layer.move(PRIMARY);
-    StalkerEffect.variant=STALKER(BlazingTrail);
- } else { 
-    Layer.move(GAME);
-    StalkerEffect.variant = STALKER(Rainbow);
- }  
+static void xoyMode(uint8_t combo_index) {
+    if (Layer.isActive(XOY)) {
+        Layer.move(PRIMARY);
+        StalkerEffect.variant = STALKER(BlazingTrail);
+    } else {
+        Layer.move(XOY);
+        StalkerEffect.variant = STALKER(Haunt);
+    }
+}
+static void gameMode(uint8_t combo_index) {
+    if (Layer.isActive(GAME)) {
+        Layer.move(PRIMARY);
+        StalkerEffect.variant = STALKER(BlazingTrail);
+    } else {
+        Layer.move(GAME);
+        StalkerEffect.variant = STALKER(Rainbow);
+    }
 }
 
-static void nextLEDEffect(uint8_t combo_index){
-	current=current+1;
-	if (LEDEffectSwitchOnLayer.getPlugin(current)==NULL){
-		current=0;
-	}
-	LEDEffectSwitchOnLayer.getPlugin(current)->activate();
-	LEDEffectSwitchOnLayer.setPluginForLayer(Layer.mostRecent(),current);
-	
+static void nextLEDEffect(uint8_t combo_index) {
+    current = current + 1;
+
+    if (LEDEffectSwitchOnLayer.getPlugin(current) == NULL) {
+        current = 0;
+    }
+
+    LEDEffectSwitchOnLayer.getPlugin(current)->activate();
+    LEDEffectSwitchOnLayer.setPluginForLayer(Layer.mostRecent(), current);
 }
 
-static void toggleLed(uint8_t combo_index){
-    static int on=0;
-    on+=1;
-    if (on>4) on=0;
-    switch(on) {
-      case 0:
-        StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
-	break;
-      case 1:
-	StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
-	break;
-      case 2:
-	StalkerEffect.inactive_color=CRGB(0x60, 0x64, 0x85);
-	break;
-      case 3:
-	StalkerEffect.inactive_color=CRGB(0x85,0x30,0x30);
-	break;
-      case 4:
-	StalkerEffect.inactive_color=CRGB(0,0,0);
-	break;
-      default:
-	StalkerEffect.inactive_color=CRGB(0x24, 0x24, 0x85);
-	break;
+static void toggleLed(uint8_t combo_index) {
+    static int on = 0;
+    on += 1;
 
-	//LEDOff.activate();
-    	//LEDControl.set_all_leds_to({0, 0, 0});
-   	//LEDControl.syncLeds();
-	//LEDEffectSwitchOnLayer.getPlugin(current)->activate();
-	//LEDControl.refreshAll();
+    if (on > 4) { on = 0; }
+
+    switch (on) {
+        case 0:
+            StalkerEffect.inactive_color = CRGB(0x30, 0x90, 0x30);
+            break;
+
+        case 1:
+            StalkerEffect.inactive_color = CRGB(0x24, 0x24, 0x85);
+            break;
+
+        case 2:
+            StalkerEffect.inactive_color = CRGB(0x60, 0x64, 0x85);
+            break;
+
+        case 3:
+            StalkerEffect.inactive_color = CRGB(0x85, 0x30, 0x30);
+            break;
+
+        case 4:
+            StalkerEffect.inactive_color = CRGB(0, 0, 0);
+            break;
+
+        default:
+            StalkerEffect.inactive_color = CRGB(0x24, 0x24, 0x85);
+            break;
+            //LEDOff.activate();
+            //LEDControl.set_all_leds_to({0, 0, 0});
+            //LEDControl.syncLeds();
+            //LEDEffectSwitchOnLayer.getPlugin(current)->activate();
+            //LEDControl.refreshAll();
     }
 }
 
@@ -591,8 +609,8 @@ static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
 //static kaleidoscope::plugin::LEDSolidColor solidIndigo(0, 0, 170);
 //static kaleidoscope::plugin::LEDSolidColor solidViolet(130, 0, 120);
 //static kaleidoscope::plugin::TriColor greenBlueRedEffect (CRGB(0x00, 0xff, 0x00),
- //                                                   CRGB(0x00, 0x00, 0xff),
- //                                                   CRGB(0xff, 0x00, 0x00));
+//                                                   CRGB(0x00, 0x00, 0xff),
+//                                                   CRGB(0xff, 0x00, 0x00));
 
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
@@ -614,13 +632,13 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // `settings.defaultLayer` command)
   //FocusSettingsCommand,
 
-  // FocusEEPROMCommand adds a set of Focus commands, which are very helpful in
-  // both debugging, and in backing up one's EEPROM contents.
-  //FocusEEPROMCommand,
+    // FocusEEPROMCommand adds a set of Focus commands, which are very helpful in
+    // both debugging, and in backing up one's EEPROM contents.
+    //FocusEEPROMCommand,
 
-  // The boot greeting effect pulses the LED button for 10 seconds after the
-  // keyboard is first connected
-  //BootAnimationEffect,
+    // The boot greeting effect pulses the LED button for 10 seconds after the
+    // keyboard is first connected
+    //BootAnimationEffect,
 
   // The hardware test mode, which can be invoked by tapping Prog, LED and the
   // left Fn button at the same time.
@@ -641,58 +659,70 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // running through all the colors of the rainbow.
   LEDRainbowEffect,
 
-  // The rainbow wave effect lights up your keyboard with all the colors of a rainbow
-  // and slowly moves the rainbow across your keyboard
-  LEDRainbowWaveEffect,
+    //JukeboxEffect,
+    //MiamiEffect,
+    //JukeboxAlternateEffect,
+    StalkerEffect,
+    WavepoolEffect,
 
-  // The chase effect follows the adventure of a blue pixel which chases a red pixel across
-  // your keyboard. Spoiler: the blue pixel never catches the red pixel
-  //LEDChaseEffect,
-  // These static effects turn your keyboard's LEDs a variety of colors
-  //solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
+    // The rainbow effect changes the color of all of the keyboard's keys at the same time
+    // running through all the colors of the rainbow.
+    LEDRainbowEffect,
 
-  // The breathe effect slowly pulses all of the LEDs on your keyboard
-  LEDBreatheEffect,
+    // The rainbow wave effect lights up your keyboard with all the colors of a rainbow
+    // and slowly moves the rainbow across your keyboard
+    LEDRainbowWaveEffect,
 
-  // The AlphaSquare effect prints each character you type, using your
-  // keyboard's LEDs as a display
-  //AlphaSquareEffect,
+    // The chase effect follows the adventure of a blue pixel which chases a red pixel across
+    // your keyboard. Spoiler: the blue pixel never catches the red pixel
+    //LEDChaseEffect,
+    // These static effects turn your keyboard's LEDs a variety of colors
+    //solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
 
-  LEDOff,
-  // The LED Palette Theme plugin provides a shared palette for other plugins,
-  // like Colormap below
-  LEDPaletteTheme,
+    // The breathe effect slowly pulses all of the LEDs on your keyboard
+    LEDBreatheEffect,
 
-  // The Colormap effect makes it possible to set up per-layer colormaps
-  ColormapEffect,
+    // The AlphaSquare effect prints each character you type, using your
+    // keyboard's LEDs as a display
+    //AlphaSquareEffect,
 
-  // The numpad plugin is responsible for lighting up the 'numpad' mode
-  // with a custom LED effect
-  NumPad,
-  //kaleidoscope::plugin::LEDEffectSwitchOnLayer,
+    LEDOff,
+    // The LED Palette Theme plugin provides a shared palette for other plugins,
+    // like Colormap below
+    LEDPaletteTheme,
+    LEDDigitalRainEffect,
 
   // The macros plugin adds support for macros
   Macros,
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
   //MouseKeys,
 
-  // The HostPowerManagement plugin allows us to turn LEDs off when then host
-  // goes to sleep, and resume them when it wakes up.
-  HostPowerManagement,
-  solidBlue,
-  solidRed,
-  solidGreen,
-  // The MagicCombo plugin lets you use key combinations to trigger custom
-  // actions - a bit like Macros, but triggered by pressing multiple keys at the
-  // same time.
-  MagicCombo,
-  PersistentIdleLEDs,
-  LEDEffectSwitchOnLayer
-  // The USBQuirks plugin lets you do some things with USB that we aren't
-  // comfortable - or able - to do automatically, but can be useful
-  // nevertheless. Such as toggling the key report protocol between Boot (used
-  // by BIOSes) and Report (NKRO).
-  //USBQuirks
+    // The numpad plugin is responsible for lighting up the 'numpad' mode
+    // with a custom LED effect
+    NumPad,
+    //kaleidoscope::plugin::LEDEffectSwitchOnLayer,
+
+    // The macros plugin adds support for macros
+    Macros,
+    // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
+    MouseKeys,
+
+    // The HostPowerManagement plugin allows us to turn LEDs off when then host
+    // goes to sleep, and resume them when it wakes up.
+    HostPowerManagement,
+    solidBlue,
+    solidRed,
+    solidGreen,
+    // The MagicCombo plugin lets you use key combinations to trigger custom
+    // actions - a bit like Macros, but triggered by pressing multiple keys at the
+    // same time.
+    MagicCombo,
+    LEDEffectSwitchOnLayer
+    // The USBQuirks plugin lets you do some things with USB that we aren't
+    // comfortable - or able - to do automatically, but can be useful
+    // nevertheless. Such as toggling the key report protocol between Boot (used
+    // by BIOSes) and Report (NKRO).
+    //USBQuirks
 );
 
 
@@ -701,9 +731,35 @@ KALEIDOSCOPE_INIT_PLUGINS(
  * Kaleidoscope and any plugins.
  */
 void setup() {
-	QUKEYS(
-	    kaleidoscope::plugin::Qukey(0, KeyAddr(0, 6), ShiftToLayer(NUMPAD))
-	)
+    QUKEYS(
+        kaleidoscope::plugin::Qukey(0, KeyAddr(0, 6), ShiftToLayer(NUMPAD))
+    )
+    // First, call Kaleidoscope's internal setup function
+    Kaleidoscope.setup();
+    HostOS.os(kaleidoscope::plugin::hostos::OSX);
+    // While we hope to improve this in the future, the NumPad plugin
+    // needs to be explicitly told which keymap layer is your numpad layer
+    NumPad.numPadLayer = NUMPAD;
+    NumPad.color = CRGB(0, 0, 160); // a blue color
+    NumPad.lock_hue = 85; // green
+    // We configure the AlphaSquare effect to use RED letters
+    //AlphaSquare.color = CRGB(255, 0, 0);
+    // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
+    // This draws more than 500mA, but looks much nicer than a dimmer effect
+    LEDRainbowEffect.brightness(150);
+    LEDRainbowWaveEffect.brightness(150);
+    // Set the action key the test mode should listen for to Left Fn
+    HardwareTestMode.setActionKey(R3C6);
+    // The LED Stalker mode has a few effects. The one we like is called
+    // 'BlazingTrail'. For details on other options, see
+    //StalkerEffect.activate();
+    StalkerEffect.variant = STALKER(BlazingTrail);
+    StalkerEffect.inactive_color = CRGB(0x30, 0x90, 0x30);
+    LEDRainbowWaveEffect.activate();
+    LEDDigitalRainEffect.setDropMs(140);
+    LEDDigitalRainEffect.setDecayMs(1500);
+    LEDDigitalRainEffect.setNewDropProbability(20);
+    LEDDigitalRainEffect.setColorChannel(LEDDigitalRainEffect.ColorChannel::GREEN);
 
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
@@ -789,8 +845,7 @@ void setup() {
   */
 
 void loop() {
-  Kaleidoscope.loop();
+    Kaleidoscope.loop();
 }
-
 
 
