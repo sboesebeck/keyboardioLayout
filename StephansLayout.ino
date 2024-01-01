@@ -5,8 +5,8 @@
 #ifndef BUILD_INFORMATION
     #define BUILD_INFORMATION "Lazout Yagdul 01.05.2020"
 #endif
-///// Firmware Model 01
 
+//------> MODEL01!!!! <------
 /**
  * These #include directives pull in the Kaleidoscope firmware core,
  * as well as the Kaleidoscope plugins we use in the Model 01's firmware
@@ -19,12 +19,12 @@
 #include "src/LEDEffectSwitchOnLayer.h"
 #include "src/ScreenSaverLEDs.h"
 // Support for storing the keymap in EEPROM
-//#include "Kaleidoscope-EEPROM-Settings.h"
-//#include "Kaleidoscope-EEPROM-Keymap.h"
+// #include "Kaleidoscope-EEPROM-Settings.h"
+// #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-Turbo.h"
 #include <Kaleidoscope-LED-Wavepool.h>
 // Support for communicating with the host via a simple Serial protocol
-#include "Kaleidoscope-FocusSerial.h"
+// #include "Kaleidoscope-FocusSerial.h"
 // #include "Kaleidoscope-LayerFocus.h"
 //#include "Kaleidoscope-RemoteControl.h"
 #include "kaleidoscope/plugin/LEDModeInterface.h"
@@ -69,7 +69,7 @@
 #include "Kaleidoscope-Colormap.h"
 
 // Support for Keyboardio's internal keyboard testing mode
-//#include "Kaleidoscope-HardwareTestMode.h"
+#include "Kaleidoscope-HardwareTestMode.h"
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
@@ -198,6 +198,7 @@ enum { PRIMARY, XOY, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
  *   so we can make the keymaps actually resemble the physical key layout better
  */
 // *INDENT-OFF*
+
 KEYMAPS(
 
  [PRIMARY] = KEYMAP_STACKED
@@ -344,87 +345,103 @@ KEYMAPS(
 
  */
 
-const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
-  static uint32_t start;
-  static int current=0;
+const macro_t * macroAction(uint8_t macroIndex, KeyEvent & event) {
+    static uint32_t start;
+    static int current = 0;
 
-  if (macroIndex ==  LED_EFFECT_NEXT_NUMPADSHIFT){
-	if(keyToggledOn(event.state)){
-		start=millis();
+    if (macroIndex ==  LED_EFFECT_NEXT_NUMPADSHIFT) {
+        if (keyToggledOn(event.state)) {
+            start = millis();
         } else if (keyToggledOff(event.state)) {
-		if (millis()-start < 150){
-			//WavepoolEffect.activate();
-			current=current+1;
-			if (LEDEffectSwitchOnLayer.getPlugin(current)==NULL){
-				current=0;
-			}
-			LEDEffectSwitchOnLayer.getPlugin(current)->activate();
-			LEDEffectSwitchOnLayer.setPluginForLayer(Layer.mostRecent(),current);
-		}
-	}
-	return MACRO_NONE;
-  }
-  
-  if (keyToggledOn(event.state)) {
-     switch (macroIndex) {
-		 
-	  //case MACRO_VERSION_INFO:
-	  //  versionInfoMacro(event.state);
-	  //  break;
-	  //case MACRO_ANY:
-	    //anyKeyMacro(event.state);
-	    //break;
-	  case MACRO_SMIRK:
-	    Macros.type(PSTR("</("));
-            //Unicode.type(0x2328);
-	    break;
-	  case MACRO_FROWN:
-	    Macros.type(PSTR(">/*"));
-	    break;
-	  case MACRO_SMILE:
-	    Macros.type(PSTR(">/("));
-	    break;
-	  case MACRO_PUKE:
-	    Macros.type(PSTR("*puke("));
-	    break;
-	  case MACRO_TONGUE:
-	    Macros.type(PSTR(">/P"));
-	    break;
-	  case MACRO_TONGUE2:
-	    Macros.type(PSTR("</P"));
-	    break;
-	  case MACRO_SWEAR:
-	    Macros.type(PSTR("*swear("));
-	    break;
-	  //case MACRO_DARN:
-	    //return MACRODOWN(I(25),
-		//	     D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt)
-		//	    );
-	    //break;
-	  case MACRO_ROLL:
-	    Macros.type(PSTR("*roll("));
-	    break;
-	  case MACRO_ROFL:
-	    Macros.type(PSTR("*rofl("));
-	    break;
-	  case MACRO_SHRUG:
-	    Macros.type(PSTR("*shrug("));
-	    break;
-	  case MACRO_LOL:
-	    Macros.type(PSTR("*lol("));
-	    break;
-	  case MACRO_LLAP:
-        Macros.type(PSTR("*llap("));
-	    break;
-	  case MACRO_FACEPALM:
-            Macros.type(PSTR("*facepalm("));
-            break;
-      case MACRO_COFFEE:
-        Macros.type(PSTR("*coffee("));
-        break;
-	  }
-  }
-  return MACRO_NONE;
+            if (millis() - start < 150) {
+                //WavepoolEffect.activate();
+                current = current + 1;
+
+                if (LEDEffectSwitchOnLayer.getPlugin(current) == NULL) {
+                    current = 0;
+                }
+
+                LEDEffectSwitchOnLayer.getPlugin(current)->activate();
+                LEDEffectSwitchOnLayer.setPluginForLayer(Layer.mostRecent(), current);
+            }
+        }
+
+        return MACRO_NONE;
+    }
+
+    if (keyToggledOn(event.state)) {
+        switch (macroIndex) {
+            //case MACRO_VERSION_INFO:
+            //  versionInfoMacro(keyState);
+            //  break;
+            //case MACRO_ANY:
+            //anyKeyMacro(keyState);
+            //break;
+            case MACRO_SMIRK:
+                Macros.type(PSTR("</("));
+                //Unicode.type(0x2328);
+                break;
+
+            case MACRO_FROWN:
+                Macros.type(PSTR(">/*"));
+                break;
+
+            case MACRO_SMILE:
+                Macros.type(PSTR(">/("));
+                break;
+
+            case MACRO_PUKE:
+                Macros.type(PSTR("*puke("));
+                break;
+
+            case MACRO_TONGUE:
+                Macros.type(PSTR(">/P"));
+                break;
+
+            case MACRO_TONGUE2:
+                Macros.type(PSTR("</P"));
+                break;
+
+            case MACRO_SWEAR:
+                Macros.type(PSTR("*swear("));
+                break;
+
+            //case MACRO_DARN:
+            //return MACRODOWN(I(25),
+            //       D(LeftShift), T(Period), U(LeftShift), T(Slash), D(LeftAlt), T(E), U(LeftAlt)
+            //      );
+            //break;
+            case MACRO_ROLL:
+                Macros.type(PSTR("*roll("));
+                break;
+
+            case MACRO_ROFL:
+                Macros.type(PSTR("*rofl("));
+                break;
+
+            case MACRO_SHRUG:
+                Macros.type(PSTR("*shrug("));
+                break;
+
+            case MACRO_LOL:
+                Macros.type(PSTR("*lol("));
+                break;
+
+            case MACRO_LLAP:
+                Macros.type(PSTR("*llap("));
+                break;
+
+            case MACRO_FACEPALM:
+                Macros.type(PSTR("*facepalm("));
+                break;
+
+            case MACRO_COFFEE:
+                Macros.type(PSTR("*coffee("));
+                break;
+        }
+    }
+
+    return MACRO_NONE;
 }
 
 
@@ -434,19 +451,21 @@ const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
  * and turns them back on when it wakes up.
  */
 void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event event) {
-  switch (event) {
-  case kaleidoscope::plugin::HostPowerManagement::Suspend:
-    LEDControl.set_all_leds_to({0, 0, 0});
-    LEDControl.syncLeds();
-    break;
-  case kaleidoscope::plugin::HostPowerManagement::Resume:
-    LEDControl.refreshAll();
-    break;
-  case kaleidoscope::plugin::HostPowerManagement::Sleep:
-    LEDControl.set_all_leds_to({0, 0, 0});
-    LEDControl.syncLeds();
-    break;
-  }
+    switch (event) {
+        case kaleidoscope::plugin::HostPowerManagement::Suspend:
+            LEDControl.set_all_leds_to({0, 0, 0});
+            LEDControl.syncLeds();
+            break;
+
+        case kaleidoscope::plugin::HostPowerManagement::Resume:
+            LEDControl.refreshAll();
+            break;
+
+        case kaleidoscope::plugin::HostPowerManagement::Sleep:
+            LEDControl.set_all_leds_to({0, 0, 0});
+            LEDControl.syncLeds();
+            break;
+    }
 }
 
 /** hostPowerManagementEventHandler dispatches power management events (suspend,
@@ -486,9 +505,9 @@ enum {
 /**
  *  This enters the hardware test mode
  */
-// static void enterHardwareTestMode(uint8_t combo_index) {
- //  HardwareTestMode.runTests();
-// }
+static void enterHardwareTestMode(uint8_t combo_index) {
+    HardwareTestMode.runTests();
+}
 static void xoyMode(uint8_t combo_index) {
     if (Layer.isActive(XOY)) {
         Layer.move(PRIMARY);
@@ -578,12 +597,12 @@ static void toggleLed(uint8_t combo_index) {
 // }
 // });
 USE_MAGIC_COMBOS(
-   {.action=gameMode,.keys={ R3C6,R3C9,R3C15}},   //fn+fn+shift, right half
-   {.action=xoyMode,.keys={R3C6,R3C9,R3C0}},   //FN+FN+"Shift" on left half
-   //{.action=enterHardwareTestMode,.keys={R3C6,R0C0,R0C6}},   //Left Fn+Prog+LED
-   {.action=nextLEDEffect,.keys={R2C8,R2C9,R0C6}},   //Hyper+Alt+LED
-   {.action=toggleLed,.keys={R3C0,R3C15,R3C9}},   //shift+shift+right FN
- //  {.action=addR,.keys={R3C6,R3C9,R1C1}}   //FN+FN+1
+{.action = gameMode, .keys = { R3C6, R3C9, R3C15}}, //fn+fn+shift, right half
+{.action = xoyMode, .keys = {R3C6, R3C9, R3C0}}, //FN+FN+"Shift" on left half
+{.action = enterHardwareTestMode, .keys = {R3C6, R0C0, R0C6}}, //Left Fn+Prog+LED
+{.action = nextLEDEffect, .keys = {R2C8, R2C9, R0C6}}, //Hyper+Alt+LED
+{.action = toggleLed, .keys = {R3C0, R3C15, R3C9}}, //shift+shift+right FN
+//  {.action=addR,.keys={R3C6,R3C9,R1C1}}   //FN+FN+1
 );
 
 
@@ -607,21 +626,23 @@ static kaleidoscope::plugin::LEDSolidColor solidBlue(0, 70, 130);
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
 KALEIDOSCOPE_INIT_PLUGINS(
-  // The EEPROMSettings & EEPROMKeymap plugins make it possible to have an
-  // editable keymap in EEPROM.
-  //EEPROMSettings,
-  //EEPROMKeymap,
-  Qukeys,
-  // Focus allows bi-directional communication with the host, and is the
-  // interface through which the keymap in EEPROM can be edited.
-  Focus,
-  FocusLEDCommand,
-  LayerFocus,
-  //RemoteControl,
-  // FocusSettingsCommand adds a few Focus commands, intended to aid in
-  // changing some settings of the keyboard, such as the default layer (via the
-  // `settings.defaultLayer` command)
-  //FocusSettingsCommand,
+    // The EEPROMSettings & EEPROMKeymap plugins make it possible to have an
+    // editable keymap in EEPROM.
+    // EEPROMSettings,
+    // EEPROMKeymap,
+    Qukeys,
+    // Focus allows bi-directional communication with the host, and is the
+    // interface through which the keymap in EEPROM can be edited.
+    // Focus,
+    // FocusLEDCommand,
+    // LayerFocus,
+    //PersistentIdleLEDs,
+    ScreenSaverLEDs,
+    //RemoteControl,
+    // FocusSettingsCommand adds a few Focus commands, intended to aid in
+    // changing some settings of the keyboard, such as the default layer (via the
+    // `settings.defaultLayer` command)
+    //FocusSettingsCommand,
 
     // FocusEEPROMCommand adds a set of Focus commands, which are very helpful in
     // both debugging, and in backing up one's EEPROM contents.
@@ -631,24 +652,14 @@ KALEIDOSCOPE_INIT_PLUGINS(
     // keyboard is first connected
     //BootAnimationEffect,
 
-  // The hardware test mode, which can be invoked by tapping Prog, LED and the
-  // left Fn button at the same time.
-  //HardwareTestMode,
+    // The hardware test mode, which can be invoked by tapping Prog, LED and the
+    // left Fn button at the same time.
+    HardwareTestMode,
 
-  // LEDControl provides support for other LED modes
-  LEDControl,
-  //For the Key_Turbo to work
-  Turbo,
-
-  //JukeboxEffect,
-  //MiamiEffect,
-  //JukeboxAlternateEffect,
-  StalkerEffect,
-  WavepoolEffect,
-  
-  // The rainbow effect changes the color of all of the keyboard's keys at the same time
-  // running through all the colors of the rainbow.
-  LEDRainbowEffect,
+    // LEDControl provides support for other LED modes
+    LEDControl,
+    //For the Key_Turbo to work
+    Turbo,
 
     //JukeboxEffect,
     //MiamiEffect,
@@ -683,10 +694,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
     LEDPaletteTheme,
     LEDDigitalRainEffect,
 
-  // The macros plugin adds support for macros
-  Macros,
-  // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
-  //MouseKeys,
+    // The Colormap effect makes it possible to set up per-layer colormaps
+    ColormapEffect,
 
     // The numpad plugin is responsible for lighting up the 'numpad' mode
     // with a custom LED effect
@@ -740,7 +749,7 @@ void setup() {
     LEDRainbowEffect.brightness(150);
     LEDRainbowWaveEffect.brightness(150);
     // Set the action key the test mode should listen for to Left Fn
-    //HardwareTestMode.setActionKey(R3C6);
+    HardwareTestMode.setActionKey(R3C6);
     // The LED Stalker mode has a few effects. The one we like is called
     // 'BlazingTrail'. For details on other options, see
     //StalkerEffect.activate();
@@ -752,79 +761,50 @@ void setup() {
     LEDDigitalRainEffect.setNewDropProbability(20);
     LEDDigitalRainEffect.setColorChannel(LEDDigitalRainEffect.ColorChannel::GREEN);
 
-  // First, call Kaleidoscope's internal setup function
-  Kaleidoscope.setup();
-  HostOS.os(kaleidoscope::plugin::hostos::OSX);
-  // While we hope to improve this in the future, the NumPad plugin
-  // needs to be explicitly told which keymap layer is your numpad layer
-  NumPad.numPadLayer = NUMPAD;
-  NumPad.color = CRGB(0, 0, 160); // a blue color
-  NumPad.lock_hue = 85; // green
-  // We configure the AlphaSquare effect to use RED letters
-  //AlphaSquare.color = CRGB(255, 0, 0);
-
-  // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
-  // This draws more than 500mA, but looks much nicer than a dimmer effect
-  LEDRainbowEffect.brightness(150);
-  LEDRainbowWaveEffect.brightness(150);
-
-  // Set the action key the test mode should listen for to Left Fn
-  //HardwareTestMode.setActionKey(R3C6);
-
-  // The LED Stalker mode has a few effects. The one we like is called
-  // 'BlazingTrail'. For details on other options, see
-  StalkerEffect.variant = STALKER( BlazingTrail);
-  StalkerEffect.inactive_color=CRGB(0x30,0x90,0x30);
-  //StalkerEffect.activate();
-  LEDRainbowWaveEffect.activate();
-
-  // To make the keymap editable without flashing new firmware, we store
-  // additional layers in EEPROM. For now, we reserve space for five layers. If
-  // one wants to use these layers, just set the default layer to one in EEPROM,
-  // by using the `settings.defaultLayer` Focus command, or by using the
-  // `keymap.onlyCustom` command to use EEPROM layers only.
-  //EEPROMKeymap.setup(2);
-
-  Turbo.interval(10);
-  Turbo.sticky(true);
-  Turbo.flash(true);
-  Turbo.flashInterval(80);
-  Turbo.activeColor(CRGB(0x64, 0x96, 0xed));
-
-  // We need to tell the Colormap plugin how many layers we want to have custom
-  // maps for. To make things simple, we set it to five layers, which is how
-  // many editable layers we have (see above).
-  ColormapEffect.max_layers(1);
-  WavepoolEffect.idle_timeout = 15000;  // 15 seconds
-  //WavepoolEffect.activate();
-  Qukeys.activate();
-  Qukeys.setHoldTimeout(220);
-  Qukeys.setOverlapThreshold(80);
-  Qukeys.setMinimumHoldTime(50);
-  Qukeys.setMinimumPriorInterval(75);
-
-  PersistentIdleLEDs.setIdleTimeoutSeconds(130);
-  //greenBlueRedEffect.activate();
-  LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY,LEDRainbowWaveEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(XOY,StalkerEffect);
-  LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
-  LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION,solidBlue);
-  LEDEffectSwitchOnLayer.setPluginForLayer(GAME,WavepoolEffect);
-  LEDEffectSwitchOnLayer.enable();
-
-  LEDEffectSwitchOnLayer.setPluginOrder(0,StalkerEffect);
-  LEDEffectSwitchOnLayer.setPluginOrder(1,LEDRainbowEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(2,LEDBreatheEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(3,LEDRainbowWaveEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(4,WavepoolEffect);  
-  LEDEffectSwitchOnLayer.setPluginOrder(5,solidRed);  
-  LEDEffectSwitchOnLayer.setPluginOrder(6,solidGreen);  
-  LEDEffectSwitchOnLayer.setPluginOrder(7,solidBlue);  
-  //LEDEffectSwitchOnLayer.setPluginOrder(8,MiamiEffect);  
-  //LEDEffectSwitchOnLayer.setPluginOrder(9,JukeboxEffect);  
-
-  LEDEffectSwitchOnLayer.setPluginOrder(8,LEDOff);  
- 
+    // To make the keymap editable without flashing new firmware, we store
+    // additional layers in EEPROM. For now, we reserve space for five layers. If
+    // one wants to use these layers, just set the default layer to one in EEPROM,
+    // by using the `settings.defaultLayer` Focus command, or by using the
+    // `keymap.onlyCustom` command to use EEPROM layers only.
+    // EEPROMKeymap.setup(2);
+    Turbo.interval(10);
+    Turbo.sticky(true);
+    Turbo.flash(true);
+    Turbo.flashInterval(80);
+    Turbo.activeColor(CRGB(0x64, 0x96, 0xed));
+    // We need to tell the Colormap plugin how many layers we want to have custom
+    // maps for. To make things simple, we set it to five layers, which is how
+    // many editable layers we have (see above).
+    ColormapEffect.max_layers(5);
+    WavepoolEffect.idle_timeout = 15000;  // 15 seconds
+    //WavepoolEffect.activate();
+    Qukeys.activate();
+    Qukeys.setHoldTimeout(220);
+    Qukeys.setOverlapThreshold(80);
+    Qukeys.setMinimumHoldTime(50);
+    Qukeys.setMinimumPriorInterval(75);
+    //PersistentIdleLEDs.setIdleTimeoutSeconds(130);
+    ScreenSaverLEDs.setIdleTimeoutSeconds(180);
+    ScreenSaverLEDs.setScreenSaverLEDEffect(LEDDigitalRainEffect);
+    //greenBlueRedEffect.activate();
+    LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY, LEDRainbowWaveEffect);
+    LEDEffectSwitchOnLayer.setPluginForLayer(XOY, StalkerEffect);
+    LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL, NULL);
+    // LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
+    LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION, NULL);
+    LEDEffectSwitchOnLayer.setPluginForLayer(GAME, WavepoolEffect);
+    LEDEffectSwitchOnLayer.enable();
+    LEDEffectSwitchOnLayer.setPluginOrder(0, StalkerEffect);
+    LEDEffectSwitchOnLayer.setPluginOrder(1, LEDRainbowEffect);
+    LEDEffectSwitchOnLayer.setPluginOrder(2, LEDBreatheEffect);
+    LEDEffectSwitchOnLayer.setPluginOrder(3, LEDRainbowWaveEffect);
+    LEDEffectSwitchOnLayer.setPluginOrder(4, WavepoolEffect);
+    LEDEffectSwitchOnLayer.setPluginOrder(5, solidRed);
+    LEDEffectSwitchOnLayer.setPluginOrder(6, solidGreen);
+    LEDEffectSwitchOnLayer.setPluginOrder(7, solidBlue);
+    //LEDEffectSwitchOnLayer.setPluginOrder(8,MiamiEffect);
+    //LEDEffectSwitchOnLayer.setPluginOrder(9,JukeboxEffect);
+    LEDEffectSwitchOnLayer.setPluginOrder(8, LEDOff);
 }
 
 //REMOTE_CONTROL_INIT(REMOTE_CONTROL)
