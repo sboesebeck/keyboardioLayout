@@ -634,7 +634,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     // Focus allows bi-directional communication with the host, and is the
     // interface through which the keymap in EEPROM can be edited.
     Focus,
-    FocusLEDCommand,
+    //FocusLEDCommand,
     LayerFocus,
     //PersistentIdleLEDs,
     ScreenSaverLEDs,
