@@ -170,7 +170,7 @@ static int current = 0;
   *
   */
 
-enum { PRIMARY, XOY, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
+enum { PRIMARY, QWERTY, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
 //enum { PRIMARY, GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
 
 
@@ -216,20 +216,20 @@ KEYMAPS(
    ShiftToLayer(SPECIAL),  Key_RightAlt,Key_Enter,  Key_Space,
    ShiftToLayer(FUNCTION)),
 
- [XOY] =  KEYMAP_STACKED
-  (___,             ___, ___, ___, ___, ___, ___,
-   ___,             Key_X,        Key_Period, Key_O,    Key_Comma,       Key_Z,         ___,
-   Key_LeftControl, Key_H,        Key_A,     Key_E,     Key_I,           Key_U,
-   ___,             Key_K,        Key_Q,     Key_Quote, Key_LeftBracket, Key_Semicolon, ___,
-   ___, ___, ___, ___,
-   ___,
+ [QWERTY] =  KEYMAP_STACKED
+  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
+   Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
+   Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
+   ShiftToLayer(FUNCTION),
 
-   ___,  ___,    ___,    ___,    ___,   ___,          Key_Slash,
-   ___,                   Key_V,   Key_G, Key_C,   Key_L, Key_J, Key_Minus,
-                          Key_D,   Key_T, Key_R,   Key_N, Key_S, CTL_T(F),
-   ___,                   Key_B,   Key_P, Key_W,   Key_M, Key_Y, ___,
-   ___, ___, ___, ___,
-   ___),
+   Key_NonUsBackslashAndPipe,  Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_PcApplication,
+   Key_Enter,                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
+                               Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
+   Key_RightAlt,               Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   Key_RightShift,             Key_LeftAlt, Key_Spacebar, Key_RightControl,
+   ShiftToLayer(FUNCTION)),
 
  [GAME] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
@@ -282,17 +282,17 @@ KEYMAPS(
 
 
 [FUNCTION] =  KEYMAP_STACKED
-(Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                ___,
+(Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                Consumer_AC_NextKeyboardLayoutSelect,
  ___,                ___,                Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
  ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
  ___,                Key_mouseScrollUp,  ___,             Key_mouseBtnM, ___,                 ___,                   ___,
  Key_mouseScrollL,   Key_mouseScrollR,   ___,             ___,
-
  ___,
- ___,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
- ___,     Key_Home,            Key_PageDown,   Key_PageUp,     Key_End,                    ___,                       Key_F12,
-          Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             ___,                       ___,
- ___,     LGUI(Key_LeftArrow), ___,            ___,            LGUI(Key_RightArrow),       ___,                       ___,
+
+ Key_NonUsBackslashAndPipe,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
+ ___,                           Key_Home,            Key_PageDown,   Key_PageUp,     Key_End,                    ___,                       Key_F12,
+                                Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             ___,                       ___,
+ ___,                           LGUI(Key_LeftArrow), ___,            ___,            LGUI(Key_RightArrow),       ___,                       ___,
  ___, ___, ___, ___,
  ___)
 ) // KEYMAPS(
@@ -321,15 +321,15 @@ KEYMAPS(
  */
 
 //static void anyKeyMacro(uint8_t keyState) {
-// static Key lastKey;
-//bool toggledOn = false;
-//if (keyToggledOn(keyState)) {
-//lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
-//toggledOn = true;
-//}
+//    static Key lastKey;
+//    bool toggledOn = false;
+//    if (keyToggledOn(keyState)) {
+//        lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
+//        toggledOn = true;
+//    }
 //
-//if (keyIsPressed(keyState))
-//kaleidoscope::hid::pressKey(lastKey, toggledOn);
+//    if (keyIsPressed(keyState))
+//        kaleidoscope::hid::pressKey(lastKey, toggledOn);
 //}
 
 
@@ -374,9 +374,9 @@ const macro_t * macroAction(uint8_t macroIndex, KeyEvent & event) {
             //case MACRO_VERSION_INFO:
             //  versionInfoMacro(keyState);
             //  break;
-            //case MACRO_ANY:
-            //anyKeyMacro(keyState);
-            //break;
+//            case MACRO_ANY:
+//               anyKeyMacro(keyState);
+            break;
             case MACRO_SMIRK:
                 Macros.type(PSTR("</("));
                 //Unicode.type(0x2328);
@@ -509,11 +509,11 @@ static void enterHardwareTestMode(uint8_t combo_index) {
     HardwareTestMode.runTests();
 }
 static void xoyMode(uint8_t combo_index) {
-    if (Layer.isActive(XOY)) {
+    if (Layer.isActive(QWERTY)) {
         Layer.move(PRIMARY);
         StalkerEffect.variant = STALKER(BlazingTrail);
     } else {
-        Layer.move(XOY);
+        Layer.move(QWERTY);
         StalkerEffect.variant = STALKER(Haunt);
     }
 }
@@ -788,7 +788,7 @@ void setup() {
     ScreenSaverLEDs.setScreenSaverLEDEffect(LEDDigitalRainEffect);
     //greenBlueRedEffect.activate();
     LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY, LEDRainbowWaveEffect);
-    LEDEffectSwitchOnLayer.setPluginForLayer(XOY, StalkerEffect);
+    LEDEffectSwitchOnLayer.setPluginForLayer(QWERTY, StalkerEffect);
     LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL, NULL);
     // LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
     LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION, NULL);
