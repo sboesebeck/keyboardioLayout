@@ -203,18 +203,18 @@ KEYMAPS(
 
  [PRIMARY] = KEYMAP_STACKED
   (Key_Escape,      Key_1,      Key_2,       Key_3,                Key_4, Key_5, LockLayer(NUMPAD),//M(LED_EFFECT_NEXT_NUMPADSHIFT),
-   Key_Tab,         Key_Q,      Key_W,       Key_E,                Key_R, Key_T, MT(LeftGui,Equals),
+   Key_Tab,         Key_Q,      Key_W,       Key_E,                Key_R, Key_T, Key_LeftGui,
    Key_LeftControl, Key_A,      Key_S,       Key_D,                Key_F, Key_G,
    Key_LeftShift,   Key_Z,      Key_X,       Key_C,                Key_V, Key_B, Key_Meh,
-   Key_Backspace,   Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
-   ShiftToLayer(FUNCTION),
+      Key_Backspace,   Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
+      ShiftToLayer(FUNCTION),
 
-   Key_NonUsBackslashAndPipe,                 Key_6,        Key_7,      Key_8,     Key_9,         Key_0,           Key_Minus,
-   MT(RightGui,Backslash),     Key_Y,        Key_U,      Key_I,     Key_O,         Key_P,           Key_LeftBracket,
-                               Key_H,        Key_J,      Key_K,     Key_L,         Key_Semicolon,   MT(RightControl,Quote),
-   Key_Hyper,                  Key_N,        Key_M,      Key_Comma, Key_Period,    Key_Slash,       Key_RightShift,
-   ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
-   ShiftToLayer(FUNCTION)),
+   M(LED_EFFECT_NEXT_NUMPADSHIFT), Key_6,        Key_7,      Key_8,     Key_9,         Key_0,           Key_Minus,
+   Key_RightGui,                   Key_Y,        Key_U,      Key_I,     Key_O,         Key_P,           Key_LeftBracket,
+                                   Key_H,        Key_J,      Key_K,     Key_L,         Key_Semicolon,   MT(RightControl,Quote),
+   Key_Hyper,                      Key_N,        Key_M,      Key_Comma, Key_Period,    Key_Slash,       Key_RightShift,
+      ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
+      ShiftToLayer(FUNCTION)),
 
  [EXPERIMENTAL] =  KEYMAP_STACKED
   (Key_Escape,      Key_1,      Key_2,       Key_3,                Key_4, Key_5, M(LED_EFFECT_NEXT_NUMPADSHIFT),
@@ -285,10 +285,10 @@ KEYMAPS(
  ___, ___, ___, ___,
  ___,
 
- Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,               ___,                               ___,                               LSHIFT(Key_Minus),
- Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),       LSHIFT(Key_NonUsBackslashAndPipe), Key_NonUsBackslashAndPipe, LSHIFT(Key_0),
+ Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,               ___,                               ___,                               Key_Backslash,
+ Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),       LSHIFT(Key_NonUsBackslashAndPipe), Key_NonUsBackslashAndPipe,         Key_Equals,
                              LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),     LALT(Key_8),                       LALT(Key_9),                       LSHIFT(Key_RightBracket),
- Consumer_ScanPreviousTrack, LSHIFT(Key_7),      Key_Backtick,       LSHIFT(Key_Backtick), Key_Backslash,                   Key_Equals,                         Key_RightBracket,
+ Consumer_ScanPreviousTrack, LSHIFT(Key_7),      Key_Backtick,       LSHIFT(Key_Backtick), Key_Backslash,                   Key_Equals,                        Key_RightBracket,
  ___,         		    ___, 		___, 		     ___,
  ___),
 
@@ -832,5 +832,6 @@ void setup() {
 void loop() {
     Kaleidoscope.loop();
 }
+
 
 
