@@ -123,7 +123,7 @@ static int current = 0;
 ////     static byte r=0x05;
 
 /** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
-  * keymaps: The standard QWERTY keymap, the "Function layer" keymap and the "Numpad"
+  * keymaps: The standard EXPERIMENTAL keymap, the "Function layer" keymap and the "Numpad"
   * keymap.
   *
   * Each keymap is defined as a list using the 'KEYMAP_STACKED' macro, built
@@ -165,29 +165,29 @@ static int current = 0;
 /**
   * Layers are "0-indexed" -- That is the first one is layer 0. The second one is layer 1.
   * The third one is layer 2.
-  * This 'enum' lets us use names like QWERTY, FUNCTION, and NUMPAD in place of
+  * This 'enum' lets us use names like EXPERIMENTAL, FUNCTION, and NUMPAD in place of
   * the numbers 0, 1 and 2.
   *
   */
 
-enum { PRIMARY, QWERTY, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
+enum { PRIMARY, EXPERIMENTAL, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
 //enum { PRIMARY, GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
 
 
 /**
-  * To change your keyboard's layout from QWERTY to DVORAK or COLEMAK, comment out the line
+  * To change your keyboard's layout from EXPERIMENTAL to DVORAK or COLEMAK, comment out the line
   *
-  * #define PRIMARY_KEYMAP_QWERTY
+  * #define PRIMARY_KEYMAP_EXPERIMENTAL
   *
   * by changing it to
   *
-  * // #define PRIMARY_KEYMAP_QWERTY
+  * // #define PRIMARY_KEYMAP_EXPERIMENTAL
   *
   * Then uncomment the line corresponding to the layout you want to use.
   *
   */
 
-//#define PRIMARY_KEYMAP_QWERTY
+//#define PRIMARY_KEYMAP_EXPERIMENTAL
 // #define PRIMARY_KEYMAP_COLEMAK
 // #define PRIMARY_KEYMAP_DVORAK
 // #define PRIMARY_KEYMAP_CUSTOM
@@ -209,27 +209,40 @@ KEYMAPS(
    Key_Backspace,   Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
    ShiftToLayer(FUNCTION),
 
-   Key_NonUsBackslashAndPipe,  Key_6,        Key_7,      Key_8,     Key_9,         Key_0,           Key_Minus,
+   Key_NonUsBackslashAndPipe,                 Key_6,        Key_7,      Key_8,     Key_9,         Key_0,           Key_Minus,
    MT(RightGui,Backslash),     Key_Y,        Key_U,      Key_I,     Key_O,         Key_P,           Key_LeftBracket,
                                Key_H,        Key_J,      Key_K,     Key_L,         Key_Semicolon,   MT(RightControl,Quote),
    Key_Hyper,                  Key_N,        Key_M,      Key_Comma, Key_Period,    Key_Slash,       Key_RightShift,
    ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
    ShiftToLayer(FUNCTION)),
 
- [QWERTY] =  KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, ShiftToLayer(NUMPAD),
-   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
-   MT(LeftControl,Equals),   Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_LeftAlt,  Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Meh,
-   Key_LeftGui,  Key_Backspace,Key_LeftShift, ShiftToLayer(SPECIAL), 
+ [EXPERIMENTAL] =  KEYMAP_STACKED
+  (Key_Escape,      Key_1,      Key_2,       Key_3,                Key_4, Key_5, M(LED_EFFECT_NEXT_NUMPADSHIFT),
+   Key_Tab,         Key_Q,      Key_W,       Key_E,                Key_R, Key_T, Key_Equals,
+   Key_LeftControl, Key_A,      Key_S,       Key_D,                Key_F, Key_G,
+   Key_LeftShift,   Key_Z,      Key_X,       Key_C,                Key_V, Key_B, Key_Meh,
+       Key_Backspace,   MT(LeftGui,Delete), Key_LeftAlt, ShiftToLayer(SPECIAL),
    ShiftToLayer(FUNCTION),
-
-   Key_Delete,            Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_Minus,
-   Key_Enter,             Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_LeftBracket,
-                          Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, MT(RightControl,Quote),
-   Key_Hyper,             Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_RightAlt,
-   ShiftToLayer(SPECIAL), Key_RightShift,    Key_Spacebar, Key_RightGui,
+   
+   Key_Delete,                 Key_6,        Key_7,      Key_8,     Key_9,         Key_0,           Key_Minus,
+   Key_Backslash,              Key_Y,        Key_U,      Key_I,     Key_O,         Key_P,           Key_LeftBracket,
+                               Key_H,        Key_J,      Key_K,     Key_L,         Key_Semicolon,   MT(RightControl,Quote),
+   Key_Hyper,                  Key_N,        Key_M,      Key_Comma, Key_Period,    Key_Slash,       Key_RightShift,
+   ShiftToLayer(SPECIAL),      Key_RightAlt, MT(RightGui,Enter),  Key_Space,
    ShiftToLayer(FUNCTION)),
+//  (___,                      Key_1, Key_2, Key_3, Key_4, Key_5, ShiftToLayer(NUMPAD),
+//   Key_Backtick,             Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
+//   MT(LeftControl,Equals),   Key_A, Key_S, Key_D, Key_F, Key_G,
+//   Key_LeftAlt,              Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Meh,
+//   Key_LeftGui,  Key_Backspace,Key_LeftShift, ShiftToLayer(SPECIAL), 
+//   ShiftToLayer(FUNCTION),
+//
+//   Key_Delete,            Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_Minus,
+//   Key_Enter,             Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_LeftBracket,
+//                          Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, MT(RightControl,Quote),
+//   Key_Hyper,             Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_RightAlt,
+//   ShiftToLayer(SPECIAL), Key_RightShift,    Key_Spacebar, Key_RightGui,
+//   ShiftToLayer(FUNCTION)),
 
  [GAME] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
@@ -265,17 +278,17 @@ KEYMAPS(
 
 
 [SPECIAL] =  KEYMAP_STACKED
-(___,           ___,               ___,            ___,               ___,                 ___,               Consumer_Mute,
+(Key_Turbo,           ___,               ___,            ___,               ___,                 ___,               Consumer_Mute,
  LALT(Key_Tab), M(MACRO_COFFEE),   M(MACRO_PUKE),  M(MACRO_SHRUG),    M(MACRO_FROWN),      M(MACRO_ROFL),     Consumer_VolumeIncrement,
  ___,           M(MACRO_FACEPALM), M(MACRO_ROLL),  M(MACRO_TONGUE),   M(MACRO_SMIRK),      M(MACRO_LOL),
- Key_Turbo,     M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     Consumer_VolumeDecrement,
+ ___,     M(MACRO_LLAP),     M(MACRO_SWEAR), M(MACRO_TONGUE2),  M(MACRO_SMILE),      M(MACRO_DARN),     Consumer_VolumeDecrement,
  ___, ___, ___, ___,
  ___,
 
- Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,               ___,                       ___,                               LSHIFT(Key_Minus),
- Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),       Key_NonUsBackslashAndPipe, LSHIFT(Key_NonUsBackslashAndPipe), LSHIFT(Key_0),
-                             LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),     LALT(Key_8),               LALT(Key_9),                       LSHIFT(Key_RightBracket),
- Consumer_ScanPreviousTrack, Key_Backtick,       LSHIFT(Key_Backtick),LSHIFT(Key_Comma), LSHIFT(Key_Period),        Key_Slash,                         Key_RightBracket,
+ Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,               ___,                               ___,                               LSHIFT(Key_Minus),
+ Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),       LSHIFT(Key_NonUsBackslashAndPipe), Key_NonUsBackslashAndPipe, LSHIFT(Key_0),
+                             LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),     LALT(Key_8),                       LALT(Key_9),                       LSHIFT(Key_RightBracket),
+ Consumer_ScanPreviousTrack, LSHIFT(Key_7),      Key_Backtick,       LSHIFT(Key_Backtick), Key_Backslash,                   Key_Equals,                         Key_RightBracket,
  ___,         		    ___, 		___, 		     ___,
  ___),
 
@@ -510,11 +523,11 @@ static void enterHardwareTestMode(uint8_t combo_index) {
     HardwareTestMode.runTests();
 }
 static void xoyMode(uint8_t combo_index) {
-    if (Layer.isActive(QWERTY)) {
+    if (Layer.isActive(EXPERIMENTAL)) {
         Layer.move(PRIMARY);
         StalkerEffect.variant = STALKER(BlazingTrail);
     } else {
-        Layer.move(QWERTY);
+        Layer.move(EXPERIMENTAL);
         StalkerEffect.variant = STALKER(Haunt);
     }
 }
@@ -789,7 +802,7 @@ void setup() {
     ScreenSaverLEDs.setScreenSaverLEDEffect(LEDDigitalRainEffect);
     //greenBlueRedEffect.activate();
     LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY, LEDRainbowWaveEffect);
-    LEDEffectSwitchOnLayer.setPluginForLayer(QWERTY, StalkerEffect);
+    LEDEffectSwitchOnLayer.setPluginForLayer(EXPERIMENTAL, StalkerEffect);
     LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL, NULL);
     // LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
     LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION, NULL);
