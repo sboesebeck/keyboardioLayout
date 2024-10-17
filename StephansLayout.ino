@@ -285,10 +285,10 @@ KEYMAPS(
  ___, ___, ___, ___,
  ___,
 
- Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,               ___,                               ___,                               Key_Backslash,
+ Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,               ___,                               LSHIFT(Key_2),                     LSHIFT(Key_Backslash),
  Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),       LSHIFT(Key_NonUsBackslashAndPipe), Key_NonUsBackslashAndPipe,         Key_Equals,
-                             LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),     LALT(Key_8),                       LALT(Key_9),                       LSHIFT(Key_RightBracket),
- Consumer_ScanPreviousTrack, LSHIFT(Key_7),      Key_Backtick,       LSHIFT(Key_Backtick), Key_Backslash,                   Key_Equals,                        Key_RightBracket,
+                             LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),     LALT(Key_8),                       LALT(Key_9),                       LSHIFT(Key_Equals),
+ Consumer_ScanPreviousTrack, LSHIFT(Key_7),      Key_Backtick,       LSHIFT(Key_Backtick), Key_Backslash,                   LSHIFT(Key_RightBracket),          Key_RightBracket,
  ___,         		    ___, 		___, 		     ___,
  ___),
 
