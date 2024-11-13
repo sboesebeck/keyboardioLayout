@@ -748,7 +748,7 @@ void setup() {
     QUKEYS(
         kaleidoscope::plugin::Qukey(0, KeyAddr(0, 6), ShiftToLayer(NUMPAD)),
          // left-side modifiers
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 1), Key_LeftGui),      // A
+        kaleidoscope::plugin::Qukey(0, KeyAddr(3, 1), Key_LeftGui),      // A
         kaleidoscope::plugin::Qukey(0, KeyAddr(2, 2), Key_LeftAlt),      // S
         kaleidoscope::plugin::Qukey(0, KeyAddr(2, 3), Key_LeftControl),  // D
         kaleidoscope::plugin::Qukey(0, KeyAddr(2, 4), Key_LeftShift),    // F
@@ -756,7 +756,7 @@ void setup() {
         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 3), ShiftToLayer(SPECIAL)),    // C
         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 4), ShiftToLayer(NUMPAD)),  // V
          // right-side modifiers
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 14), Key_LeftGui),      // Ö
+        kaleidoscope::plugin::Qukey(0, KeyAddr(3, 14), Key_LeftGui),      // Ö
         kaleidoscope::plugin::Qukey(0, KeyAddr(2, 13), Key_LeftAlt),      // L
         kaleidoscope::plugin::Qukey(0, KeyAddr(2, 12), Key_LeftControl),  // K
         kaleidoscope::plugin::Qukey(0, KeyAddr(2, 11), Key_LeftShift),    // J
@@ -810,11 +810,11 @@ void setup() {
     WavepoolEffect.idle_timeout = 15000;  // 15 seconds
     //WavepoolEffect.activate();
     Qukeys.activate();
-    Qukeys.setHoldTimeout(200);
-    Qukeys.setMaxIntervalForTapRepeat(150);
-    Qukeys.setOverlapThreshold(85);
-    Qukeys.setMinimumHoldTime(60);
-    Qukeys.setMinimumPriorInterval(85);
+//    Qukeys.setHoldTimeout(200);
+//    Qukeys.setMaxIntervalForTapRepeat(200);
+    Qukeys.setOverlapThreshold(70);
+    Qukeys.setMinimumHoldTime(40);
+//    Qukeys.setMinimumPriorInterval(85);
 
 
     //PersistentIdleLEDs.setIdleTimeoutSeconds(130);
