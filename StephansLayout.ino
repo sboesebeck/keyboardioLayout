@@ -202,17 +202,17 @@ enum { PRIMARY, EXPERIMENTAL, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
 KEYMAPS(
 
  [PRIMARY] = KEYMAP_STACKED
-  (Key_Escape,      Key_1,      Key_2,       Key_3,                Key_4, Key_5, LockLayer(NUMPAD),//M(LED_EFFECT_NEXT_NUMPADSHIFT),
-   Key_Tab,         Key_Q,      Key_W,       Key_E,                Key_R, Key_T, Key_LeftGui,
-   Key_LeftControl, Key_A,      Key_S,       Key_D,                Key_F, Key_G,
-   Key_LeftShift,   Key_Z,      Key_X,       Key_C,                Key_V, Key_B, Key_Meh,
+  (Key_Escape,      Key_1,         Key_2,         Key_3,           Key_4,             Key_5, LockLayer(NUMPAD),//M(LED_EFFECT_NEXT_NUMPADSHIFT),
+   Key_Tab,         Key_Q,         Key_W,         Key_E,           Key_R,             Key_T, Key_LeftGui,
+   Key_LeftControl, MT(LeftAlt,A), MT(LeftGui,S), MT(LeftShift,D), MT(LeftControl,F), Key_G,
+   Key_LeftShift,   Key_Z,         Key_X,         LT(SPECIAL,C),   LT(NUMPAD,V),      Key_B, Key_Meh,
       Key_Backspace,   Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
       ShiftToLayer(FUNCTION),
 
-   M(LED_EFFECT_NEXT_NUMPADSHIFT), Key_6,        Key_7,      Key_8,     Key_9,         Key_0,           Key_Minus,
-   Key_RightGui,                   Key_Y,        Key_U,      Key_I,     Key_O,         Key_P,           Key_LeftBracket,
-                                   Key_H,        Key_J,      Key_K,     Key_L,         Key_Semicolon,   MT(RightControl,Quote),
-   Key_Hyper,                      Key_N,        Key_M,      Key_Comma, Key_Period,    Key_Slash,       Key_RightShift,
+   M(LED_EFFECT_NEXT_NUMPADSHIFT), Key_6,        Key_7,               Key_8,             Key_9,            Key_0,                  Key_Minus,
+   Key_RightGui,                   Key_Y,        Key_U,               Key_I,             Key_O,            Key_P,                  Key_LeftBracket,
+                                   Key_H,        MT(RightControl,J),  MT(RightShift,K),  MT(RightGui,L), MT(RightAlt,Semicolon), Key_Quote,
+   Key_Hyper,                      Key_N,        Key_M,               LT(SPECIAL,Comma), Key_Period,    Key_Slash,       Key_RightShift,
       ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
       ShiftToLayer(FUNCTION)),
 
@@ -748,20 +748,20 @@ void setup() {
     QUKEYS(
         kaleidoscope::plugin::Qukey(0, KeyAddr(0, 6), ShiftToLayer(NUMPAD)),
          // left-side modifiers
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 1), Key_LeftGui),      // A
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 2), Key_LeftAlt),      // S
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 3), Key_LeftControl),  // D
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 4), Key_LeftShift),    // F
+//        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 1), Key_LeftAlt),      // A
+//        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 2), Key_LeftGui),      // S
+//        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 3), Key_LeftShift),  // D
+//        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 4), Key_LeftControl),    // F
         // left-side layer shifts
-        kaleidoscope::plugin::Qukey(0, KeyAddr(3, 3), ShiftToLayer(SPECIAL)),    // C
-        kaleidoscope::plugin::Qukey(0, KeyAddr(3, 4), ShiftToLayer(NUMPAD)),  // V
+        //kaleidoscope::plugin::Qukey(0, KeyAddr(3, 3), ShiftToLayer(SPECIAL)),    // C
+        //kaleidoscope::plugin::Qukey(0, KeyAddr(3, 4), ShiftToLayer(NUMPAD)),  // V
          // right-side modifiers
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 14), Key_RightGui),      // Ö
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 13), Key_RightAlt),      // L
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 12), Key_RightControl),  // K
-        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 11), Key_RightShift),    // J
+//        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 14), Key_RightAlt),      // Ö
+//        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 13), Key_RightGui),      // L
+//        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 12), Key_RightShift),  // K
+//        kaleidoscope::plugin::Qukey(0, KeyAddr(2, 11), Key_RightControl),    // J
         // left-side layer shifts
-        kaleidoscope::plugin::Qukey(0, KeyAddr(3, 12), ShiftToLayer(SPECIAL)),    // C
+        //kaleidoscope::plugin::Qukey(0, KeyAddr(3, 12), ShiftToLayer(SPECIAL)),    // C
         //kaleidoscope::plugin::Qukey(0, KeyAddr(3, 11), ShiftToLayer(FUNCTION)),  // V
 
     )
