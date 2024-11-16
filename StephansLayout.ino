@@ -823,7 +823,7 @@ void setup() {
     //greenBlueRedEffect.activate();
     LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY, LEDRainbowWaveEffect);
     LEDEffectSwitchOnLayer.setPluginForLayer(EXPERIMENTAL, StalkerEffect);
-    LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL, NULL);
+    LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL, solidRed);
     // LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
     LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION, NULL);
     LEDEffectSwitchOnLayer.setPluginForLayer(GAME, WavepoolEffect);
