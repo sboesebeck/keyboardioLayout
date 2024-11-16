@@ -58,6 +58,7 @@
 
 // Support for an LED mode that lights up the keys as you press them
 #include "Kaleidoscope-LED-Stalker.h"
+#include <Kaleidoscope-LED-ActiveModColor.h>
 
 // Support for an LED mode that prints the keys you press in letters 4px high
 //#include "Kaleidoscope-LED-AlphaSquare.h"
@@ -674,7 +675,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
     LEDControl,
     //For the Key_Turbo to work
     Turbo,
-
     //JukeboxEffect,
     //MiamiEffect,
     //JukeboxAlternateEffect,
@@ -684,6 +684,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
     // The rainbow effect changes the color of all of the keyboard's keys at the same time
     // running through all the colors of the rainbow.
     LEDRainbowEffect,
+    ActiveModColorEffect,
 
     // The rainbow wave effect lights up your keyboard with all the colors of a rainbow
     // and slowly moves the rainbow across your keyboard
@@ -786,12 +787,13 @@ void setup() {
     //StalkerEffect.activate();
     StalkerEffect.variant = STALKER(BlazingTrail);
     StalkerEffect.inactive_color = CRGB(0x30, 0x90, 0x30);
-    LEDRainbowWaveEffect.activate();
+    StalkerEffect.activate();
     LEDDigitalRainEffect.setDropMs(140);
     LEDDigitalRainEffect.setDecayMs(1500);
     LEDDigitalRainEffect.setNewDropProbability(20);
     LEDDigitalRainEffect.setColorChannel(LEDDigitalRainEffect.ColorChannel::GREEN);
 
+    ActiveModColorEffect.setHighlightColor(CRGB(0x00, 0xff, 0xff));
     // To make the keymap editable without flashing new firmware, we store
     // additional layers in EEPROM. For now, we reserve space for five layers. If
     // one wants to use these layers, just set the default layer to one in EEPROM,
@@ -840,6 +842,7 @@ void setup() {
     //LEDEffectSwitchOnLayer.setPluginOrder(8,MiamiEffect);
     //LEDEffectSwitchOnLayer.setPluginOrder(9,JukeboxEffect);
     LEDEffectSwitchOnLayer.setPluginOrder(8, LEDOff);
+   // LEDControl.setCrgbAt(KeyAddr(0, 6),CRGB(0xff,0xff,0xff));
 }
 
 //REMOTE_CONTROL_INIT(REMOTE_CONTROL)
