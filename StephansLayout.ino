@@ -33,7 +33,7 @@
 
 // Support for macros
 #include "Kaleidoscope-Macros.h"
-
+//#include <Kaleidoscope-AutoShift.h>
 // Support for controlling the keyboard's LEDs
 #include "Kaleidoscope-LEDControl.h"
 
@@ -523,7 +523,7 @@ enum {
 static void enterHardwareTestMode(uint8_t combo_index) {
     HardwareTestMode.runTests();
 }
-static void xoyMode(uint8_t combo_index) {
+static void experimentalMode(uint8_t combo_index) {
     if (Layer.isActive(EXPERIMENTAL)) {
         Layer.move(PRIMARY);
         StalkerEffect.variant = STALKER(BlazingTrail);
@@ -553,7 +553,7 @@ static void nextLEDEffect(uint8_t combo_index) {
     LEDEffectSwitchOnLayer.setPluginForLayer(Layer.mostRecent(), current);
 }
 
-static void toggleLed(uint8_t combo_index) {
+static void changeStalkerLed(uint8_t combo_index) {
     static int on = 0;
     on += 1;
 
@@ -613,10 +613,10 @@ static void toggleLed(uint8_t combo_index) {
 // });
 USE_MAGIC_COMBOS(
 {.action = gameMode, .keys = { R3C6, R3C9, R3C15}}, //fn+fn+shift, right half
-{.action = xoyMode, .keys = {R3C6, R3C9, R3C0}}, //FN+FN+"Shift" on left half
+{.action = experimentalMode, .keys = {R3C6, R3C9, R3C0}}, //FN+FN+"Shift" on left half
 {.action = enterHardwareTestMode, .keys = {R3C6, R0C0, R0C6}}, //Left Fn+Prog+LED
 {.action = nextLEDEffect, .keys = {R2C8, R2C9, R0C6}}, //Hyper+Alt+LED
-{.action = toggleLed, .keys = {R3C0, R3C15, R3C9}}, //shift+shift+right FN
+{.action = changeStalkerLed, .keys = {R3C0, R3C15, R3C9}}, //shift+shift+right FN
 //  {.action=addR,.keys={R3C6,R3C9,R1C1}}   //FN+FN+1
 );
 
@@ -698,6 +698,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
     // The breathe effect slowly pulses all of the LEDs on your keyboard
     LEDBreatheEffect,
+    //AutoShift,
 
     // The AlphaSquare effect prints each character you type, using your
     // keyboard's LEDs as a display
@@ -811,6 +812,8 @@ void setup() {
     ColormapEffect.max_layers(5);
     WavepoolEffect.idle_timeout = 15000;  // 15 seconds
     //WavepoolEffect.activate();
+
+    //AutoShift.numberKeys();
     Qukeys.activate();
 //    Qukeys.setHoldTimeout(200);
 //    Qukeys.setMaxIntervalForTapRepeat(200);
