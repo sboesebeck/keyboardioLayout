@@ -227,7 +227,7 @@ KEYMAPS(
       ShiftToLayer(FUNCTION),
    
    M(LED_EFFECT_NEXT_NUMPADSHIFT), Key_6,        Key_7,      Key_8,     Key_9,         Key_0,     Key_Minus,
-   Key_RightGui,                   Key_P,        Key_C,      Key_I,     Key_M,         Key_F,     Key_X,
+   Key_RightGui,                   Key_P,        Key_C,      Key_L,     Key_M,         Key_F,     Key_X,
                                    Key_D,        Key_T,      Key_R,     Key_N,         Key_S,     MT(RightControl,Slash),
    Key_Hyper,                      Key_J,        Key_G,      Key_W,     Key_V,         Key_Z,     Key_RightShift,
       ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
