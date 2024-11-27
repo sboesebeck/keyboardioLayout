@@ -206,8 +206,6 @@ KEYMAPS(
   (Key_Escape,                Key_1,            Key_2,              Key_3,           Key_4,             Key_5, LockLayer(NUMPAD),//M(LED_EFFECT_NEXT_NUMPADSHIFT),
    Key_Tab,                   Key_Q,            Key_W,              Key_E,           Key_R,             Key_T, Key_LeftGui,
    Key_NonUsBackslashAndPipe, Key_A,            Key_S,              Key_D,           Key_F,             Key_G,
-   //Homerowmod
-   //Key_LeftControl,         MT(LeftAlt,A),    MT(LeftControl,S),  MT(LeftShift,D), MT(LeftGui,F),     LT(SPECIAL,G),
    //Key_LeftShift,           Key_Z,         Key_X,         Key_C,           LT(NUMPAD,V),      Key_B, Key_Meh,
    //BottomrowMod
    Key_Backslash,             MT(LeftAlt,Z),   MT(LeftControl,X),   MT(LeftShift,C),MT(LeftGui,V),      LT(SPECIAL,B), Key_Meh,
@@ -218,8 +216,6 @@ KEYMAPS(
    Key_RightGui,                   Key_Y,        Key_U,               Key_I,             Key_O,              Key_P,                  Key_LeftBracket,
                                    //Key_H,        Key_J,               Key_K,             Key_L,              Key_Semicolon,          MT(RightControl,Quote),
                                    Key_H,        Key_J,               Key_K,             Key_L,              Key_Semicolon,          Key_Quote,
-   //Homerowmod
-   //                                LT(SPECIAL,H),        MT(RightGui,J),      MT(RightShift,K),  MT(RightControl,L), MT(RightAlt,Semicolon),          MT(RightControl,Quote),
    //Key_Hyper,                      Key_N,        Key_M,               Key_Comma,         Key_Period,       Key_Slash,              Key_RightShift,
    // BottomrowMod
    Key_Hyper,                      LT(SPECIAL,N),        MT(RightGui,M),       MT(RightShift,Comma),         MT(RightControl,Period),  MT(RightAlt,Slash),              Key_RightBracket,
@@ -299,7 +295,7 @@ KEYMAPS(
  Consumer_PlaySlashPause,    LSHIFT(Key_6),      LSHIFT(Key_7),       ___,               ___,                               ___,                     LSHIFT(Key_Equals),
  Consumer_ScanNextTrack,     LALT(Key_7),        LALT(Key_5),         LALT(Key_6),       LSHIFT(Key_1),                     LSHIFT(Key_2),           Key_Equals,
                              LALT(LSHIFT(Key_7)),LSHIFT(Key_8),       LSHIFT(Key_9),     LALT(Key_8),                       LALT(Key_9),             LSHIFT(Key_Backslash),
- Consumer_ScanPreviousTrack, LSHIFT(Key_7),      Key_Backtick,        LSHIFT(Key_Backtick), Key_Backslash,                  LSHIFT(Key_Slash),       LSHIFT(Key_4),
+ Consumer_ScanPreviousTrack, LSHIFT(Key_7),      Key_Backtick,        LSHIFT(Key_Backtick), LSHIFT(Key_6),                  LSHIFT(Key_Slash),       LSHIFT(Key_4),
  ___,         		    ___, 		___, 		     ___,
  ___),
 
