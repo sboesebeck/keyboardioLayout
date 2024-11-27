@@ -309,8 +309,8 @@ KEYMAPS(
 (Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                Consumer_AC_NextKeyboardLayoutSelect,
  ___,                Key_mouseScrollUp,  Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
  ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
- ___,                ___,                ___,             ___,           ___,                 ___,                   ___,
- Key_mouseScrollL,   Key_mouseScrollR,   Key_mouseBtnM,             ___,
+ Key_mouseScrollL,   Key_mouseScrollR,   Key_mouseBtnM,   ___,           ___,                 ___,                   ___,
+ ___,   ___,   ___,  ___,
  ___,
 
  Key_NonUsBackslashAndPipe,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
