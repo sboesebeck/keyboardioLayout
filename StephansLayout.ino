@@ -217,9 +217,9 @@ KEYMAPS(
    Key_RightGui,                   Key_Y,        Key_U,               Key_I,             Key_O,              Key_P,                  Key_LeftBracket,
                                    //Key_H,        Key_J,               Key_K,             Key_L,              Key_Semicolon,          MT(RightControl,Quote),
                                    Key_H,        Key_J,               Key_K,             Key_L,              Key_Semicolon,          Key_Quote,
-   //Key_Hyper,                      Key_N,        Key_M,               Key_Comma,         Key_Period,       Key_Slash,              Key_RightShift,
+   Key_Hyper,                      Key_N,        Key_M,               Key_Comma,         Key_Period,       Key_Slash,              Key_RightShift,
    // BottomrowMod
-   Key_Hyper,                      LT(SPECIAL,N),        MT(RightGui,M),       MT(RightShift,Comma),         MT(RightControl,Period),  MT(RightAlt,Slash),              Key_RightBracket,
+   //Key_Hyper,                      LT(SPECIAL,N),        MT(RightGui,M),       MT(RightShift,Comma),         MT(RightControl,Period),  MT(RightAlt,Slash),              Key_RightBracket,
       ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
       ShiftToLayer(FUNCTION)),
 
