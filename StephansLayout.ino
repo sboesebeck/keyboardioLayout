@@ -1,3 +1,4 @@
+
 // -*- mode: c++ -*-
 // Copyright 2016 Keyboardio, inc. <jesse@keyboard.io>
 // See "LICENSE" for license details
@@ -171,11 +172,7 @@ static int current = 0;
   *
   */
 
-<<<<<<< HEAD
 enum { PRIMARY, EXPERIMENTAL, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
-=======
-enum { PRIMARY, QWERTY, GAME, NUMPAD, SPECIAL, FUNCTION }; // layers
->>>>>>> fd3f74a (removing XOY - adding qwertz)
 //enum { PRIMARY, GAME,NUMPAD, SPECIAL, FUNCTION }; // layers
 
 
@@ -212,9 +209,8 @@ KEYMAPS(
    Key_NonUsBackslashAndPipe, Key_A,            Key_S,              Key_D,           Key_F,             Key_G,
    Key_LeftShift,           Key_Z,         Key_X,         Key_C,           LT(NUMPAD,V),      Key_B, Key_Meh,
    //BottomrowMod
-//   Key_Backslash,             MT(LeftAlt,Z),   MT(LeftControl,X),   MT(LeftShift,C),MT(LeftGui,V),      LT(SPECIAL,B), Key_Meh,
-      MT(LeftControl,Backspace),  MT(LeftShift,Delete), MT(Backspace,LeftAlt), LT(SPECIAL,NonUsBackslashAndPipe),
-      //Key_Backspace,  Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
+   //Key_Backslash,             MT(LeftAlt,Z),   MT(LeftControl,X),   MT(LeftShift,C),MT(LeftGui,V),      LT(SPECIAL,B), Key_Meh,
+      Key_Backspace,  Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
       ShiftToLayer(FUNCTION),
 
    M(LED_EFFECT_NEXT_NUMPADSHIFT), Key_6,        Key_7,               Key_8,             Key_9,              Key_0,                  Key_Minus,
@@ -224,11 +220,9 @@ KEYMAPS(
    //Key_Hyper,                      Key_N,        Key_M,               Key_Comma,         Key_Period,       Key_Slash,              Key_RightShift,
    // BottomrowMod
    Key_Hyper,                      LT(SPECIAL,N),        MT(RightGui,M),       MT(RightShift,Comma),         MT(RightControl,Period),  MT(RightAlt,Slash),              Key_RightBracket,
-      LT(SPECIAL,RighBracket),      MT(RightAlt,LSHIFT(6)), MT(RightShift,Enter),  MT(RightControl,Space),
-      //ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
+      ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
       ShiftToLayer(FUNCTION)),
 
-<<<<<<< HEAD
     //Layout XOY - back to the roots 
  [EXPERIMENTAL] =  KEYMAP_STACKED
   (Key_Escape,      Key_1,      Key_2,       Key_3,           Key_4,           Key_5,           LockLayer(NUMPAD), 
@@ -257,22 +251,6 @@ KEYMAPS(
 //   Key_Hyper,             Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_RightAlt,
 //   ShiftToLayer(SPECIAL), Key_RightShift,    Key_Spacebar, Key_RightGui,
 //   ShiftToLayer(FUNCTION)),
-=======
- [QWERTY] =  KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
-   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
-   Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
-   ShiftToLayer(FUNCTION),
-
-   Key_NonUsBackslashAndPipe,  Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_PcApplication,
-   Key_Enter,                  Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
-                               Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   Key_RightAlt,               Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
-   Key_RightShift,             Key_LeftAlt, Key_Spacebar, Key_RightControl,
-   ShiftToLayer(FUNCTION)),
->>>>>>> fd3f74a (removing XOY - adding qwertz)
 
  [GAME] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
@@ -326,17 +304,10 @@ KEYMAPS(
 
 [FUNCTION] =  KEYMAP_STACKED
 (Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                Consumer_AC_NextKeyboardLayoutSelect,
-<<<<<<< HEAD
  ___,                Key_mouseScrollUp,  Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
  ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
  ___,                ___,                ___,             ___,           ___,                 ___,                   ___,
  Key_mouseScrollL,   Key_mouseScrollR,   Key_mouseBtnM,             ___,
-=======
- ___,                ___,                Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
- ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
- ___,                Key_mouseScrollUp,  ___,             Key_mouseBtnM, ___,                 ___,                   ___,
- Key_mouseScrollL,   Key_mouseScrollR,   ___,             ___,
->>>>>>> fd3f74a (removing XOY - adding qwertz)
  ___,
 
  Key_NonUsBackslashAndPipe,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
@@ -559,21 +530,12 @@ enum {
 static void enterHardwareTestMode(uint8_t combo_index) {
     HardwareTestMode.runTests();
 }
-<<<<<<< HEAD
 static void experimentalMode(uint8_t combo_index) {
     if (Layer.isActive(EXPERIMENTAL)) {
         Layer.move(PRIMARY);
         StalkerEffect.variant = STALKER(BlazingTrail);
     } else {
         Layer.move(EXPERIMENTAL);
-=======
-static void xoyMode(uint8_t combo_index) {
-    if (Layer.isActive(QWERTY)) {
-        Layer.move(PRIMARY);
-        StalkerEffect.variant = STALKER(BlazingTrail);
-    } else {
-        Layer.move(QWERTY);
->>>>>>> fd3f74a (removing XOY - adding qwertz)
         StalkerEffect.variant = STALKER(Haunt);
     }
 }
@@ -871,15 +833,9 @@ void setup() {
     ScreenSaverLEDs.setIdleTimeoutSeconds(180);
     ScreenSaverLEDs.setScreenSaverLEDEffect(LEDDigitalRainEffect);
     //greenBlueRedEffect.activate();
-<<<<<<< HEAD
     LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY, StalkerEffect);
     LEDEffectSwitchOnLayer.setPluginForLayer(EXPERIMENTAL, LEDRainbowWaveEffect);
     LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL, solidRed);
-=======
-    LEDEffectSwitchOnLayer.setPluginForLayer(PRIMARY, LEDRainbowWaveEffect);
-    LEDEffectSwitchOnLayer.setPluginForLayer(QWERTY, StalkerEffect);
-    LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL, NULL);
->>>>>>> fd3f74a (removing XOY - adding qwertz)
     // LEDEffectSwitchOnLayer.setPluginForLayer(SPECIAL,solidRed);
     LEDEffectSwitchOnLayer.setPluginForLayer(FUNCTION, NULL);
     LEDEffectSwitchOnLayer.setPluginForLayer(GAME, WavepoolEffect);
