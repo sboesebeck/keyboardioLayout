@@ -223,7 +223,7 @@ KEYMAPS(
    //Key_Hyper,                      Key_N,        Key_M,               Key_Comma,         Key_Period,       Key_Slash,              Key_RightShift,
    // BottomrowMod
    Key_Hyper,                      LT(SPECIAL,N),        MT(RightGui,M),       MT(RightShift,Comma),         MT(RightControl,Period),  MT(RightAlt,Slash),              Key_RightBracket,
-      ShiftToLayer(SPECIAL),      Key_RightAlt, MT(RightControl,Enter),  Key_Space,
+      ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
       ShiftToLayer(FUNCTION)),
 
     //Layout XOY - back to the roots 
@@ -234,7 +234,7 @@ KEYMAPS(
    Key_LeftShift,   Key_K,      Key_Q,       Key_Quote,       Key_LeftBracket, Key_Semicolon,   Key_Meh,
       Key_Backspace,   Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
       ShiftToLayer(FUNCTION),
-   
+ 
    M(LED_EFFECT_NEXT_NUMPADSHIFT), Key_6,        Key_7,      Key_8,     Key_9,         Key_0,     Key_Slash,
    Key_RightGui,                   Key_V,        Key_G,      Key_C,     Key_L,         Key_J,     Key_Minus,
                                    Key_D,        Key_T,      Key_R,     Key_N,         Key_S,     MT(RightControl,F),
@@ -307,10 +307,10 @@ KEYMAPS(
 
 [FUNCTION] =  KEYMAP_STACKED
 (Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                Consumer_AC_NextKeyboardLayoutSelect,
- ___,                ___,                Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
+ ___,                Key_mouseScrollUp,  Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
  ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
- ___,                Key_mouseScrollUp,  ___,             Key_mouseBtnM, ___,                 ___,                   ___,
- Key_mouseScrollL,   Key_mouseScrollR,   ___,             ___,
+ ___,                ___,                ___,             ___,           ___,                 ___,                   ___,
+ Key_mouseScrollL,   Key_mouseScrollR,   Key_mouseBtnM,             ___,
  ___,
 
  Key_NonUsBackslashAndPipe,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
