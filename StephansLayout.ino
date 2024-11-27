@@ -206,10 +206,11 @@ KEYMAPS(
   (Key_Escape,                Key_1,            Key_2,              Key_3,           Key_4,             Key_5, LockLayer(NUMPAD),//M(LED_EFFECT_NEXT_NUMPADSHIFT),
    Key_Tab,                   Key_Q,            Key_W,              Key_E,           Key_R,             Key_T, Key_LeftGui,
    Key_NonUsBackslashAndPipe, Key_A,            Key_S,              Key_D,           Key_F,             Key_G,
-   //Key_LeftShift,           Key_Z,         Key_X,         Key_C,           LT(NUMPAD,V),      Key_B, Key_Meh,
+   Key_LeftShift,           Key_Z,         Key_X,         Key_C,           LT(NUMPAD,V),      Key_B, Key_Meh,
    //BottomrowMod
-   Key_Backslash,             MT(LeftAlt,Z),   MT(LeftControl,X),   MT(LeftShift,C),MT(LeftGui,V),      LT(SPECIAL,B), Key_Meh,
-      Key_Backspace,  Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
+//   Key_Backslash,             MT(LeftAlt,Z),   MT(LeftControl,X),   MT(LeftShift,C),MT(LeftGui,V),      LT(SPECIAL,B), Key_Meh,
+      MT(LeftControl,Backspace),  MT(LeftShift,Delete), MT(Backspace,LeftAlt), LT(SPECIAL,NonUsBackslashAndPipe),
+      //Key_Backspace,  Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
       ShiftToLayer(FUNCTION),
 
    M(LED_EFFECT_NEXT_NUMPADSHIFT), Key_6,        Key_7,               Key_8,             Key_9,              Key_0,                  Key_Minus,
@@ -219,7 +220,8 @@ KEYMAPS(
    //Key_Hyper,                      Key_N,        Key_M,               Key_Comma,         Key_Period,       Key_Slash,              Key_RightShift,
    // BottomrowMod
    Key_Hyper,                      LT(SPECIAL,N),        MT(RightGui,M),       MT(RightShift,Comma),         MT(RightControl,Period),  MT(RightAlt,Slash),              Key_RightBracket,
-      ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
+      LT(SPECIAL,RighBracket),      MT(RightAlt,LSHIFT(6)), MT(RightShift,Enter),  MT(RightControl,Space),
+      //ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
       ShiftToLayer(FUNCTION)),
 
     //Layout XOY - back to the roots 
