@@ -667,11 +667,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
     // FocusSettingsCommand adds a few Focus commands, intended to aid in
     // changing some settings of the keyboard, such as the default layer (via the
     // `settings.defaultLayer` command)
-    //FocusSettingsCommand,
+    FocusSettingsCommand,
 
     // FocusEEPROMCommand adds a set of Focus commands, which are very helpful in
     // both debugging, and in backing up one's EEPROM contents.
-    //FocusEEPROMCommand,
+    FocusEEPROMCommand,
 
     // The boot greeting effect pulses the LED button for 10 seconds after the
     // keyboard is first connected
