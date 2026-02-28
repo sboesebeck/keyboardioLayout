@@ -207,11 +207,11 @@ KEYMAPS(
   (Key_Escape,                Key_1,            Key_2,              Key_3,           Key_4,             Key_5, LockLayer(NUMPAD),//M(LED_EFFECT_NEXT_NUMPADSHIFT),
    Key_Tab,                   Key_Q,            Key_W,              Key_E,           Key_R,             Key_T, Key_LeftGui,
    Key_NonUsBackslashAndPipe, Key_A,            Key_S,              Key_D,           Key_F,             Key_G,
-   Key_LeftShift,           Key_Z,         Key_X,         Key_C,           LT(NUMPAD,V),      Key_B, Key_Meh,
+   Key_LeftShift,           Key_Z,         Key_X,         Key_C,           LT(NUMPAD,V),      Key_B,           Key_Meh,
    //BottomrowMod
    //Key_Backslash,             MT(LeftAlt,Z),   MT(LeftControl,X),   MT(LeftShift,C),MT(LeftGui,V),      LT(SPECIAL,B), Key_Meh,
       // Thumbcluster Mod
-      MT(LeftControl, Backspace),  MT(LeftShift,Delete), MT(LeftAlt,Backslash), LT(SPECIAL,NonUsBackslashAndPipe),
+      MT(LeftGui, Backspace),  MT(LeftAlt,Delete), MT(LeftControl,Backslash), LT(SPECIAL,NonUsBackslashAndPipe),
       //Key_Backspace,  Key_Delete, Key_LeftAlt, ShiftToLayer(SPECIAL),
       ShiftToLayer(FUNCTION),
 
@@ -222,7 +222,7 @@ KEYMAPS(
    Key_Hyper,                      Key_N,        Key_M,               Key_Comma,         Key_Period,       Key_Slash,              Key_RightShift,
    // BottomrowMod
    //Key_Hyper,                      LT(SPECIAL,N),        MT(RightGui,M),       MT(RightShift,Comma),         MT(RightControl,Period),  MT(RightAlt,Slash),              Key_RightBracket,
-      LT(SPECIAL,Equals),      MT(RightAlt,RightBracket), MT(RightShift,Enter),  MT(RightControl,Space),
+      LT(SPECIAL,Equals),      MT(RightControl,RightBracket), MT(RightAlt,Enter),  MT(RightGui,Space),
      //ShiftToLayer(SPECIAL),      Key_RightAlt, Key_Enter,  Key_Space,
       ShiftToLayer(FUNCTION)),
 
@@ -307,17 +307,17 @@ KEYMAPS(
 
 [FUNCTION] =  KEYMAP_STACKED
 (Key_Power,          Key_F1,             Key_F2,          Key_F3,        Key_F4,              Key_F5,                Consumer_AC_NextKeyboardLayoutSelect,
- ___,                Key_mouseScrollUp,  Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   ___,
+ ___,                Key_mouseScrollUp,  Key_mouseBtnL,   Key_mouseUp,   Key_mouseBtnR,       ___,                   LGUI(Key_C),
  ___,                Key_mouseScrollDn,  Key_mouseL,      Key_mouseDn,   Key_mouseR,          ___,
  Key_mouseScrollL,   Key_mouseScrollR,   Key_mouseBtnM,   ___,           ___,                 ___,                   ___,
- ___,   ___,   ___,  ___,
+ ___,   ___,   ___,  Key_Meh,
  ___,
 
- Key_NonUsBackslashAndPipe,     Key_F6,              Key_F7,         Key_F8,         Key_F9,                     Key_F10,                   Key_F11,
- ___,                           Key_Home,            Key_PageDown,   Key_PageUp,     Key_End,                    ___,                       Key_F12,
-                                Key_LeftArrow,       Key_DownArrow,  Key_UpArrow,    Key_RightArrow,             ___,                       ___,
- ___,                           LGUI(Key_LeftArrow), ___,            ___,            LGUI(Key_RightArrow),       ___,                       ___,
- ___, ___, ___, ___,
+ Key_NonUsBackslashAndPipe,     Key_F6,              Key_F7,                Key_F8,                  Key_F9,                     Key_F10,                   Key_F11,
+ LGUI(Key_V),                           Key_Home,            Key_PageDown,          Key_PageUp,              Key_End,                    ___,                       Key_F12,
+                                Key_LeftArrow,       Key_DownArrow,         Key_UpArrow,             Key_RightArrow,             ___,                       ___,
+ ___,                           LGUI(Key_LeftArrow), LCTRL(Key_LeftArrow),  LCTRL(Key_RightArrow),            LGUI(Key_RightArrow),       ___,                       ___,
+ ___, ___, ___, Key_Hyper,
  ___)
 ) // KEYMAPS(
 
